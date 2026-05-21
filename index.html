@@ -23,6 +23,8 @@
     <div class="scent-tabs">
       <span class="stab s2" onclick="applyScent(1)">Oolong Terrace</span>
       <span class="stab s2" onclick="applyScent(2)">MELASMA</span>
+      <span class="stab s2" onclick="applyScent(3)">Dropper Cap</span>
+
 
     </div>
     <div class="scent-detail" id="scent-detail">คลิกกลิ่นด้านบนเพื่อดูรายละเอียดและ auto-fill</div>
@@ -173,7 +175,8 @@
       <!-- ══ KEY INGREDIENTS ══ -->
 
       <div class="prop-label">Science Skincare Lab</div>
-      <span class="pill" data-val="glass beaker filled with translucent serum reflecting soft laboratory light">🧪 Glass
+      <span class="pill"
+        data-val="glass beaker filled with crystal clear liquid serum reflecting soft laboratory light">🧪 Glass
         Beaker</span>
 
       <span class="pill" data-val="transparent petri dish filled with crystal clear liquid and glossy water droplets">🔬
@@ -183,7 +186,8 @@
       <span class="pill" data-val="scientific glass pipette dripping skincare serum with glossy reflections">💧 Glass
         Pipette</span>
 
-      <span class="pill" data-val="laboratory test tubes containing pastel skincare liquids and botanical extracts">🧫
+      <span class="pill"
+        data-val="transparent laboratory test tubes filled with crystal clear serum liquid and soft glossy reflections">🧫
         Test Tubes</span>
 
       <span class="pill" data-val="floating molecular structure hologram with clean futuristic aesthetic">⚛️ Molecule
@@ -246,6 +250,25 @@
       <span class="pill" data-val="floating mid-air with light rays">ลอยกลางอากาศ</span>
       <span class="pill" data-val="placed on a dark stone slab">แผ่นหิน</span>
       <span class="pill" data-val="placed on a moss-covered rock">หินมอส</span>
+      <span class="pill active" data-val="">
+        No Placement
+      </span>
+
+      <span class="pill" data-val="placed naturally on a clean flat surface with soft shadows">
+        Flat Surface
+      </span>
+
+      <span class="pill" data-val="placed on a seamless studio floor with subtle reflections">
+        Studio Floor
+      </span>
+
+      <span class="pill" data-val="standing naturally on a minimal clean surface with soft lighting">
+        Natural Standing
+      </span>
+
+      <span class="pill" data-val="placed directly on a smooth reflective surface with clean editorial styling">
+        Reflective Surface
+      </span>
       <span class="pill" data-val="placed on a transparent acrylic cube with glossy reflections">Acrylic Cube</span>
 
       <span class="pill" data-val="placed on a reflective chrome platform with futuristic laboratory atmosphere">Chrome
@@ -293,6 +316,32 @@
       <span class="pill" data-val="placed inside a circular acrylic ring with glowing edge light">Acrylic Ring</span>
 
       <span class="pill" data-val="placed on translucent resin block with soft pastel reflections">Resin Block</span>
+      <span class="pill" data-val="floating mid-air with soft shadows and futuristic laboratory atmosphere">Floating
+        Mid-Air</span>
+
+      <span class="pill"
+        data-val="floating above reflective surface with soft cinematic lighting and subtle glow">Floating Above
+        Surface</span>
+
+      <span class="pill"
+        data-val="suspended in mid-air surrounded by transparent serum droplets and glossy reflections">Suspended
+        Serum</span>
+
+      <span class="pill"
+        data-val="floating weightlessly in clean white laboratory environment with soft shadows">Weightless Lab</span>
+
+      <span class="pill"
+        data-val="levitating skincare bottle with translucent glow and futuristic reflections">Levitating Glow</span>
+
+      <span class="pill"
+        data-val="floating inside transparent acrylic space with soft blue laboratory lighting">Floating Acrylic</span>
+
+      <span class="pill" data-val="hovering above crystal clear liquid surface with subtle ripple reflections">Hovering
+        Liquid</span>
+
+      <span class="pill"
+        data-val="floating in zero gravity surrounded by soft hydration particles and glossy highlights">Zero
+        Gravity</span>
     </div>
     <input class="pm-input" id="placement-custom"
       placeholder="หรือกำหนดเอง เช่น placed on a stack of vintage books, on a wooden cutting board..."
@@ -455,6 +504,61 @@
         <div class="sc-icon">🎋</div>
         <div class="sc-title">Zen Garden Mist</div>
         <div class="sc-desc">สวนญี่ปุ่น ไม้ไผ่เงา หมอกยามเช้า สงบ เรียบ</div>
+      </div>
+      <div class="scene-card"
+        data-val="background: futuristic skincare laboratory with transparent glass equipment, clean scientific atmosphere and soft reflections">
+        <div class="sc-icon">🧪</div>
+        <div class="sc-title">Futuristic Lab</div>
+        <div class="sc-desc">ห้องแล็บสกินแคร์ กระจกใส อุปกรณ์วิทยาศาสตร์ ล้ำสมัย</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: clean biotechnology laboratory with glossy scientific glassware and minimal clinical atmosphere">
+        <div class="sc-icon">🔬</div>
+        <div class="sc-title">Biotech Laboratory</div>
+        <div class="sc-desc">ห้องทดลองชีวภาพ กระจกเงา คลีน มินิมอล</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: luxury skincare research laboratory with acrylic panels, scientific equipment and cinematic reflections">
+        <div class="sc-icon">🧴</div>
+        <div class="sc-title">Skincare Research</div>
+        <div class="sc-desc">แล็บวิจัยสกินแคร์ หรู เรียบ สะอาด</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: sterile pharmaceutical laboratory with transparent beakers, petri dishes and soft depth of field">
+        <div class="sc-icon">⚗️</div>
+        <div class="sc-title">Pharma Lab</div>
+        <div class="sc-desc">ห้องทดลองยา sterile กระจกใส depth นุ่ม</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: modern cosmetic science laboratory with reflective surfaces and futuristic product testing atmosphere">
+        <div class="sc-icon">🧬</div>
+        <div class="sc-title">Cosmetic Science</div>
+        <div class="sc-desc">แล็บเครื่องสำอาง โมเดิร์น เงาสะท้อน futuristic</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: transparent laboratory environment with floating glass elements and clean editorial composition">
+        <div class="sc-icon">🫧</div>
+        <div class="sc-title">Glass Laboratory</div>
+        <div class="sc-desc">แล็บกระจกใส ลอยตัว คลีน editorial</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: scientific hydratioโn laboratory with serum textures, glass reflections and minimal luxury atmosphere">
+        <div class="sc-icon">💧</div>
+        <div class="sc-title">Hydration Lab</div>
+        <div class="sc-desc">แล็บเซรั่ม ความชุ่มชื้น หรู มินิมอล</div>
+      </div>
+
+      <div class="scene-card"
+        data-val="background: advanced skincare formulation laboratory with transparent scientific tools and cinematic depth">
+        <div class="sc-icon">🧫</div>
+        <div class="sc-title">Formulation Lab</div>
+        <div class="sc-desc">ห้องพัฒนาสูตรสกินแคร์ depth แบบภาพยนตร์</div>
       </div>
       <div class="scene-card"
         data-val="background: softly blurred forest with golden sunlight filtering through leaves, warm bokeh, organic and natural">
@@ -758,84 +862,158 @@
 
   </div>
   <div class="pm-card">
-    <div class="pm-label"><i class="ti ti-camera" aria-hidden="true"></i> มุมกล้อง</div>
-    <div class="pill-group" id="angle-group">
-      <span class="pill active"
-        data-val="straight-on front view skincare bottle on reflective laboratory surface, soft studio lighting, clean editorial style">Front</span>
 
-      <span class="pill"
-        data-val="45-degree three-quarter angle skincare bottle with glossy reflections and soft laboratory lighting">3/4
-        Angle</span>
-
-      <span class="pill"
-        data-val="dramatic worm-eye low angle skincare bottle with futuristic laboratory background and rim lighting">Worm
-        Eye</span>
-
-      <span class="pill"
-        data-val="overhead flat lay skincare composition with scientific props and minimal clean shadows">Flat
-        Lay</span>
-
-      <span class="pill"
-        data-val="macro close-up of skincare bottle texture and label detail with shallow depth of field">Macro
-        Close-up</span>
-
-      <span class="pill"
-        data-val="30-degree overhead skincare composition with acrylic props and editorial laboratory styling">30°
-        Overhead</span>
-
-      <span class="pill"
-        data-val="side profile skincare bottle silhouette with soft backlight and reflective surface">Side
-        Profile</span>
-
-      <span class="pill"
-        data-val="two skincare bottles composition with front and angled positioning on glossy laboratory surface">Duo
-        Shot</span>
-
-      <span class="pill"
-        data-val="slightly tilted 15-degree skincare composition with modern editorial framing and soft reflections">Tilted
-        15°</span>
-
-      <span class="pill"
-        data-val="low surface-level skincare shot with cinematic reflections and futuristic laboratory lighting">Ground
-        Level</span>
-
-      <span class="pill"
-        data-val="skincare bottle viewed through transparent laboratory glass with soft refraction effects">Through
-        Glass</span>
-
-      <span class="pill"
-        data-val="off-center editorial skincare composition with clean negative space and luxury lighting">Editorial
-        Offset</span>
-
-      <span class="pill"
-        data-val="floating skincare bottle surrounded by transparent bubbles in futuristic laboratory environment">Floating
-        Shot</span>
-
-      <span class="pill" data-val="tight crop focusing on skincare pump cap and glossy packaging texture">Detail
-        Crop</span>
-
-      <span class="pill"
-        data-val="skincare product framed by blurred scientific foreground elements with cinematic depth">Foreground
-        Framing</span>
-
-      <span class="pill" data-val="mirror reflection skincare composition on glossy black acrylic surface">Mirror
-        Reflection</span>
-
-      <span class="pill"
-        data-val="backlit translucent skincare bottle glowing with soft blue laboratory lighting">Backlit Glow</span>
-
-      <span class="pill"
-        data-val="editorial skincare composition with layered acrylic panels and chrome reflections">Acrylic
-        Layers</span>
-
-      <span class="pill"
-        data-val="diagonal skincare composition with leading lines guiding focus toward the product">Leading
-        Lines</span>
-
-      <span class="pill"
-        data-val="telephoto skincare shot with compressed perspective and soft blurred laboratory background">Telephoto
-        Compression</span>
+    <div class="pm-label">
+      <i class="ti ti-camera" aria-hidden="true"></i>
+      มุมกล้อง
     </div>
+
+    <!-- MAIN CAMERA -->
+    <div class="pill-group" id="angle-group">
+
+      <span class="pill active"
+        data-val="straight-on front view skincare bottle on reflective laboratory surface, soft studio lighting, clean editorial style">
+        Front
+      </span>
+
+      <span class="pill"
+        data-val="45-degree three-quarter angle skincare bottle with glossy reflections and soft laboratory lighting">
+        3/4 Angle
+      </span>
+
+      <span class="pill"
+        data-val="dramatic worm-eye low angle skincare bottle with futuristic laboratory background and rim lighting">
+        Worm Eye
+      </span>
+
+      <span class="pill"
+        data-val="overhead flat lay skincare composition with scientific props and minimal clean shadows">
+        Flat Lay
+      </span>
+
+      <span class="pill"
+        data-val="30-degree overhead skincare composition with acrylic props and editorial laboratory styling">
+        30° Overhead
+      </span>
+
+      <span class="pill" data-val="side profile skincare bottle silhouette with soft backlight and reflective surface">
+        Side Profile
+      </span>
+
+      <span class="pill"
+        data-val="two skincare bottles composition with front and angled positioning on glossy laboratory surface">
+        Duo Shot
+      </span>
+
+      <span class="pill"
+        data-val="slightly tilted 15-degree skincare composition with modern editorial framing and soft reflections">
+        Tilted 15°
+      </span>
+
+      <span class="pill"
+        data-val="low surface-level skincare shot with cinematic reflections and futuristic laboratory lighting">
+        Ground Level
+      </span>
+
+      <span class="pill"
+        data-val="skincare bottle viewed through transparent laboratory glass with soft refraction effects">
+        Through Glass
+      </span>
+
+      <span class="pill"
+        data-val="off-center editorial skincare composition with clean negative space and luxury lighting">
+        Editorial Offset
+      </span>
+
+      <span class="pill"
+        data-val="floating skincare bottle surrounded by transparent bubbles in futuristic laboratory environment">
+        Floating Shot
+      </span>
+
+      <span class="pill"
+        data-val="skincare product framed by blurred scientific foreground elements with cinematic depth">
+        Foreground Framing
+      </span>
+
+      <span class="pill" data-val="mirror reflection skincare composition on glossy black acrylic surface">
+        Mirror Reflection
+      </span>
+
+      <span class="pill" data-val="backlit translucent skincare bottle glowing with soft blue laboratory lighting">
+        Backlit Glow
+      </span>
+
+      <span class="pill" data-val="editorial skincare composition with layered acrylic panels and chrome reflections">
+        Acrylic Layers
+      </span>
+
+      <span class="pill" data-val="diagonal skincare composition with leading lines guiding focus toward the product">
+        Leading Lines
+      </span>
+
+      <span class="pill"
+        data-val="telephoto skincare shot with compressed perspective and soft blurred laboratory background">
+        Telephoto Compression
+      </span>
+
+    </div>
+
+
+    <!-- MACRO SUBGROUP -->
+    <div class="pm-subgroup">
+
+      <div class="pm-sublabel">
+        <i class="ti ti-focus-2"></i>
+        Macro Focus
+      </div>
+
+      <div class="pill-group" id="macro-angle-group">
+
+        <span class="pill"
+          data-val="macro close-up focusing on skincare bottle cap with glossy reflections and shallow depth of field">
+          Cap Macro
+        </span>
+
+        <span class="pill" data-val="macro shot focusing on product label texture and embossed typography details">
+          Label Macro
+        </span>
+
+        <span class="pill" data-val="macro close-up of lower bottle area with reflective surface and soft lighting">
+          Bottom Bottle
+        </span>
+
+        <span class="pill" data-val="extreme macro shot of serum texture on bottle surface with glossy highlights">
+          Serum Texture
+        </span>
+
+        <span class="pill" data-val="macro shot of skincare pump head with transparent serum reflections">
+          Pump Detail
+        </span>
+
+        <span class="pill" data-val="close-up macro focusing on glass bottle edge and reflective highlights">
+          Glass Edge
+        </span>
+
+        <span class="pill" data-val="macro shot of water droplets on skincare bottle with cinematic reflections">
+          Water Droplets
+        </span>
+
+        <span class="pill" data-val="macro close-up of transparent dropper tip with crystal clear serum liquid">
+          Dropper Tip
+        </span>
+
+        <span class="pill" data-val="macro focus on embossed logo and premium packaging texture">
+          Logo Detail
+        </span>
+
+        <span class="pill" data-val="macro composition highlighting glossy acrylic reflections beneath skincare bottle">
+          Reflection Macro
+        </span>
+
+      </div>
+
+    </div>
+
   </div>
 </div>
 </div>
@@ -966,6 +1144,7 @@
   const scents = {
     1: { name: 'Oolong Terrace', labelColor: 'teal', notes: 'Mandarin Orange· Cardamom · Oolong tea · White tea · Jasmine · Orange blossom', desc: 'โทนกลิ่นสะอาด สดชื่น สงบ เรียบหรู มีกลิ่นอายของชา ดอกไม้และส้มแมนดาริน ที่สดชื่นในที่โล่งกว้าง ท่ามกลางภูเขาและไร่ชา', swatchIdx: 1, mood: 2, props: 'scent-2' },
     2: { name: 'MELASMA CORRECTIVE SERUM', labelColor: 'white', swatchIdx: 1, mood: 2, },
+    3: { name: 'Dropper Serum', labelColor: 'white', mood: 2, },
 
   };
 
@@ -1161,7 +1340,7 @@
     document.getElementById('scent-detail').innerHTML = `<div class="snotes">${s.name} — ${s.notes}</div>${s.desc}`;
     document.querySelectorAll('#props-group .pill').forEach(p => {
       const isScentPill = ['scent-1', 'scent-2', 'scent-3', 'scent-4', 'scent-5'].some(c => p.classList.contains(c));
-      if (isScentPill) { p.classList.contains(s.props) ? p.classList.add('active') : p.classList.remove('active'); }
+      if (isScentPill) { p.classList.containโs(s.props) ? p.classList.add('active') : p.classList.remove('active'); }
     });
     /* document.querySelectorAll('.cswatch').forEach(x => x.classList.remove('selected'));
     document.querySelectorAll('.cswatch')[s.swatchIdx].classList.add('selected'); */
@@ -1179,7 +1358,7 @@
     const customPlacement = document.getElementById('placement-custom').value.trim();
     const placement = customPlacement
       ? 'placed on ' + customPlacement
-      : (getSel('placement-group')[0] || 'placed on a white marble podium');
+      : (getSel('placement-group')[0] || '');
     const props = getSel('props-group').join(', ') || 'soft botanical elements';
     const bg = getBgValue();
     const customMood = document.getElementById('mood-custom').value.trim();
@@ -1228,7 +1407,9 @@
     // compile เป็น prompt text ก่อน
     const prompt =
       `${quality} product photograph of ${product}. `
-      + `The bottle is ${placement}. `
+      + (placement
+        ? `The bottle is ${placement}. `
+        : '')
       + `Surrounding scene elements: ${props}. `
       + `Background: ${bg}. `
       + (color ? `Color palette: ${color}. ` : '')
