@@ -1,0 +1,1012 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+  rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+  rel="stylesheet">
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Google Sans", sans-serif;
+  }
+
+  :root {
+    --ink: #0f0f0f;
+    --ink2: #555;
+    --ink3: #999;
+    --ink4: #ccc;
+    --s: #fff;
+    --s2: #f7f6f4;
+    --s3: #f0efe9;
+    --line: rgba(0, 0, 0, .08);
+    --line2: rgba(0, 0, 0, .16);
+    --r: 10px;
+    --rl: 16px;
+    --green: #1D9E75;
+    --amber: #BA7517;
+    --purple: #534AB7;
+    --coral: #D85A30;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    font-size: 13px
+  }
+
+  .wrap {
+    padding: 1.5rem 1.5rem
+  }
+
+  .hero {
+    margin-bottom: 1.75rem
+  }
+
+  .hero h1 {
+    font-family: "Google Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -.3px;
+    color: var(--ink)
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: var(--ink3);
+    margin-top: 3px;
+    font-weight: 300
+  }
+
+  .sec {
+    margin-bottom: 1.5rem
+  }
+
+  .sec-hd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: .85rem
+  }
+
+  .sec-n {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0
+  }
+
+  .sec-t {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: .06em
+  }
+
+  .sec-line {
+    flex: 1;
+    height: .5px;
+    background: var(--line)
+  }
+
+  .fl {
+    font-size: 14px;
+    color: var(--ink3);
+    font-weight: 300;
+    margin-bottom: 5px
+  }
+
+  .req {
+    color: var(--coral)
+  }
+
+  input[type=text],
+  select,
+  textarea {
+    width: 100%;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--s2);
+    border: .5px solid var(--line);
+    border-radius: var(--r);
+    color: var(--ink);
+    padding: 8px 11px;
+    outline: none;
+    transition: all .2s;
+    font-weight: 300
+  }
+
+  input[type=text]:focus,
+  select:focus,
+  textarea:focus {
+    background: var(--s);
+    border-color: var(--line2);
+    box-shadow: 0 0 0 3px rgba(83, 74, 183, .07)
+  }
+
+  textarea {
+    resize: none;
+    line-height: 1.6
+  }
+
+  .g2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+  }
+
+  .g3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px
+  }
+
+  /* Shot type cards */
+  .shot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px
+  }
+
+  .shot-card {
+    border: .5px solid var(--line);
+    border-radius: var(--rl);
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: all .2s;
+    background: var(--s2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shot-card:hover {
+    background: var(--s);
+    border-color: var(--line2)
+  }
+
+  .shot-card.on {
+    background: var(--ink);
+    border-color: var(--ink)
+  }
+
+  .shot-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+    color: var(--ink3)
+  }
+
+  .shot-card.on .shot-icon {
+    color: rgba(255, 255, 255, .6)
+  }
+
+  .shot-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink)
+  }
+
+  .shot-card.on .shot-name {
+    color: #fff
+  }
+
+  .shot-desc {
+    font-size: 12px;
+    color: var(--ink3);
+    margin-top: 2px;
+    line-height: 1.4;
+    font-weight: 300
+  }
+
+  .shot-card.on .shot-desc {
+    color: rgba(255, 255, 255, .5)
+  }
+
+  .shot-tag {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-weight: 500
+  }
+
+  .tag-pop {
+    background: #EAF3DE;
+    color: #3B6D11
+  }
+
+  .shot-card.on .tag-pop {
+    background: rgba(255, 255, 255, .15);
+    color: rgba(255, 255, 255, .8)
+  }
+
+  /* Ingredient chips */
+  .ing-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
+
+  .ing-cat {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 4px
+  }
+
+  .chip-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px
+  }
+
+  .chip {
+    font-size: 14;
+    padding: 5px 11px;
+    border-radius: 20px;
+    border: .5px solid var(--line);
+    cursor: pointer;
+    color: var(--ink2);
+    background: var(--s);
+    transition: all .18s;
+    user-select: none;
+    font-weight: 300
+  }
+
+  .chip:hover {
+    border-color: var(--line2);
+    color: var(--ink);
+    background: var(--s2)
+  }
+
+  .chip.on {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+    font-weight: 400
+  }
+
+  .chip.flower.on {
+    background: #993556;
+    border-color: #993556
+  }
+
+  .chip.fruit.on {
+    background: #854F0B;
+    border-color: #854F0B
+  }
+
+  .chip.herb.on {
+    background: #3B6D11;
+    border-color: #3B6D11
+  }
+
+  .chip.extract.on {
+    background: #534AB7;
+    border-color: #534AB7
+  }
+
+  /* bg color */
+  .color-row {
+    display: flex;
+    gap: 8px;
+    align-items: center
+  }
+
+  input[type=color] {
+    width: 38px;
+    height: 38px;
+    padding: 3px;
+    border: .5px solid var(--line);
+    border-radius: var(--r);
+    background: var(--s2);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color .2s
+  }
+
+  input[type=color]:hover {
+    border-color: var(--line2)
+  }
+
+  .preset-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 7px
+  }
+
+  .preset {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: .5px solid var(--line);
+    cursor: pointer;
+    color: var(--ink2);
+    background: var(--s);
+    transition: all .18s;
+    font-weight: 300;
+    user-select: none
+  }
+
+  .preset:hover {
+    border-color: var(--line2);
+    color: var(--ink)
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: .5px solid rgba(0, 0, 0, .1);
+    flex-shrink: 0
+  }
+
+  /* atmosphere pills */
+  .atm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px
+  }
+
+  .atm-card {
+    border: .5px solid var(--line);
+    border-radius: var(--r);
+    padding: 8px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .18s;
+    background: var(--s2)
+  }
+
+  .atm-card:hover {
+    background: var(--s);
+    border-color: var(--line2)
+  }
+
+  .atm-card.on {
+    background: var(--ink);
+    border-color: var(--ink)
+  }
+
+  .atm-n {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ink2)
+  }
+
+  .atm-d {
+    font-size: 10px;
+    color: var(--ink3);
+    margin-top: 1px;
+    font-weight: 300
+  }
+
+  .atm-card.on .atm-n {
+    color: #fff
+  }
+
+  .atm-card.on .atm-d {
+    color: rgba(255, 255, 255, .5)
+  }
+
+  /* output */
+  .out-section {
+    background: var(--s2);
+    border: .5px solid var(--line);
+    border-radius: var(--rl);
+    overflow: hidden;
+    margin-top: 1.5rem
+  }
+
+  .out-hd {
+    padding: 11px 15px;
+    border-bottom: .5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+  }
+
+  .out-hd-t {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink2);
+    text-transform: uppercase;
+    letter-spacing: .06em
+  }
+
+  .out-body {
+    padding: 14px 16px;
+    font-family: 'DM Mono', monospace, var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.85;
+    color: var(--ink2);
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 72px
+  }
+
+  .neg-section {
+    background: var(--s3);
+    border: .5px solid var(--line);
+    border-radius: var(--rl);
+    overflow: hidden;
+    margin-top: 8px
+  }
+
+  .neg-body {
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace, var(--font-mono);
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--ink3);
+    word-break: break-word
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 1.25rem
+  }
+
+  .btn-gen {
+    flex: 1;
+    padding: 11px 20px;
+    border-radius: var(--r);
+    border: none;
+    background: var(--ink);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #fff;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: .01em
+  }
+
+  .btn-gen:hover {
+    background: #2a2a2a;
+    transform: translateY(-1px)
+  }
+
+  .btn-gen:active {
+    transform: translateY(0)
+  }
+
+  .btn-sm {
+    padding: 5px 10px;
+    border-radius: 7px;
+    border: .5px solid var(--line);
+    background: transparent;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--ink3);
+    transition: all .18s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'DM Sans', sans-serif
+  }
+
+  .btn-sm:hover {
+    color: var(--ink);
+    border-color: var(--line2)
+  }
+
+  .divider {
+    height: .5px;
+    background: var(--line);
+    margin: 1.5rem 0
+  }
+</style>
+
+<!-- Head -->
+
+<head>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Skincare Scene Builder</h1>
+    <p>สร้าง prompt สำหรับถ่าย/render ภาพ scene วีดีโอสกินแคร์ — ingredients, botanicals, textures</p>
+    <a href="./index.html"> Product </a>
+
+  </div>
+
+  <!-- SECTION 1: SHOT TYPE -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">1</div>
+      <div class="sec-t">Shot Type</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="shot-grid">
+      <div class="shot-card on" data-shot="macro" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-zoom-in" aria-hidden="true"></i></span>
+        <div class="shot-name">Extreme Macro</div>
+        <div class="shot-desc">เห็นเนื้อสัมผัส, เส้นใย, crystal ระดับ micro</div>
+        <!--<span class="shot-tag tag-pop">popular</span>-->
+      </div>
+      <div class="shot-card " data-shot="hero" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-camera" aria-hidden="true"></i></span>
+        <div class="shot-name">Hero Close-up</div>
+        <div class="shot-desc">subject ชัด, background blur, เห็นรายละเอียดสำคัญ</div>
+      </div>
+      <div class="shot-card" data-shot="float" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-layers-intersect" aria-hidden="true"></i></span>
+        <div class="shot-name">Floating / Levitation</div>
+        <div class="shot-desc">วัตถุลอย กระจาย ตกหล่น เหมาะ compositing</div>
+      </div>
+      <div class="shot-card" data-shot="splash" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-droplet" aria-hidden="true"></i></span>
+        <div class="shot-name">Liquid Splash</div>
+        <div class="shot-desc">water, oil, serum splash จับ motion frozen</div>
+      </div>
+      <div class="shot-card" data-shot="flatlay" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-layout-grid" aria-hidden="true"></i></span>
+        <div class="shot-name">Flat Lay Top-down</div>
+        <div class="shot-desc">มองจากบน จัดองค์ประกอบแบบ editorial</div>
+      </div>
+      <div class="shot-card" data-shot="cross" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-cut" aria-hidden="true"></i></span>
+        <div class="shot-name">Cross-section / Slice</div>
+        <div class="shot-desc">ตัดครึ่ง เห็น inside เนื้อผลไม้ ชั้นดอก</div>
+      </div>
+      <div class="shot-card" data-shot="pour" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-wave-sine" aria-hidden="true"></i></span>
+        <div class="shot-name">Pour / Drip</div>
+        <div class="shot-desc">น้ำมัน serum หยด ไหล ลงบน surface</div>
+      </div>
+      <div class="shot-card" data-shot="texture" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-grain" aria-hidden="true"></i></span>
+        <div class="shot-name">Texture & Pattern</div>
+        <div class="shot-desc">abstract, pattern, สีสันสวยงาม สำหรับ bg scene</div>
+      </div>
+      <div class="shot-card" data-shot="cinematic" onclick="pickShot(this)">
+        <span class="shot-icon"><i class="ti ti-movie" aria-hidden="true"></i></span>
+        <div class="shot-name">Cinematic Scene</div>
+        <div class="shot-desc">full scene, lighting mood, เหมาะ video hero</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: INGREDIENT / SUBJECT -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">2</div>
+      <div class="sec-t">Main Subject / Ingredient</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="ing-section">
+      <div>
+        <div class="ing-cat">🌸 ดอกไม้</div>
+        <div class="chip-wrap">
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">orchid</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">rose</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">cherry blossom</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">jasmine</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">lavender</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">lotus</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">chrysanthemum</span>
+          <span class="chip flower" data-g="ing" onclick="pickIng(this)">camellia</span>
+        </div>
+      </div>
+      <div>
+        <div class="ing-cat">🍋 ผลไม้</div>
+        <div class="chip-wrap">
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">lemon</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">citrus orange</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">pomegranate</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">avocado</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">watermelon</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">papaya</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">blueberry</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">peach</span>
+          <span class="chip fruit" data-g="ing" onclick="pickIng(this)">mango</span>
+        </div>
+      </div>
+      <div>
+        <div class="ing-cat">🌿 สมุนไพร & Botanicals</div>
+        <div class="chip-wrap">
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">aloe vera</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">green tea leaf</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">rosemary</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">turmeric root</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">ginger</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">ginseng</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">chamomile</span>
+          <span class="chip herb" data-g="ing" onclick="pickIng(this)">eucalyptus</span>
+        </div>
+      </div>
+      <div>
+        <div class="ing-cat">💧 Extracts & Actives</div>
+        <div class="chip-wrap">
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">hyaluronic acid crystal</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">collagen fiber</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">retinol bead</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">gold flake</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">niacinamide droplet</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">vitamin C serum</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">pearl powder</span>
+          <span class="chip extract" data-g="ing" onclick="pickIng(this)">peptide molecule</span>
+        </div>
+      </div>
+    </div>
+    <input type="text" id="ingCust" placeholder="กำหนดเอง เช่น black truffle, saffron, bakuchiol..."
+      style="margin-top:10px">
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3: BACKGROUND & SURFACE -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">3</div>
+      <div class="sec-t">Background & Surface</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="fl">background color <span class="req">*</span></div>
+        <div class="color-row">
+          <input type="color" id="bgPick" value="#0d0d0d" oninput="document.getElementById('bgHex').value=this.value">
+          <input type="text" id="bgHex" value="#0d0d0d" maxlength="7" placeholder="#0d0d0d" oninput="syncPick()">
+        </div>
+        <div class="preset-wrap">
+          <span class="preset" onclick="setCol('#0d0d0d')"><span class="dot"
+              style="background:#0d0d0d"></span>black</span>
+          <span class="preset" onclick="setCol('#ffffff')"><span class="dot"
+              style="background:#fff;border-color:rgba(0,0,0,.2)"></span>white</span>
+          <span class="preset" onclick="setCol('#1a0a2e')"><span class="dot" style="background:#1a0a2e"></span>deep
+            purple</span>
+          <span class="preset" onclick="setCol('#0a1628')"><span class="dot"
+              style="background:#0a1628"></span>midnight</span>
+          <span class="preset" onclick="setCol('#F5F0EB')"><span class="dot"
+              style="background:#F5F0EB"></span>cream</span>
+          <span class="preset" onclick="setCol('#1a2e1a')"><span class="dot"
+              style="background:#1a2e1a"></span>forest</span>
+        </div>
+      </div>
+      <div>
+        <div class="fl">surface / material</div>
+        <div class="chip-wrap" id="surf-chips">
+          <span class="chip on" data-g="surf">no surface — pure bg</span>
+          <span class="chip" data-g="surf">wet marble</span>
+          <span class="chip" data-g="surf">black glass</span>
+          <span class="chip" data-g="surf">frosted acrylic</span>
+          <span class="chip" data-g="surf">dark stone slate</span>
+          <span class="chip" data-g="surf">water surface</span>
+          <span class="chip" data-g="surf">white ceramic</span>
+          <span class="chip" data-g="surf">raw concrete</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: LIGHTING -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">4</div>
+      <div class="sec-t">Lighting & Mood</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="fl">lighting setup <span class="req">*</span></div>
+        <div class="chip-wrap" id="light-chips">
+          <span class="chip on" data-g="light">dramatic dark studio — single key light</span>
+          <span class="chip" data-g="light">soft diffused natural window</span>
+          <span class="chip" data-g="light">rim backlight glow</span>
+          <span class="chip" data-g="light">golden hour warm sunlight</span>
+          <span class="chip" data-g="light">neon accent lighting</span>
+          <span class="chip" data-g="light">high-key bright white</span>
+          <span class="chip" data-g="light">underlighting from below</span>
+          <span class="chip" data-g="light">match reference image</span>
+        </div>
+      </div>
+      <div>
+        <div class="fl">atmosphere</div>
+        <div class="atm-grid">
+          <div class="atm-card on" onclick="pickAtm(this,'luxurious & dark')">
+            <div class="atm-n">luxury</div>
+            <div class="atm-d">premium, dark</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'fresh & dewy')">
+            <div class="atm-n">fresh</div>
+            <div class="atm-d">dewy, clean</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'organic & earthy')">
+            <div class="atm-n">organic</div>
+            <div class="atm-d">raw, natural</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'clinical & minimal')">
+            <div class="atm-n">clinical</div>
+            <div class="atm-d">lab, science</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'romantic & soft')">
+            <div class="atm-n">romantic</div>
+            <div class="atm-d">soft, pastel</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'energetic & vivid')">
+            <div class="atm-n">vivid</div>
+            <div class="atm-d">bold, pop</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'mystical & ethereal')">
+            <div class="atm-n">ethereal</div>
+            <div class="atm-d">dreamy, mist</div>
+          </div>
+          <div class="atm-card" onclick="pickAtm(this,'spa & tranquil')">
+            <div class="atm-n">spa</div>
+            <div class="atm-d">calm, zen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: DETAIL -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">5</div>
+      <div class="sec-t">Detail Effects & Motion</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="fl">texture & surface detail</div>
+        <div class="chip-wrap" id="detail-chips">
+          <span class="chip on" data-g="detail">water drops & condensation</span>
+          <span class="chip" data-g="detail">dew droplets on petals</span>
+          <span class="chip" data-g="detail">oil sheen & shimmer</span>
+          <span class="chip" data-g="detail">frost & ice crystals</span>
+          <span class="chip" data-g="detail">golden dust particles</span>
+          <span class="chip" data-g="detail">mist & vapor wisps</span>
+          <span class="chip" data-g="detail">bokeh light orbs</span>
+          <span class="chip" data-g="detail">none — clean</span>
+        </div>
+      </div>
+      <div>
+        <div class="fl">motion style (video scene)</div>
+        <div class="chip-wrap" id="motion-chips">
+          <span class="chip on" data-g="motion">still — frozen moment, ultra-sharp</span>
+          <span class="chip" data-g="motion">slow motion splash frozen</span>
+          <span class="chip" data-g="motion">gentle rotation turntable</span>
+          <span class="chip" data-g="motion">falling / floating descent</span>
+          <span class="chip" data-g="motion">liquid pour in progress</span>
+          <span class="chip" data-g="motion">breeze — petals moving softly</span>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <div class="fl">extra instructions</div>
+      <textarea id="extra" rows="2"
+        placeholder="เช่น keep petal veins visible, show cross-section of fruit, emphasize translucency, match ref image lighting direction..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 6: QUALITY -->
+  <div class="sec">
+    <div class="sec-hd">
+      <div class="sec-n">6</div>
+      <div class="sec-t">Quality & Format</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="fl">output quality</div>
+        <div class="atm-grid">
+          <div class="atm-card" onclick="setQ(this,'standard')">
+            <div class="atm-n">std</div>
+            <div class="atm-d">8MP clean</div>
+          </div>
+          <div class="atm-card on" onclick="setQ(this,'high')">
+            <div class="atm-n">high</div>
+            <div class="atm-d">16K detail</div>
+          </div>
+          <div class="atm-card" onclick="setQ(this,'ultra')">
+            <div class="atm-n">ultra</div>
+            <div class="atm-d">commercial</div>
+          </div>
+          <div class="atm-card" onclick="setQ(this,'hyper')">
+            <div class="atm-n">hyper</div>
+            <div class="atm-d">CGI grade</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="fl">aspect ratio</div>
+        <select id="ratio">
+          <option value="9:16 vertical">9:16 — vertical (TikTok / Reels / Stories)</option>
+          <option value="1:1 square">1:1 — square (Feed / e-commerce)</option>
+          <option value="16:9 landscape">16:9 — landscape (YouTube / banner)</option>
+          <option value="4:5 portrait">4:5 — portrait (Instagram feed)</option>
+          <option value="3:4 portrait">3:4 — catalog portrait</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-gen" onclick="gen()"><i class="ti ti-wand" aria-hidden="true"></i> generate prompt</button>
+    <button class="btn-sm" id="copyBtn" onclick="doCopy()"><i class="ti ti-copy" aria-hidden="true"></i> copy</button>
+  </div>
+
+  <div class="out-section">
+    <div class="out-hd">
+      <span class="out-hd-t"><i class="ti ti-plus" aria-hidden="true"
+          style="font-size:12px;margin-right:3px"></i>positive prompt</span>
+      <button class="btn-sm" onclick="doCopy()" id="copyBtn2"><i class="ti ti-copy" aria-hidden="true"></i>
+        copy</button>
+    </div>
+    <div class="out-body" id="outPos">กรอกข้อมูลแล้วกด generate prompt...</div>
+  </div>
+
+  <div class="neg-section">
+    <div class="out-hd" style="border-bottom:.5px solid var(--line)">
+      <span class="out-hd-t" style="color:var(--ink3)"><i class="ti ti-minus" aria-hidden="true"
+          style="font-size:12px;margin-right:3px"></i>negative prompt</span>
+      <button class="btn-sm" onclick="copyNeg()" id="negCopy"><i class="ti ti-copy" aria-hidden="true"></i>
+        copy</button>
+    </div>
+    <div class="neg-body" id="outNeg">blurry, watermark, text overlay, people, hands, low quality, oversaturated, AI
+      artifacts, plastic look, fake texture, overexposed highlights, ugly composition, cluttered background</div>
+  </div>
+
+</div>
+
+<script>
+  let shotVal = 'hero', atmVal = 'luxurious & dark', qVal = 'high';
+  const ingSelected = new Set();
+
+  const shotPrompts = {
+    macro: `Extreme macro photography, ultra-close-up, 1:1 reproduction ratio or greater. The subject fills the entire frame. Every micro-texture, pore, cell, and fiber is visible with razor sharpness. Shallow depth of field — only a sliver in focus, rest melts to smooth bokeh. 100mm macro lens, f/2.8, tripod-mounted.`,
+    hero: `Hero close-up product photography. Subject occupies 60–70% of frame. Background rendered as smooth creamy bokeh. 85mm portrait lens at f/1.8, subject in tack-sharp focus. Precise studio lighting with controlled specular highlights.`,
+    float: `Levitation / floating composition. Multiple elements suspended mid-air at different depths, creating layered 3D depth. Subtle motion blur on some elements. Elements scattered with intentional asymmetric composition. Clean background allows elements to breathe.`,
+    splash: `High-speed frozen liquid photography. 1/8000s shutter equivalent. Liquid forms a perfect sculptural crown, arc, or splash. Frozen droplets suspended in air. Dramatic side or backlight makes liquid translucent and jewel-like.`,
+    flatlay: `Top-down flat lay. Camera directly overhead at 90 degrees. Elements arranged with editorial precision — rule of thirds or radial composition. Even, soft diffused lighting with no harsh shadows. Shadows add depth but stay soft.`,
+    cross: `Cross-section / bisected subject. Cut cleanly through center revealing interior layers, seeds, and flesh. Both halves arranged artfully — one face-up showing interior, one showing exterior. Knife-cut edge sharp and clean.`,
+    pour: `Liquid pour in elegant motion. Silky serum, oil, or essence flowing in a controlled graceful arc. Liquid catches backlight, revealing its translucency and golden hue. Point-of-impact creates ripple rings. Remaining liquid in perfect suspension.`,
+    texture: `Macro abstract texture pattern. Fills entire frame with pure visual texture — no horizon, no subject context. Tactile quality — you can almost feel the surface. Shot straight-on at 90 degrees to maximize pattern detail.`,
+    cinematic: `Cinematic wide scene composition. Full production-quality frame with intentional foreground, midground, and background layers. Anamorphic lens character — subtle horizontal lens flare, oval bokeh. Color-graded for the mood. Depth and atmosphere.`
+  };
+
+  const qMap = {
+    standard: 'sharp photography, clean output',
+    high: 'hyper-detailed photography, 16K resolution, microscopic surface detail visible',
+    ultra: 'ultra-high resolution commercial grade, advertising photography, photorealistic',
+    hyper: 'hyper-realistic CGI render, ray-traced lighting, 8K advertising grade, indistinguishable from photograph'
+  };
+
+  function pickShot(el) {
+    document.querySelectorAll('.shot-card').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+    shotVal = el.dataset.shot;
+  }
+
+  function pickIng(el) {
+    if (el.classList.contains('on')) { el.classList.remove('on'); ingSelected.delete(el.textContent.trim()); return; }
+    el.classList.add('on');
+    ingSelected.add(el.textContent.trim());
+  }
+
+  function pickAtm(el, v) {
+    document.querySelectorAll('.atm-card').forEach(c => c.classList.remove('on'));
+    el.classList.add('on'); atmVal = v;
+  }
+
+  document.querySelectorAll('.chip[data-g="surf"],.chip[data-g="light"],.chip[data-g="detail"],.chip[data-g="motion"]').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('.chip[data-g="' + c.dataset.g + '"]').forEach(x => x.classList.remove('on'));
+      c.classList.add('on');
+    });
+  });
+
+  function setQ(el, v) { document.querySelectorAll('.atm-card').forEach(c => { if (c.parentElement.previousElementSibling && c.parentElement.previousElementSibling.textContent.includes('quality')) c.classList.remove('on') }); el.classList.add('on'); qVal = v; }
+
+  function setCol(h) { document.getElementById('bgPick').value = h; document.getElementById('bgHex').value = h; }
+  function syncPick() { const v = document.getElementById('bgHex').value; if (/^#[0-9A-Fa-f]{6}$/.test(v)) document.getElementById('bgPick').value = v; }
+  function getChip(g) { const el = document.querySelector('.chip.on[data-g="' + g + '"]'); return el ? el.textContent.trim() : ''; }
+
+  function gen() {
+    const bg = document.getElementById('bgHex').value || '#0d0d0d';
+    const ratio = document.getElementById('ratio').value;
+    const ingCust = document.getElementById('ingCust').value.trim();
+    const ingList = [...ingSelected];
+    if (ingCust) ingList.push(ingCust);
+    const ingStr = ingList.length > 0 ? ingList.join(', ') : '[not specified — add ingredient above]';
+    const surf = getChip('surf');
+    const light = getChip('light');
+    const detail = getChip('detail');
+    const motion = getChip('motion');
+    const extra = document.getElementById('extra').value.trim();
+    const quality = qMap[qVal];
+    const shotDesc = shotPrompts[shotVal] || '';
+
+    const p = `You are a world-class beauty and skincare photographer, CGI artist, and video scene director. Create a photorealistic image with the following exact specifications:
+
+[SHOT TYPE & COMPOSITION]
+${shotDesc}
+
+[MAIN SUBJECT / INGREDIENT]
+Primary subject: ${ingStr}
+Render with biological accuracy — correct color, texture, translucency, and surface micro-detail. The subject must be the undeniable hero of the frame.
+
+[BACKGROUND & SURFACE]
+Background: ${bg} — solid, seamless, fills entire frame.
+${surf === 'no surface — pure bg' ? 'No surface — subject exists in pure background space.' : 'Surface material: ' + surf + '. Subtle reflection or interaction with subject where physically natural.'}
+
+[LIGHTING]
+${light === 'match reference image' ? 'Lighting: replicate reference image exactly — match key light position, shadow softness, specular character, and fill ratio precisely.' : 'Lighting: ' + light + '. Sculpt the subject with light, revealing three-dimensionality and surface micro-texture. Specular highlights should follow physically accurate light behavior for each material.'}
+Shadow: natural, physically accurate. No artificial or painted-on shadows.
+
+[DETAIL & SURFACE EFFECTS]
+${detail === 'none — clean' ? 'No surface effects — pristine, clean.' : 'Surface detail: ' + detail + '. Rendered with photorealistic accuracy — light interaction (refraction, reflection, absorption) must be physically correct for each material type.'}
+
+[MOTION STYLE]
+${motion}. ${motion.includes('still') ? 'Every element frozen at peak sharpness.' : 'Motion rendered with physically accurate motion blur, fluid dynamics, or particle behavior.'}
+
+[ATMOSPHERE & MOOD]
+${atmVal}. Color palette, contrast, and tonal range should reinforce this mood. The image should evoke an emotional response aligned with the atmosphere.
+
+[QUALITY & FORMAT]
+${quality}. No AI artifacts, no painterly or illustrated look. Pure photography or photorealistic CGI only.
+Aspect ratio: ${ratio}. Optimized for beauty and skincare brand visual identity.${extra ? '\n\n[EXTRA REQUIREMENTS]\n' + extra : ''}
+
+[CONSTRAINTS]
+- Photorealistic — zero illustrated, painted, or AI-artifact aesthetic
+- No people, faces, hands, or body parts
+- No text, watermarks, or overlaid graphics
+- Background must be exactly the specified color — no vignette unless it serves the mood
+- Composition must feel intentional, art-directed, and brand-worthy`;
+
+    document.getElementById('outPos').textContent = p;
+  }
+
+  function doCopy() {
+    const t = document.getElementById('outPos').textContent;
+    if (t.startsWith('กรอก')) return;
+    navigator.clipboard.writeText(t).then(() => {
+      ['copyBtn', 'copyBtn2'].forEach(id => {
+        const b = document.getElementById(id);
+        const prev = b.innerHTML;
+        b.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> copied!';
+        setTimeout(() => { b.innerHTML = prev; }, 2000);
+      });
+    });
+  }
+  function copyNeg() {
+    navigator.clipboard.writeText(document.getElementById('outNeg').textContent).then(() => {
+      const b = document.getElementById('negCopy');
+      const prev = b.innerHTML;
+      b.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> copied!';
+      setTimeout(() => { b.innerHTML = prev; }, 2000);
+    });
+  }
+  gen();
+</script>
