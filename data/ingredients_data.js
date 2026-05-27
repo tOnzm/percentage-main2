@@ -2,8 +2,8 @@
 
 window.propsData = [
   // ═══ 01 NATURAL EXTRACT (สารสกัดและน้ำมันธรรมชาติ) ═══
-  { category: "Natural Extract", icon: "🌰", label: "Argan Oil", val: "argan nuts, golden argan oil droplets, warm Moroccan beauty aesthetic", extraClass: "scent-1" , image: "./assets/props/argan.jpg"},
-  { category: "Natural Extract", icon: "🖤", label: "Black Cumin Seed", val: "black cumin seeds scattered with deep matte texture and herbal luxury mood", extraClass: "scent-1" ,image: "./assets/props/cumin-seeds.webp" },
+  { category: "Natural Extract", icon: "🌰", label: "Argan Oil", val: "argan nuts, golden argan oil droplets, warm Moroccan beauty aesthetic", extraClass: "scent-1", image: "./assets/props/argan.jpg" },
+  { category: "Natural Extract", icon: "🖤", label: "Black Cumin Seed", val: "black cumin seeds scattered with deep matte texture and herbal luxury mood", extraClass: "scent-1", image: "./assets/props/cumin-seeds.webp" },
   { category: "Natural Extract", icon: "🌿", label: "Baobab Extract", val: "baobab fruit halves with creamy pulp and exotic African botanical atmosphere", extraClass: "scent-1" },
   { category: "Natural Extract", icon: "🌼", label: "Evening Primrose", val: "evening primrose flowers with soft yellow petals and delicate botanical elegance", extraClass: "scent-1" },
   { category: "Natural Extract", icon: "🌹", label: "Rose Hip", val: "rose hip berries with glossy red skin and natural skincare aesthetic" },
@@ -95,5 +95,11 @@ window.propsData = [
   { category: "Atmosphere & Aesthetic", icon: "💎", label: "Amethyst Crystal", val: "small amethyst crystal fragments, deep purple" },
   { category: "Atmosphere & Aesthetic", icon: "🌾", label: "Pampas Grass", val: "dried pampas grass plumes, neutral and textural" },
   { category: "Atmosphere & Aesthetic", icon: "🌿", label: "Petitgrain Twigs", val: "petitgrain green twigs and young orange leaves" },
-  { category: "Atmosphere & Aesthetic", icon: "🌼", label: "Neroli Blossom", val: "neroli white blossoms from bitter orange tree, delicate" }
+  { category: "Atmosphere & Aesthetic", icon: "🌼", label: "Neroli Blossom", val: "neroli white blossoms from bitter orange tree, delicate" },
+  { category: "Atmosphere & Aesthetic", icon: "🌸", label: "Sakura Silk", val: "delicate silk fabric in soft baby pink, flowing texture, elegant", extraClass: "scent-5" },
+  { category: "Atmosphere & Aesthetic", icon: "🎀", label: "Rose Quartz Slab", val: "polished rose quartz stone slab, luxury skincare background, soft light", extraClass: "scent-5" },
+  { category: "Atmosphere & Aesthetic", icon: "🩰", label: "Pink Ribbon", val: "satin ribbon in pastel pink, elegant loops, soft shadows", extraClass: "scent-5" },
+  { category: "Active Ingredient", icon: "🫧", label: "Pink Pearl Essence", val: "iridescent pink liquid pearl essence, swirling texture, glossy", extraClass: "scent-5" },
+  { category: "Atmosphere & Aesthetic", icon: "🦢", label: "Pink Feather", val: "single soft pink plume feather, ethereal and light", extraClass: "scent-5" },
+  { category: "Atmosphere & Aesthetic", icon: "☁️", label: "Pink Cloud Vapor", val: "dreamy soft pink tinted mist vapor, clean laboratory aesthetic", extraClass: "scent-5" },
 ];

@@ -26,7 +26,7 @@ const products = {
   4: { 
     name: 'Whitening Peptide Serum', 
     brand: 'Percentage',
-    label: ['WHITENING ', 'PEPTIDE SERUM', 'WHITENING', 'SKIN WHITENING', 'WITH BIOMIMETIC PEPTIDES'],
+    label: ['percentage','WHITENING ', 'PEPTIDE SERUM', 'WHITENING', 'SKIN WHITENING', 'WITH BIOMIMETIC PEPTIDES'],
     desc: 'เซรั่มขวดชมพู สำหรับผู้มีปัญหารอยดำรอยแดง ผิวไม่กระจ่างใส',
     color: '#FF85BB',
     

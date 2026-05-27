@@ -131,7 +131,41 @@ function renderBgScene() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. HEX INPUT HANDLER
+// 3. RENDER TAB BAR
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * สร้าง tab bar สำหรับเลือกประเภทพื้นหลัง
+ * แสดงเฉพาะ solid | gradient | scene | custom
+ */
+function renderBgTabBar() {
+  const bar = document.getElementById('bg-tab-bar');
+  if (!bar) return;
+
+  const tabs = [
+    { type: 'solid',    label: 'Solid'    },
+    { type: 'gradient', label: 'Gradient' },
+    { type: 'scene',    label: 'Scene'    },
+    { type: 'custom',   label: 'Custom'   },
+  ];
+
+  bar.innerHTML = '';
+  tabs.forEach(({ type, label }) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'bg-type-tab' + (type === currentBgType ? ' active' : '');
+    btn.dataset.type = type;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', String(type === currentBgType));
+    btn.setAttribute('aria-controls', `bg-${type}`);
+    btn.textContent = label;
+    btn.addEventListener('click', () => setBgType(type));
+    bar.appendChild(btn);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 4. HEX INPUT HANDLER
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
@@ -154,7 +188,7 @@ function handleHexChange(rawVal, previewId, swatchSel, customInputId) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. EVENT WIRING
+// 5. EVENT WIRING
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
@@ -199,6 +233,7 @@ function bindSingleSelectPills(groupId) {
 
 function initBackgroundComponentEvents() {
   // ── Render all sections from data ──────────────────────────────────────
+  renderBgTabBar();
   renderBgSolid();
   renderBgGradient();
   renderBgStudio();
@@ -280,13 +315,5 @@ function initBackgroundComponentEvents() {
         tryRecompile();
       });
     }
-  });
-
-  // ── Tab bar: sync aria-selected ────────────────────────────────────────
-  document.querySelectorAll('.bg-type-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.bg-type-tab').forEach(t => t.setAttribute('aria-selected', 'false'));
-      tab.setAttribute('aria-selected', 'true');
-    });
   });
 }
