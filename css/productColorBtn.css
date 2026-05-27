@@ -1,0 +1,18 @@
+.stab {
+  /* ค่าเริ่มต้น */
+  background-color: var(--default-bg, #f0f0f0); 
+  color: #333;
+  transition: all 0.3s ease;
+  border: 1px solid #ccc; /* ขอบปกติ */
+  cursor: pointer;
+}
+
+/* แสดงสีเฉพาะตอน Active */
+.stab.active {
+  /* ลบขอบออกตามที่ต้องการ */
+  border: 1px solid transparent !important; 
+  
+  /* หมายเหตุ: เนื่องจาก JS ของคุณสั่ง inline style ลงไปที่ 
+     backgroundColor และ color แล้ว มันจะทับค่า CSS ตรงนี้ 
+     ดังนั้นแค่ลบขอบก็เพียงพอครับ */
+}

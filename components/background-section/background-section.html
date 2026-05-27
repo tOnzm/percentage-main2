@@ -1,0 +1,112 @@
+<div class="section-divider">ฉากหลัง (Background)</div>
+<div class="pm-card pm-full">
+
+  <!-- Tab bar — render โดย JS -->
+  <div class="bg-tabs-container" id="bg-tab-bar" role="tablist" aria-label="ประเภทพื้นหลัง"></div>
+
+  <!-- Solid -->
+  <div class="bg-section show" id="bg-solid" role="tabpanel">
+    <div class="cgrid" id="solid-grid" aria-label="เลือกสีพื้นหลัง">
+      <!-- swatches จาก baseColors — render โดย JS -->
+    </div>
+    <div class="bg-hex-row mt-3">
+      <div class="hex-preview-box" id="solid-hex-preview" aria-hidden="true"></div>
+      <input class="pm-input" id="solid-hex"
+        placeholder="#HEX เช่น #2a1040"
+        maxlength="7" autocomplete="off"
+        aria-label="กรอก hex สีพื้นหลัง Solid" />
+      <input class="pm-input" id="solid-custom"
+        placeholder="หรือพิมพ์คำอธิบายภาษาอังกฤษ เช่น luxury emerald green"
+        autocomplete="off" />
+    </div>
+  </div>
+
+  <!-- Gradient -->
+  <div class="bg-section" id="bg-gradient" role="tabpanel">
+    <div class="cgrid" id="grad-grid" aria-label="เลือก gradient">
+      <!-- swatches จาก gradientColors — render โดย JS -->
+    </div>
+    <div class="pm-label mt-3" style="font-size:11px;">ทิศทางการไล่เฉด</div>
+    <div class="pill-group" id="grad-dir-group" role="group" aria-label="ทิศทาง gradient">
+      <!-- pills จาก gradientDirections — render โดย JS -->
+    </div>
+  </div>
+
+  <!-- Studio -->
+  <div class="bg-section" id="bg-studio" role="tabpanel">
+    <div class="studio-grid">
+
+      <!-- Backdrop -->
+      <div>
+        <div class="pm-label" style="font-size:11px;">สีฉากหลังผ้าใบ (Backdrop)</div>
+        <div class="cgrid studio-color-grid" id="studio-bg-grid" aria-label="เลือกสี Backdrop">
+          <!-- studioColors — render โดย JS -->
+        </div>
+        <div class="bg-hex-row mt-3">
+          <div class="hex-preview-box" id="studio-bg-hex-preview" aria-hidden="true"></div>
+          <input class="pm-input" id="studio-bg-hex"
+            placeholder="#HEX" maxlength="7" autocomplete="off"
+            style="width:80px; flex-shrink:0;"
+            aria-label="กรอก hex สี Backdrop" />
+          <input class="pm-input" id="studio-bg-custom"
+            placeholder="หรือระบุสีเป็นคำภาษาอังกฤษ..."
+            autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- Floor -->
+      <div>
+        <div class="pm-label" style="font-size:11px;">สีพื้นสตูดิโอ (Floor)</div>
+        <div class="cgrid studio-color-grid" id="studio-floor-grid" aria-label="เลือกสี Floor">
+          <!-- studioColors — render โดย JS -->
+        </div>
+        <div class="bg-hex-row mt-3">
+          <div class="hex-preview-box" id="studio-floor-hex-preview" aria-hidden="true"></div>
+          <input class="pm-input" id="studio-floor-hex"
+            placeholder="#HEX" maxlength="7" autocomplete="off"
+            style="width:80px; flex-shrink:0;"
+            aria-label="กรอก hex สี Floor" />
+          <input class="pm-input" id="studio-floor-custom"
+            placeholder="หรือระบุสีเป็นคำภาษาอังกฤษ..."
+            autocomplete="off" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Studio lighting / shadow -->
+    <div class="studio-grid" style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--color-border-subtle);">
+      <div>
+        <div class="pm-label" style="font-size:11px;">รูปแบบแสงไฟสตูดิโอ</div>
+        <div class="pill-group" id="studio-light-group" role="group">
+          <button type="button" class="pill active" data-val="classic three-point studio lighting">ไฟ 3 จุดมาตรฐาน</button>
+          <button type="button" class="pill" data-val="dramatic high-contrast chiaroscuro lighting">แสงเงาคอนทราสต์สูง</button>
+          <button type="button" class="pill" data-val="bright soft high-key commercial lighting">สว่างละมุนไร้เงาดำ</button>
+        </div>
+      </div>
+      <div>
+        <div class="pm-label" style="font-size:11px;">เงาตกกระทบ (Shadow)</div>
+        <div class="pill-group" id="studio-shadow-group" role="group">
+          <button type="button" class="pill active" data-val="soft natural drop shadow">เงาฟุ้งธรรมชาติ</button>
+          <button type="button" class="pill" data-val="sharp precise geometric shadow">เงาคมชัดเจน</button>
+          <button type="button" class="pill" data-val="elegant blurred window pane shadow projection">เงาพาดผ่านหน้าต่าง</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene -->
+  <div class="bg-section" id="bg-scene" role="tabpanel">
+    <div class="scene-grid" id="scene-grid">
+      <!-- scene cards จาก sceneCards — render โดย JS -->
+    </div>
+  </div>
+
+  <!-- Custom -->
+  <div class="bg-section" id="bg-custom" role="tabpanel">
+    <input class="pm-input" id="bg-custom-text"
+      placeholder="ระบุฉากหลังอิสระภาษาอังกฤษเต็มประโยค เช่น out of focus luxury spa room with candlelight background"
+      autocomplete="off" />
+  </div>
+
+</div>

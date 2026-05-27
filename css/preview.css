@@ -1,0 +1,48 @@
+/* ปรับพรีวิวให้เรียงแนวนอนและห่อบรรทัดอัตโนมัติ */
+.grid-preview-container {
+  display: flex;
+  flex-direction: row;      /* เรียงแนวนอน */
+  flex-wrap: wrap;          /* ขึ้นบรรทัดใหม่เมื่อเต็ม */
+  gap: var(--sp-2);         /* ระยะห่างระหว่างกล่อง */
+  margin-top: var(--sp-3);
+}
+
+/* ปรับขนาดกล่องพรีวิวให้เล็กลง */
+.selected-item-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-1);
+}
+
+.preview-box {
+  width: 100px;  /* ขนาดเล็กลง */
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e0e0; /* สีเทาสำหรับ Placeholder */
+}
+
+/* ถ้าไม่มีรูปภาพให้แสดงไอคอนตรงกลาง */
+.preview-box.no-image {
+  background: #e0e0e0;
+  color: #888;
+}
+
+.preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.preview-label {
+  font-size: 13px;
+  font-weight: 500;
+}
