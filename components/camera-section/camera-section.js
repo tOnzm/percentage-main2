@@ -6,6 +6,7 @@ function initCameraComponentEvents() {
   _renderSingleSelectGroup('mood-group', window.moodData);
   _renderSingleSelectGroup('quality-group', window.qualityData);
   _renderSingleSelectGroup('lens-group', window.lensData);
+  _renderSingleSelectGroup('finish-group', window.finishData);
   _bindSingleSelect('ratio-group');
 /*   _bindMultiSelect('quality-group'); */
  /*  _bindSingleSelect('mood-group'); */

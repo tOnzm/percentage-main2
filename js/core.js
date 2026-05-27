@@ -13,6 +13,7 @@ function buildPromptString(f) {
     `Lighting: ${f.light}.`,
     `Mood: ${f.mood}.`,
     `Shallow depth of field, product label sharp and legible.`,
+    f.finish ? `${f.finish}.` : '',
     `Professional luxury beauty commercial photography.`,
     f.extra ? `${f.extra}.` : '',
     `No text overlays, no people, no watermarks.`,
@@ -106,6 +107,8 @@ function generatePrompt() {
   // ── Lens (ID = lens-group) ──
   const lensVal = getSel('lens-group')[0] || '85mm lens, refined proportions, soft creamy bokeh';
 
+  // ── Finish (ID = finish-group) ──
+  const finishVal = getSel('finish-group')[0] || '';
 
   // ── Lighting (ID = light-group) ──
   const lightVal = getSel('light-group')[0] || 'soft diffused backlight with soft elegant shadows';
@@ -130,10 +133,9 @@ function generatePrompt() {
   updateDOMValue('f-light', lightVal);
   updateDOMValue('f-camera', cameraVal);
   updateDOMValue('f-lens', lensVal);
+  updateDOMValue('f-finish', finishVal);
   updateDOMValue('f-quality', qualityVal);
   updateDOMValue('f-extra', extraVal);
-  console.log(document.getElementById('f-lens'));
-  console.log(getInputValueById('f-lens'));
 
   recompile();
 
@@ -156,6 +158,7 @@ function recompile() {
     light: getInputValueById('f-light'),
     camera: getInputValueById('f-camera'),
     lens: getInputValueById('f-lens'),
+    finish: getInputValueById('f-finish'),
     quality: getInputValueById('f-quality'),
     extra: getInputValueById('f-extra'),
   };
@@ -182,6 +185,7 @@ function recompile() {
       lens: f.lens,
       lighting: f.light,
       props: f.props ? f.props.split(', ').filter(Boolean) : [],
+      finish: f.finish || '',
     },
   };
 
@@ -219,6 +223,7 @@ function copyAsPrompt() {
     light: getInputValueById('f-light'),
     camera: getInputValueById('f-camera'),
     lens: getInputValueById('f-lens'),
+    finish: getInputValueById('f-finish'),
     quality: getInputValueById('f-quality'),
     extra: getInputValueById('f-extra'),
   };
