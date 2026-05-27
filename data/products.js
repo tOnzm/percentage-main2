@@ -30,5 +30,13 @@ const products = {
     desc: 'เซรั่มขวดชมพู สำหรับผู้มีปัญหารอยดำรอยแดง ผิวไม่กระจ่างใส',
     color: '#FF85BB',
     
+  },
+    5: { 
+    name: 'Skin Barrier Moisture Serum', 
+    brand: 'Percentage',
+    label: ['percentage','SKIN BARRIER', 'MOISTURE COMPLEX SERUM', 'MOISTURIZER', 'ESSENTIAL STRENGTHEN', 'SKIN BARRIER'],
+    desc: 'เซรั่มขวดเขียวมิ้น สำหรับผู้ปัญหาผิวแห้งขาดน้ำ',
+    color: '#3EBEB8',
+    
   }
 };
