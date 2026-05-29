@@ -1,42 +1,77 @@
 // คลังข้อมูลสินค้าฉบับตัด Props และสเตทส่วนเกินออกทั้งหมด
 const products = {
-  1: { 
-    name: 'Oolong Terrace', 
+  1: {
+    name: 'Oolong Terrace',
     brand: 'Percentage',
     label: 'Oolong Terrace — Scented',
     desc: 'โทนกลิ่นสะอาด สดชื่น สงบ เรียบหรู มีกลิ่นอายของชา ดอกไม้และส้มแมนดาริน',
     color: '#093C5D',
   },
-  2: { 
-    name: 'MELASMA CORRECTIVE SERUM', 
+  2: {
+    name: 'MELASMA CORRECTIVE SERUM',
     brand: 'Percentage',
     label: 'MELASMA CORRECTIVE SERUM',
     desc: 'เซรั่มขวดม่วง สำหรับผู้มีปัญหาฝ้า กระ รอยดำสะสม',
     color: '#B153D7',
   },
- 
-  3: { 
-    name: 'PHA EXFOLIATING SERUM', 
+
+  3: {
+    name: 'PHA EXFOLIATING SERUM',
     brand: 'Percentage',
     label: 'PHA EXFOLIATING SERUM',
     desc: 'เซรั่มขวดส้ม สำหรับผู้มีปัญหารูขุมขนกว้าง อุดตัน ผลัดเซลล์',
     color: '#FF653F',
-   
+
   },
-  4: { 
-    name: 'Whitening Peptide Serum', 
+  4: {
+    name: 'Whitening Peptide Serum',
     brand: 'Percentage',
-    label: ['percentage','WHITENING ', 'PEPTIDE SERUM', 'WHITENING', 'SKIN WHITENING', 'WITH BIOMIMETIC PEPTIDES'],
+    label: ['percentage', 'WHITENING ', 'PEPTIDE SERUM', 'WHITENING', 'SKIN WHITENING', 'WITH BIOMIMETIC PEPTIDES'],
     desc: 'เซรั่มขวดชมพู สำหรับผู้มีปัญหารอยดำรอยแดง ผิวไม่กระจ่างใส',
     color: '#FF85BB',
-    
+
   },
-    5: { 
-    name: 'Skin Barrier Moisture Serum', 
+  5: {
+    name: 'Skin Barrier Moisture Serum',
     brand: 'Percentage',
-    label: ['percentage','SKIN BARRIER', 'MOISTURE COMPLEX SERUM', 'MOISTURIZER', 'ESSENTIAL STRENGTHEN', 'SKIN BARRIER'],
+    label: ['percentage', 'SKIN BARRIER', 'MOISTURE COMPLEX SERUM', 'MOISTURIZER', 'ESSENTIAL STRENGTHEN', 'SKIN BARRIER'],
     desc: 'เซรั่มขวดเขียวมิ้น สำหรับผู้ปัญหาผิวแห้งขาดน้ำ',
     color: '#3EBEB8',
-    
+
+  },
+  6: {
+    name: 'BODY OIL-A DAY GLOW',
+    brand: 'Percentage',
+    label: ['percentage', 'BODY OIL', 'a day glow', '120 mL 4.06 fl oz.'],
+    desc: 'โทนกลิ่น Fresh Clean Professional ที่ให้ความรู้สึกสดชื่น โปร่งสบาย ราวกับสูดอากาศบริสุทธิ์หลังฝนตก ผสานความสุขุม นุ่มลึก และน่าเชื่อถือ เหมือนคุณหมอ หรือผู้บริหาร ที่มีบุคลิกสุขุม มีเสน่ห์ดึงดูดแบบชวนฝัน มีกลิ่นผิวสะอาดแบบคนดูแลตัวเองดี ทำให้คนอยากอยู่ใกล้ ',
+    color: '#2d527b',
+  },
+  7: {
+    name: 'BODY OIL-Mochi Musky',
+    brand: 'Percentage',
+    label: ['percentage', 'BODY OIL', 'mochi musky', '120 mL 4.06 fl oz.'],
+    desc: 'โทนกลิ่น Powdery Soft Feminine ให้ความรู้สึกอบอุ่น ปลอดภัย และอ่อนโยน เป็นกลิ่นที่ไม่ได้หวานแบบน้ำตาล แต่หวานแบบผิวสะอาดน่ากอด สไตล์ญี่ปุ่น  ผิวหอมละมุนเหมือนแป้งโมจิ ',
+    color: '#f5a6c3',
+  },
+  8: {
+    name: 'BODY OIL-Mono Glam ',
+    brand: 'Percentage',
+    label: ['percentage', 'BODY OIL', 'mono glam', '120 mL 4.06 fl oz.'],
+    desc: 'โทนกลิ่นผู้ชาย Active ที่ดูแลตัวเองดี มีพลัง แต่ยังคงความเรียบหรูแบบ Minimal Luxury มีความสดชื่น มีพลัง แต่แฝงด้วยความหรูหรา นุ่มนวล  เหมือนเพิ่งออกกำลังกายเสร็จ อาบน้ำ แล้วออกไปใช้ชีวิตต่ออย่างมั่นใจ',
+    color: '#FEBD25',
+  },
+  9: {
+    name: 'BODY OIL-Aqua Breeze ',
+    brand: 'Percentage',
+    label: ['percentage', 'BODY OIL', 'aqua breeze', '120 mL 4.06 fl oz.'],
+    desc: 'โทนกลิ่น Floral Aquatic (ดอกไม้ผสมกลิ่นอายสายน้ำและทะเล เน้นความสดชื่น โปร่งเบา สะอาด สะท้อนภาพลักษณ์ของเจ้าหญิงเงือกน้อยที่รักการผจญภัยและท้องทะเลได้อย่างชัดเจน ช่วยเพิ่มความสดใส ไบรท์ และมีชีวิตชีวา ',
+    color: '#8CE2EE',
+  },
+  10: {
+    name: 'BODY OIL-Gentle Black  ',
+    brand: 'Percentage',
+    label: ['percentage', 'BODY OIL', 'gentle black ', '120 mL 4.06 fl oz.'],
+    desc: 'โทนกลิ่น Woody Aromatic ที่ให้ความรู้สึกหรูหรา สะอาด สดชื่น แต่แฝงไปด้วยความอบอุ่นและน่าค้นหา เป็นผู้ชายภูมิฐาน สุขุม และมีเสน่ห์ลึก ๆ เหมือนผู้ชายใส่สูทสีดำ มั่นใจ อบอุ่น น่าดึงดูด ดูแมนอย่างสมบูรณ์แบบ',
+    color: '#000000',
   }
 };

@@ -16,8 +16,26 @@ const baseColors = [
   { label: "Sage", hex: "#c8d8c8", val: "soft sage green solid background", textColor: "#3B6D11" },
   { label: "PHA Orange", hex: "#FF9D23", val: "warm orange solid background", textColor: "#000000" },
   {
-    label: "Aqua Teal",hex: "#3EBEB8",val: "fresh aqua teal solid background",textColor: "#0F4F4C"
-  }
+    label: "Aqua Teal", hex: "#3EBEB8", val: "fresh aqua teal solid background", textColor: "#0F4F4C"
+  },
+  {
+    label: "A Day Glow",
+    hex: "#2d527b",
+    val: "deep muted ocean blue solid background",
+    textColor: "#FFFFFF"
+  },
+  {
+    label: "Mochi Musky",
+    hex: "#F9A6CC",
+    val: "#F9A6CC",
+    textColor: "#2D2D2D "
+  },
+  {
+    label: "Mono Glam",
+    hex: "#FEBD25",
+    val: "#FEBD25",
+    textColor: "#2D2D2D"
+  },
 ];
 
 const studioColors = [

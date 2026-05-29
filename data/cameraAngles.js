@@ -20,6 +20,10 @@ window.cameraAngles = [
   { label: "Acrylic Layers", val: "composition with layered acrylic panels, geometric perspective" },
   { label: "Leading Lines", val: "diagonal composition with lines pointing toward the product" },
   { label: "Telephoto Compression", val: "telephoto lens perspective, compressed depth, blurred background focus" },
+  {
+    label: "Eye-Level Three-Quarter Angle",
+    val: "eye-level three-quarter camera angle, slightly rotated product perspective, natural depth and dimensional view, balanced commercial composition"
+  },
   // ── LOGO & BRANDING ─────────────────────────────────────────────────────
   {
     label: "Logo Macro Focus",

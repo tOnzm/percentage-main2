@@ -30,6 +30,7 @@ window.propsData = [
   { category: "Natural Extract", icon: "🟢", label: "Calamansi", val: "calamansi small round citrus fruits in cluster" },
   { category: "Natural Extract", icon: "🌿", label: "Kaffir Lime", val: "kaffir lime leaves and bumpy kaffir lime fruit" },
 
+
   // ═══ 02 ACTIVE INGREDIENT & TEXTURE (สารออกฤทธิ์และเนื้อสัมผัส) ═══
   { category: "Active Ingredient", icon: "💧", label: "Squalane Pure", val: "squalane pure oil pooling in a clear glass dish, ultra transparent" },
   { category: "Active Ingredient", icon: "🟡", label: "Jojoba Beads", val: "jojoba seeds and small golden jojoba beads on surface" },
@@ -102,4 +103,217 @@ window.propsData = [
   { category: "Active Ingredient", icon: "🫧", label: "Pink Pearl Essence", val: "iridescent pink liquid pearl essence, swirling texture, glossy", extraClass: "scent-5" },
   { category: "Atmosphere & Aesthetic", icon: "🦢", label: "Pink Feather", val: "single soft pink plume feather, ethereal and light", extraClass: "scent-5" },
   { category: "Atmosphere & Aesthetic", icon: "☁️", label: "Pink Cloud Vapor", val: "dreamy soft pink tinted mist vapor, clean laboratory aesthetic", extraClass: "scent-5" },
+
+  {
+    "category": "Fresh Citrus",
+    "icon": "🍋",
+    "label": "Citrus Spiral",
+    "val": "floating twisted citrus peels with glossy juicy texture and dynamic fresh motion"
+  },
+  {
+    "category": "Fresh Citrus",
+    "icon": "💧",
+    "label": "Citrus Droplets",
+    "val": "large suspended citrus-infused water droplets with reflective glossy surface"
+  },
+  {
+    "category": "Fresh Spicy",
+    "icon": "🌶️",
+    "label": "Pink Pepper Cluster",
+    "val": "floating pink peppercorn clusters with rich texture and spicy aromatic feel"
+  },
+  {
+    "category": "Fresh Spicy",
+    "icon": "🫚",
+    "label": "Ginger Slices",
+    "val": "fresh ginger slices suspended in air with juicy fibrous texture"
+  },
+  {
+    "category": "Aromatic Herbal",
+    "icon": "🌿",
+    "label": "Lavender Bundle",
+    "val": "floating lavender stems tied naturally with soft purple floral texture"
+  },
+  {
+    "category": "Aromatic Herbal",
+    "icon": "🍃",
+    "label": "Herbal Leaves",
+    "val": "fresh herbal leaves swirling naturally with layered botanical texture"
+  },
+  {
+    "category": "Amber Warm",
+    "icon": "🟠",
+    "label": "Amber Resin",
+    "val": "translucent amber resin stones glowing under warm soft lighting"
+  },
+  {
+    "category": "Amber Warm",
+    "icon": "🧊",
+    "label": "Golden Resin Glass",
+    "val": "molten amber-like translucent glass fragments with glossy reflections"
+  },
+  {
+    "category": "Woody",
+    "icon": "🪵",
+    "label": "Sandalwood Pieces",
+    "val": "smooth sandalwood chunks with creamy natural wood grain texture"
+  },
+  {
+    "category": "Woody",
+    "icon": "🌲",
+    "label": "Cedar Wood Shavings",
+    "val": "curled cedar wood shavings scattered naturally with dry woody texture"
+  },
+  {
+    "category": "Vanilla Sweet",
+    "icon": "🍦",
+    "label": "Vanilla Pods",
+    "val": "split vanilla pods with visible vanilla seeds and rich glossy texture"
+  },
+  {
+    "category": "Vanilla Sweet",
+    "icon": "🥛",
+    "label": "Vanilla Cream Cube",
+    "val": "soft creamy vanilla cubes with smooth glossy dessert-like texture"
+  },
+
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "☁️",
+    label: "Powdery Soft Veil",
+    val: "soft powder dust diffusion, velvety cosmetic particles floating in air, airy skincare aesthetic, clean muted beige atmosphere, luxurious soft-focus beauty editorial",
+    extraClass: "scent-1"
+  },
+
+  {
+    category: "Floral Essence",
+    icon: "🌸",
+    label: "Creamy Tuberose Bloom",
+    val: "creamy white tuberose petals, elegant floral arrangement, luxurious white blossom atmosphere, soft natural light, premium botanical skincare aesthetic",
+    extraClass: "scent-2"
+  },
+
+  {
+    category: "Floral Essence",
+    icon: "🪻",
+    label: "White Violet Petals",
+    val: "soft velvety violet petals with subtle white gradients, rich floral texture, elegant moody purple accents, refined botanical skincare aesthetic, clean ethereal atmosphere",
+    extraClass: "scent-3"
+  },
+
+  {
+    category: "Natural Texture",
+    icon: "🪵",
+    label: "Soft Woody Musk",
+    val: "smooth pale wood texture, soft musky atmosphere, creamy beige neutral tones, minimal spa-inspired composition, elegant warm skincare backdrop",
+    extraClass: "scent-4"
+  },
+
+  {
+    category: "Tropical Cream",
+    icon: "🥥",
+    label: "Coconut Silk Cream",
+    val: "fresh cracked coconut shell, raw organic coconut meat, pure hydrating water droplets, tropical clean beauty aesthetic, luxurious moisturizing skincare mood",
+    extraClass: "scent-5"
+  },
+  {
+    category: "Natural Texture",
+    icon: "🌿",
+    label: "Earthy Vetiver Root",
+    val: "raw vetiver root texture, damp earth ground, deep mossy green and charcoal brown tones, organic aesthetic, shadows and natural light interplay, sophisticated apothecary vibe, high-end botanical backdrop",
+    extraClass: "scent-vetiver",
+    image: "./assets/props/Vetiver.jpg",
+  },
+  {
+    category: "Natural Texture",
+    icon: "🌲",
+    label: "Aromatic Cedarwood",
+    val: "fine grain cedar wood texture, polished timber surface, warm golden and amber highlights, clean minimalist structure, soft diffused lighting, serene forest atmosphere, luxury spa product setting",
+    extraClass: "scent-cedar",
+    image: "./assets/props/cedarwood.webp",
+  },
+  {
+    category: "Natural Texture",
+    icon: "🍋",
+    label: "Fresh Zesty Lemon",
+    val: "vibrant lemon peel texture, dewy fresh droplets, bright citrus yellow tones, minimalist studio lighting, crisp and clean organic aesthetic, refreshing luxury skincare backdrop",
+    extraClass: "scent-lemon",
+    image: "./assets/props/lemon.jpg"
+  },
+
+
+  {
+    category: "Marine Citrus",
+    icon: "🍋",
+    label: "Lemon Slice Stack",
+    val: "stacked fresh lemon slices, realistic citrus pulp texture, visible condensation droplets, placed on wet coastal stone, scattered sea salt crystals, luxury skincare product photography prop, studio macro lighting",
+    extraClass: "scent-lemon-stack",
+    image: "./assets/props/lemon-stack.jpg"
+  },
+
+  {
+    category: "Marine Citrus",
+    icon: "🍊",
+    label: "Floating Grapefruit Wedge",
+    val: "single pink grapefruit wedge floating in shallow crystal-clear seawater, realistic water ripple reflections, glossy citrus surface, ocean-inspired skincare prop, clean aqua studio composition",
+    extraClass: "scent-grapefruit-water",
+    image: "./assets/props/grapefruit-water.jpg"
+  },
+
+  {
+    category: "Ocean Elements",
+    icon: "🧂",
+    label: "Sea Salt Crystal Pile",
+    val: "coarse natural sea salt crystal pile on reflective wet black stone, realistic mineral texture, ocean foam residue, macro skincare photography prop, minimal marine studio lighting",
+    extraClass: "scent-sea-salt-pile",
+    image: "./assets/props/sea-salt-pile.jpg"
+  },
+
+  {
+    category: "Ocean Elements",
+    icon: "🪨",
+    label: "Wet Volcanic Stone",
+    val: "smooth wet volcanic stone with reflective seawater droplets, realistic dark mineral surface, subtle ocean mist, minimalist luxury skincare prop object, clean studio lighting",
+    extraClass: "scent-volcanic-stone",
+    image: "./assets/props/volcanic-stone.jpg"
+  },
+
+  {
+    category: "Aquatic Glass",
+    icon: "💧",
+    label: "Aqua Glass Block",
+    val: "translucent aqua glass block with soft water reflections, realistic transparent material, ocean-inspired light refraction, clean luxury skincare prop object, minimalist studio setup",
+    extraClass: "scent-aqua-glass",
+    image: "./assets/props/aqua-glass.jpg"
+  },
+
+  {
+    category: "Coral Waters",
+    icon: "🪸",
+    label: "White Coral Fragment",
+    val: "small white coral fragment with realistic porous texture, placed beside shallow seawater reflections, clean marine skincare prop composition, soft tropical studio lighting",
+    extraClass: "scent-coral-fragment",
+    image: "./assets/props/coral-fragment.jpg"
+  },
+
+  {
+    category: "Ocean Motion",
+    icon: "🌊",
+    label: "Clear Water Ripple Tray",
+    val: "shallow transparent water ripple tray creating realistic ocean wave reflections, glossy liquid surface, clean aquatic skincare photography prop, bright minimal studio lighting",
+    extraClass: "scent-water-ripple",
+    image: "./assets/props/water-ripple.jpg"
+  },
+
+  {
+    category: "Marine Freshness",
+    icon: "泡",
+    label: "Ocean Foam Cluster",
+    val: "soft ocean foam cluster with realistic bubble texture, floating on shallow seawater surface, glossy aquatic reflections, fresh marine skincare prop aesthetic, macro studio photography",
+    extraClass: "scent-ocean-foam",
+    image: "./assets/props/ocean-foam.jpg"
+  }
+
+
+
 ];

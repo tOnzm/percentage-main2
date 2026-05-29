@@ -13,5 +13,9 @@ window.lightingData = [
   { label: "Acrylic Shadow", val: "diffused acrylic shadow with subtle gradients and futuristic laboratory feel" },
   { label: "Water Caustics", val: "soft water ripple reflections casting organic light patterns across glossy surface" },
   { label: "Chrome Reflection", val: "chrome metallic reflections creating abstract futuristic shadow shapes" },
-  { label: "Frosted Diffusion", val: "frosted glass shadow diffusion with smooth soft-edge lighting effect" }
+  { label: "Frosted Diffusion", val: "frosted glass shadow diffusion with smooth soft-edge lighting effect" },
+  {
+    label: "Linear Slit Shadow",
+    val: "sharp geometric slit light with long dramatic hard shadow contrast"
+  }
 ];

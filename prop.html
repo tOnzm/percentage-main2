@@ -1,0 +1,173 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-mono); }
+  .wrap { padding: 1.5rem 0; }
+  .label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+  .tag { display: inline-block; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: 99px; padding: 3px 10px; font-size: 12px; color: var(--color-text-secondary); margin: 3px; cursor: pointer; font-family: var(--font-sans); transition: background 0.15s; }
+  .tag:hover, .tag.active { background: #E1F5EE; color: #0F6E56; border-color: #5DCAA5; }
+  .json-output { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; font-size: 12px; line-height: 1.7; color: var(--color-text-primary); white-space: pre-wrap; word-break: break-all; max-height: 420px; overflow-y: auto; border: 0.5px solid var(--color-border-tertiary); }
+  .key { color: #185FA5; }
+  .str { color: #3B6D11; }
+  .num { color: #BA7517; }
+  .copy-btn { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 16px; font-size: 13px; cursor: pointer; font-family: var(--font-sans); color: var(--color-text-primary); float: right; margin-bottom: 8px; }
+  .copy-btn:hover { background: var(--color-background-secondary); }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; font-family: var(--font-sans); }
+  input[type=range] { width: 100%; }
+  .row { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; }
+  .row label { font-size: 13px; color: var(--color-text-secondary); font-family: var(--font-sans); min-width: 100px; }
+  .row span { font-size: 13px; font-weight: 500; min-width: 30px; font-family: var(--font-sans); }
+  select { font-family: var(--font-sans); font-size: 13px; padding: 4px 8px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); }
+</style>
+
+<h2 class="sr-only">JSON Prompt Builder for fruit flat lay image generation</h2>
+
+<div class="wrap">
+  <div class="card">
+    <div class="section-title">เลือกผลไม้ / วัตถุ</div>
+    <div class="label">คลิกเพื่อเพิ่ม/ลบ</div>
+    <div id="fruit-tags">
+      <span class="tag active" onclick="toggle(this,'nano banana')">🍌 nano banana</span>
+      <span class="tag" onclick="toggle(this,'strawberry')">🍓 strawberry</span>
+      <span class="tag" onclick="toggle(this,'orange slice')">🍊 orange slice</span>
+      <span class="tag" onclick="toggle(this,'blueberry')">🫐 blueberry</span>
+      <span class="tag" onclick="toggle(this,'kiwi slice')">🥝 kiwi slice</span>
+      <span class="tag" onclick="toggle(this,'green apple')">🍏 green apple</span>
+      <span class="tag" onclick="toggle(this,'grape')">🍇 grape</span>
+      <span class="tag" onclick="toggle(this,'mint leaf')">🌿 mint leaf</span>
+      <span class="tag" onclick="toggle(this,'watermelon slice')">🍉 watermelon</span>
+      <span class="tag" onclick="toggle(this,'lemon')">🍋 lemon</span>
+      <span class="tag" onclick="toggle(this,'raspberry')">raspberry</span>
+      <span class="tag" onclick="toggle(this,'mango chunk')">🥭 mango</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">ตั้งค่าภาพ</div>
+    <div class="row">
+      <label>สไตล์แสง</label>
+      <select id="lighting" onchange="render()">
+        <option>bright natural light</option>
+        <option>soft diffused light</option>
+        <option>dramatic side light</option>
+        <option>golden hour warm light</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>มุมกล้อง</label>
+      <select id="angle" onchange="render()">
+        <option>overhead flat lay, 90° top-down</option>
+        <option>45° bird's eye view</option>
+        <option>close-up macro shot</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>background</label>
+      <select id="bg" onchange="render()">
+        <option>wooden surface</option>
+        <option>white marble</option>
+        <option>dark slate</option>
+        <option>linen cloth</option>
+        <option>ceramic tile</option>
+      </select>
+    </div>
+    <div class="row">
+      <label>ความหนาแน่น</label>
+      <input type="range" min="1" max="3" step="1" value="2" id="density" oninput="document.getElementById('dval').textContent=['sparse','medium','dense'][this.value-1];render()">
+      <span id="dval">medium</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <button class="copy-btn" onclick="copyJSON()"><i class="ti ti-copy" aria-hidden="true"></i> copy</button>
+    <div class="label">JSON prompt output</div>
+    <div class="json-output" id="output"></div>
+  </div>
+</div>
+
+<script>
+  const selected = new Set(['nano banana']);
+
+  function toggle(el, fruit) {
+    if (selected.has(fruit)) { selected.delete(fruit); el.classList.remove('active'); }
+    else { selected.add(fruit); el.classList.add('active'); }
+    render();
+  }
+
+  const arrangements = {
+    'nano banana': { placement: 'scattered diagonally', quantity: '8–12 pieces', orientation: 'various angles 15–45°' },
+    'strawberry': { placement: 'clustered center-left', quantity: '10–15 pieces', orientation: 'stem-up and tilted' },
+    'orange slice': { placement: 'cross-section halves spread evenly', quantity: '4–6 halves', orientation: 'face-up showing inner flesh' },
+    'blueberry': { placement: 'filling gaps between larger fruits', quantity: '20–30 pieces', orientation: 'round side up' },
+    'kiwi slice': { placement: 'center accent pieces', quantity: '3–4 halves', orientation: 'face-up showing seeds' },
+    'green apple': { placement: 'corner anchors', quantity: '2–3 whole', orientation: 'stem visible' },
+    'grape': { placement: 'cascading cluster top-right', quantity: '1 bunch ~15 grapes', orientation: 'natural cluster form' },
+    'mint leaf': { placement: 'decorative accents between fruits', quantity: '5–8 sprigs', orientation: 'flat, fanned out' },
+    'watermelon slice': { placement: 'large anchor bottom-left', quantity: '2 triangle slices', orientation: 'flesh-side up' },
+    'lemon': { placement: 'halved, accent pieces', quantity: '2–3 halves', orientation: 'cut-side up' },
+    'raspberry': { placement: 'scattered fill', quantity: '15–20 pieces', orientation: 'hollow-side down' },
+    'mango chunk': { placement: 'golden accent center-right', quantity: '4–6 chunks', orientation: 'skin-down, flesh visible' },
+  };
+
+  function hl(str, type) {
+    if (type === 'key') return `<span class="key">"${str}"</span>`;
+    if (type === 'str') return `<span class="str">"${str}"</span>`;
+    if (type === 'num') return `<span class="num">${str}</span>`;
+    return str;
+  }
+
+  function render() {
+    const fruits = [...selected];
+    const lighting = document.getElementById('lighting').value;
+    const angle = document.getElementById('angle').value;
+    const bg = document.getElementById('bg').value;
+    const densityVal = parseInt(document.getElementById('density').value);
+    const densityMap = ['sparse and airy', 'medium density, overlapping edges', 'dense packed, no background visible'];
+    const density = densityMap[densityVal - 1];
+
+    const objArr = fruits.map(f => {
+      const a = arrangements[f] || { placement: 'scattered naturally', quantity: '5–10 pieces', orientation: 'random angles' };
+      return `    {\n      ${hl('name','key')}: ${hl(f,'str')},\n      ${hl('placement','key')}: ${hl(a.placement,'str')},\n      ${hl('quantity','key')}: ${hl(a.quantity,'str')},\n      ${hl('orientation','key')}: ${hl(a.orientation,'str')}\n    }`;
+    }).join(',\n');
+
+    const html = `{
+  ${hl('type','key')}: ${hl('image_generation_prompt','str')},
+  ${hl('style','key')}: {
+    ${hl('shot_type','key')}: ${hl(angle,'str')},
+    ${hl('lighting','key')}: ${hl(lighting,'str')},
+    ${hl('background','key')}: ${hl(bg,'str')},
+    ${hl('density','key')}: ${hl(density,'str')},
+    ${hl('color_palette','key')}: ${hl('vibrant, saturated, high contrast','str')},
+    ${hl('depth_of_field','key')}: ${hl('sharp throughout, f/8 equivalent','str')},
+    ${hl('post_processing','key')}: ${hl('slight saturation boost, clean whites','str')}
+  },
+  ${hl('objects','key')}: [
+${objArr}
+  ],
+  ${hl('composition_rules','key')}: [
+    ${hl('Fill frame edge-to-edge, no negative space','str')},
+    ${hl('Layer small fruits between large ones for depth','str')},
+    ${hl('Use mint leaves as organic visual separators','str')},
+    ${hl('Vary cut vs whole pieces for visual rhythm','str')},
+    ${hl('Place colorful items diagonally for dynamic flow','str')}
+  ],
+  ${hl('negative_prompt','key')}: ${hl('blurry, dark shadows, artificial-looking, plastic, CGI','str')},
+  ${hl('resolution','key')}: ${hl('1024x1792','str')},
+  ${hl('model_hint','key')}: ${hl('photorealistic food photography','str')}
+}`;
+
+    document.getElementById('output').innerHTML = html;
+  }
+
+  function copyJSON() {
+    const text = document.getElementById('output').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✓ copied!';
+      setTimeout(() => { btn.innerHTML = '<i class="ti ti-copy" aria-hidden="true"></i> copy'; }, 1500);
+    });
+  }
+
+  render();
+</script>
