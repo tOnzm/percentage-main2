@@ -1,5 +1,9 @@
 window.lightingData = [
   { label: "Soft Elegant", val: "soft elegant shadows, barely visible" },
+  {
+  label: "Soft Commercial",
+  val: "soft directional studio lighting, high-end commercial beauty lighting"
+},
   { label: "Sharp Editorial", val: "sharp clean editorial shadows" },
   { label: "Long Cinematic", val: "long cinematic projected shadows" },
   { label: "No Shadow", val: "no shadow, pure clean seamless" },

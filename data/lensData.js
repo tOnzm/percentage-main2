@@ -3,6 +3,10 @@ window.lensData = [
     label: "85mm Macro", 
     val: "85mm macro lens, tight framing, perfect product proportions, professional beauty compression, soft creamy bokeh" 
   },
+  {
+  label: "85mm Commercial",
+  val: "85mm product photography lens, shallow depth of field"
+},
   { 
     label: "50mm Prime", 
     val: "50mm prime lens, standard human eye perspective, natural depth, clean and balanced, sharp focus on product" 

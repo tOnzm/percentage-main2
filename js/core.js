@@ -74,12 +74,18 @@ function generatePrompt() {
   const customLabel = getInputValueById('product-custom-label');
   const hasCustom = customBrand || customName || customLabel;
 
+  const selectedProductsData =
+    typeof getSelectedProducts === 'function'
+      ? getSelectedProducts()
+      : [];
+
   const productStr = hasCustom
     ? `${customBrand || 'Percentage'} — ${customLabel || customName || 'Product'}`
-    : (() => {
-      const t = getActiveText('#product-tabs-container .stab.active');
-      return t ? `Percentage — ${t}` : 'Percentage — Oolong Terrace';
-    })();
+    : selectedProductsData.length
+      ? selectedProductsData
+        .map(p => `${p.brand} — ${p.name}`)
+        .join(', ')
+      : 'Percentage — Oolong Terrace';
 
   // ── Placement ──
   const customPlacement = getInputValueById('placement-custom');
@@ -120,8 +126,11 @@ function generatePrompt() {
   // ── Scent label for output header ──
   const scentLabel = hasCustom
     ? (customName || customLabel || 'Custom Product')
-    : getActiveText('#product-tabs-container .stab.active');
-
+    : selectedProductsData.length
+      ? selectedProductsData
+        .map(p => p.name)
+        .join(', ')
+      : 'No Product';
   // ── Push into hidden fields ──
   updateDOMText('out-scent-name', scentLabel);
   updateDOMValue('f-product', productStr);

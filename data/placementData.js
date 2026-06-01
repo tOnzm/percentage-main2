@@ -2,6 +2,38 @@
 window.placementData = [
   { label: "No Placement", val: "", active: true }, // กำหนดตัวแรกเป็น active เริ่มต้น
   { label: "โพเดี้ยมหินอ่อน", val: "placed on a white marble podium" },
+  {
+    label: "Floating Pedestal",
+    val: "floating geometric pedestal with layered display blocks"
+  },
+  {
+    label: "Layered Blocks",
+    val: "layered geometric display blocks"
+  },
+  {
+    label: "Minimal Cube",
+    val: "minimal cube pedestal"
+  },
+  {
+    label: "Luxury Stone",
+    val: "luxury stone pedestal"
+  },
+  {
+    label: "Acrylic Stand",
+    val: "transparent acrylic display stand"
+  },
+  {
+    label: "Floating Shelf",
+    val: "floating shelf composition"
+  },
+  {
+    label: "Reflective Surface",
+    val: "mirror reflective surface"
+  },
+  {
+  label: "Layered Monolith",
+  val: "single layered geometric monolithic platform"
+},
   { label: "Driftwood", val: "placed on a weathered driftwood log" },
   { label: "กระจก Frosted", val: "placed on a frosted glass surface" },
   { label: "แท่นทอง", val: "placed on a round gold pedestal" },

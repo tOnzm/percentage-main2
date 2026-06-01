@@ -4,6 +4,55 @@
 window.cameraAngles = [
   { label: "Front", val: "straight-on front view of skincare bottle on laboratory surface, clean editorial composition" },
   { label: "3/4 Angle", val: "45-degree three-quarter angle view of skincare bottle, balanced composition" },
+  {
+    label: "Luxury 3/4 View",
+    val: "45-degree three-quarter angle view of product, slightly elevated perspective, premium commercial photography"
+  },
+  {
+    label: "Editorial Beauty",
+    val: "dynamic three-quarter angle, editorial beauty photography, layered composition, luxury advertising style"
+  }, {
+    label: "Hero Low Angle",
+    val: "slightly low-angle hero shot, powerful premium perspective, commercial advertising photography"
+  },
+  {
+    label: "Elevated Studio",
+    val: "slightly elevated front angle, luxury studio product photography, refined composition"
+  },
+  {
+    label: "Front Commercial",
+    val: "straight-on front view of product, centered composition, clean studio commercial photography"
+  },
+  {
+    label: "Pyramid Layout",
+    val: "products arranged in a pyramid composition, hero product centered, supporting products surrounding"
+  },
+  {
+    label: "Symmetrical",
+    val: "products arranged symmetrically around the center"
+  },
+  {
+    label: "Staggered Heights",
+    val: "products placed at varying heights on layered pedestals, asymmetrical arrangement"
+  },
+  {
+    label: "Lineup",
+    val: "products aligned in a clean horizontal lineup"
+  },
+  {
+    label: "Front Edge",
+    val: "positioned near the front edge of the pedestal"
+  },
+
+  {
+    label: "Centered",
+    val: "positioned at the center of the pedestal surface"
+  },
+
+  {
+    label: "Back Edge",
+    val: "positioned near the back edge of the pedestal"
+  },
   { label: "Worm Eye", val: "dramatic low worm-eye angle, looking up at skincare bottle, futuristic lab background" },
   { label: "Flat Lay", val: "overhead flat lay top-down view, scientific props arranged around center, minimal negative space" },
   { label: "30° Overhead", val: "30-degree high-angle overhead shot, skincare bottle with surrounding props, depth-focused" },
