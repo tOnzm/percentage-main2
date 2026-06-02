@@ -312,7 +312,79 @@ window.propsData = [
     val: "soft ocean foam cluster with realistic bubble texture, floating on shallow seawater surface, glossy aquatic reflections, fresh marine skincare prop aesthetic, macro studio photography",
     extraClass: "scent-ocean-foam",
     image: "./assets/props/ocean-foam.jpg"
-  }
+  },
+  {
+    category: "Nature",
+    icon: "🪨",
+    label: "River Stone",
+    val: "smooth charcoal grey river stone, matte finish, wet texture, minimalist composition, balanced lighting, professional product styling",
+    extraClass: "scent-river-stone",
+    image: ""
+  },
+  {
+    category: "Nature",
+    icon: "💧",
+    label: "Water Ripple",
+    val: "clear water ripple surface, soft light reflection, clinical clean vibe, shallow depth of field, macro shot, premium aesthetic",
+    extraClass: "scent-water-ripple",
+    image: ""
+  },
+  {
+    category: "Nature",
+    icon: "🌿",
+    label: "Dewy Eucalyptus",
+    val: "fresh eucalyptus leaves with water droplets, vibrant green, soft focus, minimal background, serene atmosphere, high-end skincare vibe",
+    extraClass: "scent-eucalyptus-dew",
+    image: ""
+  },
+  {
+    category: "Professional",
+    icon: "🖊️",
+    label: "Architectural Pen",
+    val: "sleek brushed metal fountain pen, matte black finish, minimalist design, shadow play, sophisticated office desk context",
+    extraClass: "scent-pro-pen",
+    image: ""
+  },
+  {
+    category: "Professional",
+    icon: "⌚",
+    label: "Minimalist Watch",
+    val: "classic silver wrist watch, clean white dial, leather strap, soft studio lighting, sense of precision and time, luxury lifestyle prop",
+    extraClass: "scent-pro-watch",
+    image: ""
+  },
+  {
+    category: "Professional",
+    icon: "👔",
+    label: "Linen Texture",
+    val: "crisp white linen fabric swatch, soft natural light, clean folds, minimalist background, evokes freshness and professional grooming",
+    extraClass: "scent-pro-linen",
+    image: ""
+  },
+  {
+    category: "Others",
+    icon: "🥃",
+    label: "Crystal Glass",
+    val: "clear crystal water glass, light refraction, clean minimalist edges, condensation droplets, sophisticated studio setup",
+    extraClass: "scent-others-glass",
+    image: ""
+  },
+  {
+    category: "Others",
+    icon: "📐",
+    label: "Concrete Block",
+    val: "smooth white concrete base, sharp geometric angles, minimalist architectural prop, soft diffused studio lighting, modern clean look",
+    extraClass: "scent-others-concrete",
+    image: ""
+  },
+  {
+    category: "Others",
+    icon: "✨",
+    label: "Morning Light",
+    val: "soft morning sunlight streaming through a window, window frame shadows (gobo), dreamy atmosphere, clean airy aesthetic, professional photography style",
+    extraClass: "scent-others-light",
+    image: ""
+  },
 
 
 

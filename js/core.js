@@ -186,7 +186,7 @@ function recompile() {
     },
     metadata: {
       product: f.product,
-      scent: (() => { const el = document.getElementById('out-scent-name'); return el ? el.textContent : ''; })(),
+      /* scent: (() => { const el = document.getElementById('out-scent-name'); return el ? el.textContent : ''; })(), */
       placement: f.placement,
       background: f.background,
       mood: f.mood,

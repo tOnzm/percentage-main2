@@ -16,3 +16,19 @@
      backgroundColor และ color แล้ว มันจะทับค่า CSS ตรงนี้ 
      ดังนั้นแค่ลบขอบก็เพียงพอครับ */
 }
+
+#product-tabs-container {
+  display: block;
+}
+
+.product-category {
+  margin-bottom: 16px;
+}
+
+.product-category-title {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}

@@ -15,52 +15,83 @@ function renderProductTabs() {
 
   container.innerHTML = '';
 
-  Object.keys(products).forEach(key => {
-    const item = products[key];
+  const grouped = {};
 
-    const btn = document.createElement('button');
-    btn.className = 'stab';
-    btn.textContent = item.name;
-    btn.dataset.id = key;
+  Object.entries(products).forEach(([key, item]) => {
+    const category = item.category || 'อื่นๆ';
 
-    btn.dataset.activeBg = item.color || '#2b221a';
-    btn.dataset.activeText = item.textColor || '#ffffff';
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
 
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', 'false');
-    btn.type = 'button';
+    grouped[category].push({
+      id: key,
+      ...item
+    });
+  });
 
-    btn.addEventListener('click', () => {
-      const id = Number(key);
+  Object.entries(grouped).forEach(([category, items]) => {
 
-      clearCustomProductInputs();
+    const categoryBlock = document.createElement('div');
+    categoryBlock.className = 'product-category';
 
-      if (selectedProducts.has(id)) {
-        selectedProducts.delete(id);
+    const categoryTitle = document.createElement('div');
+    categoryTitle.className = 'product-category-title';
+    categoryTitle.textContent = category;
 
-        btn.classList.remove('active');
-        btn.setAttribute('aria-selected', 'false');
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
-        btn.style.border = '';
-      } else {
-        selectedProducts.add(id);
+    const categoryTabs = document.createElement('div');
+    categoryTabs.className = 'scent-tabs'; // ใช้ class เดิม
 
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        btn.style.backgroundColor = btn.dataset.activeBg;
-        btn.style.color = btn.dataset.activeText;
-        btn.style.border = '1px solid transparent';
-      }
+    items.forEach(item => {
+      const btn = document.createElement('button');
 
-      applySelectedScents();
-      tryRecompile();
+      btn.className = 'stab'; // ใช้ class เดิม
+      btn.textContent = item.name;
+      btn.dataset.id = item.id;
+
+      btn.dataset.activeBg = item.color || '#2b221a';
+      btn.dataset.activeText = item.textColor || '#ffffff';
+
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', 'false');
+      btn.type = 'button';
+
+      btn.addEventListener('click', () => {
+        const id = Number(item.id);
+
+        clearCustomProductInputs();
+
+        if (selectedProducts.has(id)) {
+          selectedProducts.delete(id);
+
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+          btn.style.border = '';
+        } else {
+          selectedProducts.add(id);
+
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          btn.style.backgroundColor = btn.dataset.activeBg;
+          btn.style.color = btn.dataset.activeText;
+          btn.style.border = '1px solid transparent';
+        }
+
+        applySelectedScents();
+        tryRecompile();
+      });
+
+      categoryTabs.appendChild(btn);
     });
 
-    container.appendChild(btn);
+    categoryBlock.appendChild(categoryTitle);
+    categoryBlock.appendChild(categoryTabs);
+
+    container.appendChild(categoryBlock);
   });
 }
-
 function applySelectedScents() {
   const selected = [...selectedProducts]
     .map(id => products[id])
@@ -69,7 +100,7 @@ function applySelectedScents() {
   if (!selected.length) {
     updateDOMHtml(
       'scent-detail',
-      '<div class="snotes">No Product Selected</div>'
+      '<div class="snotes">ยังไม่ได้เลือกสินค้า</div>'
     );
     return;
   }
