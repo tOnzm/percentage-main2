@@ -1,51 +1,63 @@
 // ── CAMERA COMPONENT ──────────────────────────────────────────────────────
 
 function initCameraComponentEvents() {
-  _renderSingleSelectGroup('angle-group', window.cameraAngles);
-  _renderSingleSelectGroup('light-group', window.lightingData);
-  _renderSingleSelectGroup('mood-group', window.moodData);
-  _renderSingleSelectGroup('quality-group', window.qualityData);
-  _renderSingleSelectGroup('lens-group', window.lensData);
-  _renderSingleSelectGroup('finish-group', window.finishData);
-  _bindSingleSelect('ratio-group');
-/*   _bindMultiSelect('quality-group'); */
- /*  _bindSingleSelect('mood-group'); */
+  _renderSingleSelectGroup("angle-group", window.cameraAngles);
+  _renderSingleSelectGroup("light-group", window.lightingData);
+  _renderSingleSelectGroup("mood-group", window.moodData);
+  _renderSingleSelectGroup("quality-group", window.qualityData);
+  _renderSingleSelectGroup("lens-group", window.lensData);
+  _renderSingleSelectGroup("finish-group", window.finishData);
+  _bindSingleSelect("ratio-group");
+  /*   _bindMultiSelect('quality-group'); */
+  /*  _bindSingleSelect('mood-group'); */
 
   // mood custom input — deactivates pills while typing
-  const moodCustom = document.getElementById('mood-custom');
+  const moodCustom = document.getElementById("mood-custom");
   if (moodCustom) {
-    moodCustom.addEventListener('input', () => {
+    moodCustom.addEventListener("input", () => {
       if (moodCustom.value.trim()) {
-        document.querySelectorAll('#mood-group .pill').forEach(p => p.classList.remove('active'));
+        document
+          .querySelectorAll("#mood-group .pill")
+          .forEach((p) => p.classList.remove("active"));
       }
       tryRecompile();
     });
   }
 
   // extra textarea
-  const extra = document.getElementById('extra');
-  if (extra) extra.addEventListener('input', () => tryRecompile());
+  const extra = document.getElementById("extra");
+  if (extra) extra.addEventListener("input", () => tryRecompile());
 }
 
 // ─── Render pills จาก array data แล้ว bind single-select ─────────────────
-function _renderSingleSelectGroup(groupId, dataArray) {
+function _renderSingleSelectGroup(groupId, data) {
   const group = document.getElementById(groupId);
-  if (!group || !Array.isArray(dataArray) || !dataArray.length) return;
+  if (!group || !data) return;
 
-  group.innerHTML = '';
-  dataArray.forEach((item, i) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pill' + (i === 0 ? ' active' : '');
-    btn.dataset.val = item.val;
-    if (item.icon) {
-      const span = document.createElement('span');
-      span.setAttribute('aria-hidden', 'true');
-      span.textContent = item.icon + ' ';
-      btn.appendChild(span);
+  group.innerHTML = "";
+  const isArray = Array.isArray(data);
+  const categories = isArray ? { Options: data } : data;
+
+  Object.keys(categories).forEach((category) => {
+    // 1. ถ้ามีหลายกลุ่ม ให้สร้างหัวข้อ แต่ถ้ากลุ่มเดียว ไม่ต้องสร้างหัวข้อ (ใช้ CSS เดิม)
+    if (!isArray) {
+      const title = document.createElement("div");
+      title.className = "category-title"; // เพิ่ม Class นี้ใน CSS ของคุณ
+      title.textContent = category;
+      title.style.cssText =
+        "width: 100%; margin: 10px 0 5px 0; font-weight: bold; color: #555; font-size: 0.85em; text-transform: uppercase;";
+      group.appendChild(title);
     }
-    btn.appendChild(document.createTextNode(item.label));
-    group.appendChild(btn);
+
+    // 2. ใช้ .pill-group เดิมวนลูปสร้างปุ่ม
+    categories[category].forEach((item) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "pill"; // ใช้ Class เดิม
+      btn.dataset.val = item.val;
+      btn.textContent = item.label;
+      group.appendChild(btn);
+    });
   });
 
   _bindSingleSelect(groupId);
@@ -55,11 +67,16 @@ function _renderSingleSelectGroup(groupId, dataArray) {
 function _bindSingleSelect(groupId) {
   const group = document.getElementById(groupId);
   if (!group) return;
-  group.addEventListener('click', e => {
-    const pill = e.target.closest('.pill');
+
+  group.addEventListener("click", (e) => {
+    const pill = e.target.closest(".pill");
     if (!pill) return;
-    group.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
+
+    // ลบ active จากทุกปุ่มในทุกหมวดหมู่ของกลุ่มนี้
+    group
+      .querySelectorAll(".pill")
+      .forEach((p) => p.classList.remove("active"));
+    pill.classList.add("active");
     tryRecompile();
   });
 }
@@ -68,10 +85,10 @@ function _bindSingleSelect(groupId) {
 function _bindMultiSelect(groupId) {
   const group = document.getElementById(groupId);
   if (!group) return;
-  group.addEventListener('click', e => {
-    const pill = e.target.closest('.pill');
+  group.addEventListener("click", (e) => {
+    const pill = e.target.closest(".pill");
     if (!pill) return;
-    pill.classList.toggle('active');
+    pill.classList.toggle("active");
     tryRecompile();
   });
 }

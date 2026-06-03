@@ -32,3 +32,16 @@
   color: var(--color-text-secondary);
   text-transform: uppercase;
 }
+
+.pm-label {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* เว้นระยะห่างระหว่างไอคอนกับข้อความ */
+}
+
+.selection-hint {
+  font-size: 0.75rem;       /* ขนาดตัวอักษรเล็กกว่าปกติ */
+  color: #a0a0a0;           /* สีเทาอ่อน */
+  font-weight: normal;      /* ไม่หนา */
+  margin-left: 6px;         /* เว้นระยะจากคำว่า "มุมกล้อง" */
+}
