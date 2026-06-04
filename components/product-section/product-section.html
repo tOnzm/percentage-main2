@@ -1,45 +1,39 @@
-<div class="section-divider">เลือก Product</div>
-<div class="pm-card pm-full">
-  <div class="pm-label">
-    <i class="ti ti-droplet" aria-hidden="true"></i> เลือกสินค้าที่ต้องการ
+<section class="workspace-section">
+  <div class="section-title">
+    <i class="ti ti-droplet" aria-hidden="true"></i> สินค้า
   </div>
 
-  <div class="scent-tabs" id="product-tabs-container" role="tablist" aria-label="เลือกสินค้า"></div>
+  <div class="section-content">
+    <div>
+      <div class="pm-label">เลือกสินค้า</div>
+      <div class="scent-tabs" id="product-tabs-container" role="tablist" aria-label="เลือกสินค้า"></div>
+    </div>
 
+    <div>
+      <div class="pm-label">ระบุเอง</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <input class="pm-input" id="product-custom-brand" placeholder="ระบุแบรนด์" autocomplete="off" />
+        <input class="pm-input" id="product-custom-name" placeholder="ระบุชื่อสินค้า" autocomplete="off" />
+        <input class="pm-input" id="product-custom-label" placeholder="ระบุข้อความบนฉลาก" autocomplete="off" />
+      </div>
+    </div>
 
-  <div class="mt-4" style="padding-top: 12px; border-top: 1px solid var(--color-border-subtle);">
-    <p class="sub-label"
-      style="font-weight: 600; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 8px;">
-      หรือกำหนดข้อมูลสินค้าเอง (Custom Product)
-    </p>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <input class="pm-input" id="product-custom-brand" placeholder="ระบุแบรนด์ เช่น Percentage" autocomplete="off" />
-      <input class="pm-input" id="product-custom-name" placeholder="ระบุชื่อสินค้า เช่น VITAMIN C SERUM"
-        autocomplete="off" />
-      <input class="pm-input" id="product-custom-label" placeholder="ระบุข้อความบนฉลาก เช่น Vitamin C 15% Brightening"
-        autocomplete="off" />
+    <div class="scent-detail" id="scent-detail" aria-live="polite">
+      คลิกสินค้าเพื่อดูรายละเอียด
+    </div>
+
+    <div>
+      <div class="pm-label">ตัวเลือกการแสดงผล</div>
+      <div class="pill-group" id="product-display-mode-group" role="group" aria-label="เลือกรูปแบบการแสดงสินค้า">
+        <button type="button" class="pill active" data-value="product">สินค้า</button>
+        <button type="button" class="pill" data-value="product_box">สินค้า+กล่อง</button>
+        <button type="button" class="pill" data-value="box_only">กล่อง</button>
+      </div>
     </div>
   </div>
 
-  <div class="scent-detail mt-3" id="scent-detail" aria-live="polite">
-    คลิกสินค้าด้านบนเพื่อดูรายละเอียดและ auto-fill
-  </div>
-
-  <div class="pm-field mt-3">
-    <div class="pm-label">
-      รูปแบบการแสดงสินค้า
-    </div>
-
-    <select id="product-display-mode" class="pm-input">
-      <option value="product">สินค้าเท่านั้น</option>
-      <option value="product_box">สินค้า + กล่อง</option>
-      <option value="box_only">กล่องเท่านั้น</option>
-    </select>
-  </div>
-
+  <input type="hidden" id="product-display-mode" value="product">
   <input type="hidden" id="f-display-mode">
   <input type="hidden" id="f-product-count" value="1">
   <input type="hidden" id="f-product-names">
-
-
-</div>
+</section>

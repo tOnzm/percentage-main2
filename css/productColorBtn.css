@@ -45,3 +45,70 @@
   font-weight: normal;      /* ไม่หนา */
   margin-left: 6px;         /* เว้นระยะจากคำว่า "มุมกล้อง" */
 }
+/* ── NEW APP LAYOUT (2 Columns) ───────────────────────────────────────── */
+/* แทนที่ .container เดิม หรือวางทับในส่วนที่คุมโครงสร้างหลัก */
+
+body {
+  padding: 0;
+  background: var(--color-surface-2);
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr; /* ฝั่งซ้ายคงที่ ฝั่งขวายืดหยุ่น */
+  gap: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  background: var(--color-surface-0);
+  border-right: 1px solid var(--color-border-subtle);
+  padding: var(--sp-6);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.app-main {
+  padding: var(--sp-6);
+  overflow-y: auto;
+  background: var(--color-surface-2);
+}
+
+/* ปรับแต่งภายใน Sidebar ให้กระชับ */
+.app-sidebar .pm-header {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* ปรับ Output Panel ให้ดูโดดเด่นในฝั่งขวา */
+#out-panel {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive สำหรับมือถือ */
+@media (max-width: 1024px) {
+  .app-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .app-sidebar { border-right: none; border-bottom: 1px solid var(--color-border-subtle); }
+}
+.pill[data-tooltip]:hover::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:12px;
+  white-space:nowrap;
+  z-index:9999;
+}

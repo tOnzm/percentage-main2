@@ -2,179 +2,682 @@
 
 window.propsData = [
   // ═══ 01 NATURAL EXTRACT (สารสกัดและน้ำมันธรรมชาติ) ═══
-  { category: "Natural Extract", icon: "🌰", label: "Argan Oil", val: "argan nuts, golden argan oil droplets, warm Moroccan beauty aesthetic", extraClass: "scent-1", image: "./assets/props/argan.jpg" },
-  { category: "Natural Extract", icon: "🖤", label: "Black Cumin Seed", val: "black cumin seeds scattered with deep matte texture and herbal luxury mood", extraClass: "scent-1", image: "./assets/props/cumin-seeds.webp" },
-  { category: "Natural Extract", icon: "🌿", label: "Baobab Extract", val: "baobab fruit halves with creamy pulp and exotic African botanical atmosphere", extraClass: "scent-1" },
-  { category: "Natural Extract", icon: "🌼", label: "Evening Primrose", val: "evening primrose flowers with soft yellow petals and delicate botanical elegance", extraClass: "scent-1" },
-  { category: "Natural Extract", icon: "🌹", label: "Rose Hip", val: "rose hip berries with glossy red skin and natural skincare aesthetic" },
-  { category: "Natural Extract", icon: "🥜", label: "Macadamia Nut", val: "macadamia nuts cracked open with creamy texture and premium nourishing feel" },
-  { category: "Natural Extract", icon: "🌾", label: "Wheatgerm", val: "golden wheat stalks and wheatgerm grains with soft natural sunlight" },
-  { category: "Natural Extract", icon: "🍒", label: "Cherry Kernel", val: "cherry kernels and dark red cherries with glossy juicy highlights" },
-  { category: "Natural Extract", icon: "🍑", label: "Peach Kernel", val: "peach kernels with sliced ripe peaches and soft velvety fruit texture" },
-  { category: "Natural Extract", icon: "🌾", label: "Rice Bran Extract", val: "rice bran and rice grains scattered with soft golden glow" },
-  { category: "Natural Extract", icon: "🫒", label: "Olive Leaf Extract", val: "fresh olive branch with green olives and silver-green leaves" },
-  { category: "Natural Extract", icon: "🍊", label: "Orange Slice", val: "fresh orange slices and orange peel curls" },
-  { category: "Natural Extract", icon: "🍊", label: "Sweet Orange", val: "sweet orange blossoms and fruit halves" },
-  { category: "Natural Extract", icon: "🩸", label: "Blood Orange", val: "blood orange cross-section with deep ruby flesh" },
-  { category: "Natural Extract", icon: "🍊", label: "Tangerine", val: "tangerine with leaves still attached" },
-  { category: "Natural Extract", icon: "🟠", label: "Clementine", val: "clementine peeled and whole beside each other" },
-  { category: "Natural Extract", icon: "🍋", label: "Lemon Halves", val: "fresh lemon halves and lemon zest scattered" },
-  { category: "Natural Extract", icon: "🍋", label: "Meyer Lemon", val: "meyer lemon slices with soft golden skin" },
-  { category: "Natural Extract", icon: "🟢", label: "Lime Wedges", val: "lime wedges and fresh lime leaves" },
-  { category: "Natural Extract", icon: "🟢", label: "Key Lime", val: "key lime cross-sections with tiny seeds visible" },
-  { category: "Natural Extract", icon: "🍊", label: "Grapefruit", val: "grapefruit halves with pink flesh exposed, backlit" },
-  { category: "Natural Extract", icon: "🍈", label: "Pomelo Slices", val: "pomelo segments with thick white pith visible" },
-  { category: "Natural Extract", icon: "🫒", label: "Bergamot Fruit", val: "bergamot fruit and dried bergamot peel, elegant and aromatic" },
-  { category: "Natural Extract", icon: "🟡", label: "Yuzu Citric", val: "yuzu fruit halves with textured skin, Japanese aesthetic" },
-  { category: "Natural Extract", icon: "🍋", label: "Citron Fruit", val: "citron fruit whole and sliced, thick rind and pale flesh" },
-  { category: "Natural Extract", icon: "🟢", label: "Calamansi", val: "calamansi small round citrus fruits in cluster" },
-  { category: "Natural Extract", icon: "🌿", label: "Kaffir Lime", val: "kaffir lime leaves and bumpy kaffir lime fruit" },
-
+  {
+    category: "Natural Extract",
+    icon: "🌰",
+    label: "Argan Oil",
+    val: "argan nuts, golden argan oil droplets, warm Moroccan beauty aesthetic",
+    extraClass: "scent-1",
+    image: "./assets/props/argan.jpg",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🖤",
+    label: "Black Cumin Seed",
+    val: "black cumin seeds scattered with deep matte texture and herbal luxury mood",
+    extraClass: "scent-1",
+    image: "./assets/props/cumin-seeds.webp",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌿",
+    label: "Baobab Extract",
+    val: "baobab fruit halves with creamy pulp and exotic African botanical atmosphere",
+    extraClass: "scent-1",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌼",
+    label: "Evening Primrose",
+    val: "evening primrose flowers with soft yellow petals and delicate botanical elegance",
+    extraClass: "scent-1",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌹",
+    label: "Rose Hip",
+    val: "rose hip berries with glossy red skin and natural skincare aesthetic",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🥜",
+    label: "Macadamia Nut",
+    val: "macadamia nuts cracked open with creamy texture and premium nourishing feel",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌾",
+    label: "Wheatgerm",
+    val: "golden wheat stalks and wheatgerm grains with soft natural sunlight",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍒",
+    label: "Cherry Kernel",
+    val: "cherry kernels and dark red cherries with glossy juicy highlights",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍑",
+    label: "Peach Kernel",
+    val: "peach kernels with sliced ripe peaches and soft velvety fruit texture",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌾",
+    label: "Rice Bran Extract",
+    val: "rice bran and rice grains scattered with soft golden glow",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🫒",
+    label: "Olive Leaf Extract",
+    val: "fresh olive branch with green olives and silver-green leaves",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍊",
+    label: "Orange Slice",
+    val: "fresh orange slices and orange peel curls",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍊",
+    label: "Sweet Orange",
+    val: "sweet orange blossoms and fruit halves",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🩸",
+    label: "Blood Orange",
+    val: "blood orange cross-section with deep ruby flesh",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍊",
+    label: "Tangerine",
+    val: "tangerine with leaves still attached",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🟠",
+    label: "Clementine",
+    val: "clementine peeled and whole beside each other",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍋",
+    label: "Lemon Halves",
+    val: "fresh lemon halves and lemon zest scattered",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍋",
+    label: "Meyer Lemon",
+    val: "meyer lemon slices with soft golden skin",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🟢",
+    label: "Lime Wedges",
+    val: "lime wedges and fresh lime leaves",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🟢",
+    label: "Key Lime",
+    val: "key lime cross-sections with tiny seeds visible",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍊",
+    label: "Grapefruit",
+    val: "grapefruit halves with pink flesh exposed, backlit",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍈",
+    label: "Pomelo Slices",
+    val: "pomelo segments with thick white pith visible",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🫒",
+    label: "Bergamot Fruit",
+    val: "bergamot fruit and dried bergamot peel, elegant and aromatic",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🟡",
+    label: "Yuzu Citric",
+    val: "yuzu fruit halves with textured skin, Japanese aesthetic",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🍋",
+    label: "Citron Fruit",
+    val: "citron fruit whole and sliced, thick rind and pale flesh",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🟢",
+    label: "Calamansi",
+    val: "calamansi small round citrus fruits in cluster",
+  },
+  {
+    category: "Natural Extract",
+    icon: "🌿",
+    label: "Kaffir Lime",
+    val: "kaffir lime leaves and bumpy kaffir lime fruit",
+  },
 
   // ═══ 02 ACTIVE INGREDIENT & TEXTURE (สารออกฤทธิ์และเนื้อสัมผัส) ═══
-  { category: "Active Ingredient", icon: "💧", label: "Squalane Pure", val: "squalane pure oil pooling in a clear glass dish, ultra transparent" },
-  { category: "Active Ingredient", icon: "🟡", label: "Jojoba Beads", val: "jojoba seeds and small golden jojoba beads on surface" },
-  { category: "Active Ingredient", icon: "🫧", label: "Oil Droplets", val: "golden oil droplets on surface, glistening" },
-  { category: "Active Ingredient", icon: "🧴", label: "Gel Texture", val: "transparent gel texture spread on glass surface with glossy highlights" },
-  { category: "Active Ingredient", icon: "✨", label: "Shimmer Dust", val: "fine iridescent shimmer dust on surface, light-catching" },
-  { category: "Active Ingredient", icon: "🍯", label: "Sugar Crystals", val: "raw brown sugar crystals spilling on dark surface", extraClass: "scent-4" },
-  { category: "Active Ingredient", icon: "✨", label: "Caramel Drizzle", val: "warm caramel drizzle pooling on surface, glossy", extraClass: "scent-4" },
-  { category: "Active Ingredient", icon: "🤍", label: "White Musk Crystal", val: "white musk crystal fragments, translucent and glowing" },
-  { category: "Active Ingredient", icon: "🔲", label: "Aldehyde Soap", val: "white aldehyde soap bar with soft lather, clean and pure", extraClass: "scent-5" },
+  {
+    category: "Active Ingredient",
+    icon: "💧",
+    label: "Squalane Pure",
+    val: "squalane pure oil pooling in a clear glass dish, ultra transparent",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🟡",
+    label: "Jojoba Beads",
+    val: "jojoba seeds and small golden jojoba beads on surface",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🫧",
+    label: "Oil Droplets",
+    val: "golden oil droplets on surface, glistening",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🧴",
+    label: "Gel Texture",
+    val: "transparent gel texture spread on glass surface with glossy highlights",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "✨",
+    label: "Shimmer Dust",
+    val: "fine iridescent shimmer dust on surface, light-catching",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🍯",
+    label: "Sugar Crystals",
+    val: "raw brown sugar crystals spilling on dark surface",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "✨",
+    label: "Caramel Drizzle",
+    val: "warm caramel drizzle pooling on surface, glossy",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🤍",
+    label: "White Musk Crystal",
+    val: "white musk crystal fragments, translucent and glowing",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🔲",
+    label: "Aldehyde Soap",
+    val: "white aldehyde soap bar with soft lather, clean and pure",
+    extraClass: "scent-5",
+  },
 
   // ═══ 03 LAB PROP & SCIENCE (อุปกรณ์ห้องแล็บและพร็อพวิทยาศาสตร์) ═══
-  { category: "Lab Prop", icon: "🧪", label: "Glass Beaker", val: "glass beaker filled with crystal clear liquid serum reflecting soft laboratory light" },
-  { category: "Lab Prop", icon: "🔬", label: "Petri Dish", val: "transparent petri dish filled with crystal clear liquid and glossy water droplets" },
-  { category: "Lab Prop", icon: "💧", label: "Glass Pipette", val: "scientific glass pipette dripping skincare serum with glossy reflections" },
-  { category: "Lab Prop", icon: "🧫", label: "Test Tubes", val: "transparent laboratory test tubes filled with crystal clear serum liquid and soft glossy reflections" },
-  { category: "Lab Prop", icon: "⚛️", label: "Molecule Structure", val: "floating molecular structure hologram with clean futuristic aesthetic" },
-  { category: "Lab Prop", icon: "🔍", label: "Microscope Lens", val: "microscope lens reflecting soft blue laboratory lighting" },
-  { category: "Lab Prop", icon: "🪞", label: "Acrylic Stand", val: "clear acrylic scientific display stand with reflective glossy surface" },
-  { category: "Lab Prop", icon: "🫧", label: "Water Bubbles", val: "floating transparent water bubbles with high detail glossy texture" },
-  { category: "Lab Prop", icon: "🧬", label: "Lab Tray", val: "sterile laboratory tray with chrome metallic finish and soft reflections" },
-  { category: "Lab Prop", icon: "💦", label: "Liquid Splash", val: "transparent liquid splash frozen in motion with cinematic lighting" },
-  { category: "Lab Prop", icon: "📡", label: "Hologram UI", val: "futuristic laboratory interface hologram with minimal white UI elements" },
-  { category: "Lab Prop", icon: "✨", label: "Crystal Particles", val: "macro crystal particles resembling active skincare ingredients" },
-  { category: "Lab Prop", icon: "📏", label: "Measuring Cylinder", val: "scientific measuring cylinder filled with glowing serum liquid" },
-  { category: "Lab Prop", icon: "❄️", label: "Cooling Mist", val: "high-tech cooling mist surrounding skincare bottle in clean laboratory setting", image: 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg' },
-  { category: "Lab Prop", icon: "⚪", label: "Chrome Sphere", val: "chrome metallic sphere reflecting skincare product in futuristic lab" },
-  { category: "Lab Prop", icon: "🪟", label: "Frosted Glass", val: "frosted laboratory glass panels with soft diffusion lighting" },
-  { category: "Lab Prop", icon: "🧬", label: "DNA Sculpture", val: "DNA helix inspired transparent sculpture with elegant scientific aesthetic" },
-  { category: "Lab Prop", icon: "⬜", label: "Lab Tiles", val: "minimal white laboratory tiles with reflective premium finish" },
+  {
+    category: "Lab Prop",
+    icon: "🧪",
+    label: "Glass Beaker",
+    val: "glass beaker filled with crystal clear liquid serum reflecting soft laboratory light",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🔬",
+    label: "Petri Dish",
+    val: "transparent petri dish filled with crystal clear liquid and glossy water droplets",
+  },
+  {
+    category: "Lab Prop",
+    icon: "💧",
+    label: "Glass Pipette",
+    val: "scientific glass pipette dripping skincare serum with glossy reflections",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🧫",
+    label: "Test Tubes",
+    val: "transparent laboratory test tubes filled with crystal clear serum liquid and soft glossy reflections",
+  },
+  {
+    category: "Lab Prop",
+    icon: "⚛️",
+    label: "Molecule Structure",
+    val: "floating molecular structure hologram with clean futuristic aesthetic",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🔍",
+    label: "Microscope Lens",
+    val: "microscope lens reflecting soft blue laboratory lighting",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🪞",
+    label: "Acrylic Stand",
+    val: "clear acrylic scientific display stand with reflective glossy surface",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🫧",
+    label: "Water Bubbles",
+    val: "floating transparent water bubbles with high detail glossy texture",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🧬",
+    label: "Lab Tray",
+    val: "sterile laboratory tray with chrome metallic finish and soft reflections",
+  },
+  {
+    category: "Lab Prop",
+    icon: "💦",
+    label: "Liquid Splash",
+    val: "transparent liquid splash frozen in motion with cinematic lighting",
+  },
+  {
+    category: "Lab Prop",
+    icon: "📡",
+    label: "Hologram UI",
+    val: "futuristic laboratory interface hologram with minimal white UI elements",
+  },
+  {
+    category: "Lab Prop",
+    icon: "✨",
+    label: "Crystal Particles",
+    val: "macro crystal particles resembling active skincare ingredients",
+  },
+  {
+    category: "Lab Prop",
+    icon: "📏",
+    label: "Measuring Cylinder",
+    val: "scientific measuring cylinder filled with glowing serum liquid",
+  },
+  {
+    category: "Lab Prop",
+    icon: "❄️",
+    label: "Cooling Mist",
+    val: "high-tech cooling mist surrounding skincare bottle in clean laboratory setting",
+    image: "https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg",
+  },
+  {
+    category: "Lab Prop",
+    icon: "⚪",
+    label: "Chrome Sphere",
+    val: "chrome metallic sphere reflecting skincare product in futuristic lab",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🪟",
+    label: "Frosted Glass",
+    val: "frosted laboratory glass panels with soft diffusion lighting",
+  },
+  {
+    category: "Lab Prop",
+    icon: "🧬",
+    label: "DNA Sculpture",
+    val: "DNA helix inspired transparent sculpture with elegant scientific aesthetic",
+  },
+  {
+    category: "Lab Prop",
+    icon: "⬜",
+    label: "Lab Tiles",
+    val: "minimal white laboratory tiles with reflective premium finish",
+  },
 
   // ═══ 04 ATMOSPHERE & AESTHETIC (บรรยากาศ มู้ดโทน และดอกไม้ตกแต่ง) ═══
-  { category: "Atmosphere & Aesthetic", icon: "🌫️", label: "Lab Vapor", val: "soft smoke vapor creating sterile laboratory atmosphere" },
-  { category: "Atmosphere & Aesthetic", icon: "🌫", label: "Mountain Mist", val: "soft morning mountain mist in background, ethereal" },
-  { category: "Atmosphere & Aesthetic", icon: "🌫", label: "Musk Smoke", val: "dark musk smoke wisps rising gently", extraClass: "scent-4" },
-  { category: "Atmosphere & Aesthetic", icon: "🌫", label: "Talc Powder Mist", val: "fine white talc powder floating softly in air", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🍇", label: "Wild Berries", val: "fresh wild berries scattered on surface, deep purple and red tones" },
-  { category: "Atmosphere & Aesthetic", icon: "🍐", label: "Green Pear", val: "green pear halves and slices with dewy skin" },
-  { category: "Atmosphere & Aesthetic", icon: "🍐", label: "Golden Pear", val: "golden pear whole and halved, warm-toned", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "🫐", label: "Black Currant", val: "dark blackcurrant berries in cluster", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "🌶", label: "Pink Pepper", val: "pink peppercorns scattered on surface", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "🍍", label: "Pineapple Leaves", val: "fresh pineapple slices and crown leaves", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "🪵", label: "Tonka Bean Core", val: "tonka beans whole and split, dark and aromatic", extraClass: "scent-4" },
-  { category: "Atmosphere & Aesthetic", icon: "🟡", label: "Amber Resin", val: "amber resin pieces, translucent warm gold color", extraClass: "scent-4" },
-  { category: "Atmosphere & Aesthetic", icon: "🪵", label: "Amberwood Bark", val: "amberwood dark bark fragments on surface", extraClass: "scent-4" },
-  { category: "Atmosphere & Aesthetic", icon: "☁️", label: "Cotton Bolls", val: "fluffy white cotton bolls, soft and airy", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🪵", label: "Soft Driftwood", val: "soft woody pale driftwood pieces, smooth and light", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🟠", label: "Cardamom Pods", val: "cardamom pods split open revealing seeds" },
-  { category: "Atmosphere & Aesthetic", icon: "🍵", label: "Oolong Leaves", val: "dried oolong tea leaves loosely scattered" },
-  { category: "Atmosphere & Aesthetic", icon: "🤍", label: "White Tea Buds", val: "white tea buds and pale dried tea petals" },
-  { category: "Atmosphere & Aesthetic", icon: "🌼", label: "Jasmine Blossom", val: "white jasmine blossoms freshly picked" },
-  { category: "Atmosphere & Aesthetic", icon: "🌸", label: "Orange Blossom", val: "orange blossom branches with small white flowers" },
-  { category: "Atmosphere & Aesthetic", icon: "🌸", label: "Wild Rose Petals", val: "soft pink wild rose petals scattered delicately" },
-  { category: "Atmosphere & Aesthetic", icon: "💜", label: "Cosmos Flower", val: "soft purple cosmos flowers on thin stems" },
-  { category: "Atmosphere & Aesthetic", icon: "🌹", label: "Red Rose Petals", val: "deep red rose petals scattered dramatically", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "💜", label: "Heliotrope Bloom", val: "heliotrope purple flowers with small clustered blooms", extraClass: "scent-3" },
-  { category: "Atmosphere & Aesthetic", icon: "🌸", label: "Vanilla Orchid", val: "vanilla orchid flowers in full bloom, creamy white", extraClass: "scent-4" },
-  { category: "Atmosphere & Aesthetic", icon: "🤍", label: "Muguet Lily", val: "muguet lily of the valley tiny white bell flowers", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🌹", label: "White Rose Buds", val: "soft white rose buds barely opened", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🌼", label: "White Jasmine", val: "white jasmine small star-shaped flowers", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🪷", label: "Powder Puff", val: "delicate powder puff with loose translucent powder", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🌿", label: "Botanical Leaves", val: "delicate green botanical leaves and stems" },
-  { category: "Atmosphere & Aesthetic", icon: "💎", label: "Amethyst Crystal", val: "small amethyst crystal fragments, deep purple" },
-  { category: "Atmosphere & Aesthetic", icon: "🌾", label: "Pampas Grass", val: "dried pampas grass plumes, neutral and textural" },
-  { category: "Atmosphere & Aesthetic", icon: "🌿", label: "Petitgrain Twigs", val: "petitgrain green twigs and young orange leaves" },
-  { category: "Atmosphere & Aesthetic", icon: "🌼", label: "Neroli Blossom", val: "neroli white blossoms from bitter orange tree, delicate" },
-  { category: "Atmosphere & Aesthetic", icon: "🌸", label: "Sakura Silk", val: "delicate silk fabric in soft baby pink, flowing texture, elegant", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🎀", label: "Rose Quartz Slab", val: "polished rose quartz stone slab, luxury skincare background, soft light", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🩰", label: "Pink Ribbon", val: "satin ribbon in pastel pink, elegant loops, soft shadows", extraClass: "scent-5" },
-  { category: "Active Ingredient", icon: "🫧", label: "Pink Pearl Essence", val: "iridescent pink liquid pearl essence, swirling texture, glossy", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "🦢", label: "Pink Feather", val: "single soft pink plume feather, ethereal and light", extraClass: "scent-5" },
-  { category: "Atmosphere & Aesthetic", icon: "☁️", label: "Pink Cloud Vapor", val: "dreamy soft pink tinted mist vapor, clean laboratory aesthetic", extraClass: "scent-5" },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌫️",
+    label: "Lab Vapor",
+    val: "soft smoke vapor creating sterile laboratory atmosphere",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌫",
+    label: "Mountain Mist",
+    val: "soft morning mountain mist in background, ethereal",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌫",
+    label: "Musk Smoke",
+    val: "dark musk smoke wisps rising gently",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌫",
+    label: "Talc Powder Mist",
+    val: "fine white talc powder floating softly in air",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🍇",
+    label: "Wild Berries",
+    val: "fresh wild berries scattered on surface, deep purple and red tones",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🍐",
+    label: "Green Pear",
+    val: "green pear halves and slices with dewy skin",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🍐",
+    label: "Golden Pear",
+    val: "golden pear whole and halved, warm-toned",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🫐",
+    label: "Black Currant",
+    val: "dark blackcurrant berries in cluster",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌶",
+    label: "Pink Pepper",
+    val: "pink peppercorns scattered on surface",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🍍",
+    label: "Pineapple Leaves",
+    val: "fresh pineapple slices and crown leaves",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🪵",
+    label: "Tonka Bean Core",
+    val: "tonka beans whole and split, dark and aromatic",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🟡",
+    label: "Amber Resin",
+    val: "amber resin pieces, translucent warm gold color",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🪵",
+    label: "Amberwood Bark",
+    val: "amberwood dark bark fragments on surface",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "☁️",
+    label: "Cotton Bolls",
+    val: "fluffy white cotton bolls, soft and airy",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🪵",
+    label: "Soft Driftwood",
+    val: "soft woody pale driftwood pieces, smooth and light",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🟠",
+    label: "Cardamom Pods",
+    val: "cardamom pods split open revealing seeds",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🍵",
+    label: "Oolong Leaves",
+    val: "dried oolong tea leaves loosely scattered",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🤍",
+    label: "White Tea Buds",
+    val: "white tea buds and pale dried tea petals",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌼",
+    label: "Jasmine Blossom",
+    val: "white jasmine blossoms freshly picked",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌸",
+    label: "Orange Blossom",
+    val: "orange blossom branches with small white flowers",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌸",
+    label: "Wild Rose Petals",
+    val: "soft pink wild rose petals scattered delicately",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "💜",
+    label: "Cosmos Flower",
+    val: "soft purple cosmos flowers on thin stems",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌹",
+    label: "Red Rose Petals",
+    val: "deep red rose petals scattered dramatically",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "💜",
+    label: "Heliotrope Bloom",
+    val: "heliotrope purple flowers with small clustered blooms",
+    extraClass: "scent-3",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌸",
+    label: "Vanilla Orchid",
+    val: "vanilla orchid flowers in full bloom, creamy white",
+    extraClass: "scent-4",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🤍",
+    label: "Muguet Lily",
+    val: "muguet lily of the valley tiny white bell flowers",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌹",
+    label: "White Rose Buds",
+    val: "soft white rose buds barely opened",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌼",
+    label: "White Jasmine",
+    val: "white jasmine small star-shaped flowers",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🪷",
+    label: "Powder Puff",
+    val: "delicate powder puff with loose translucent powder",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌿",
+    label: "Botanical Leaves",
+    val: "delicate green botanical leaves and stems",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "💎",
+    label: "Amethyst Crystal",
+    val: "small amethyst crystal fragments, deep purple",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌾",
+    label: "Pampas Grass",
+    val: "dried pampas grass plumes, neutral and textural",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌿",
+    label: "Petitgrain Twigs",
+    val: "petitgrain green twigs and young orange leaves",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌼",
+    label: "Neroli Blossom",
+    val: "neroli white blossoms from bitter orange tree, delicate",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🌸",
+    label: "Sakura Silk",
+    val: "delicate silk fabric in soft baby pink, flowing texture, elegant",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🎀",
+    label: "Rose Quartz Slab",
+    val: "polished rose quartz stone slab, luxury skincare background, soft light",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🩰",
+    label: "Pink Ribbon",
+    val: "satin ribbon in pastel pink, elegant loops, soft shadows",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Active Ingredient",
+    icon: "🫧",
+    label: "Pink Pearl Essence",
+    val: "iridescent pink liquid pearl essence, swirling texture, glossy",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "🦢",
+    label: "Pink Feather",
+    val: "single soft pink plume feather, ethereal and light",
+    extraClass: "scent-5",
+  },
+  {
+    category: "Atmosphere & Aesthetic",
+    icon: "☁️",
+    label: "Pink Cloud Vapor",
+    val: "dreamy soft pink tinted mist vapor, clean laboratory aesthetic",
+    extraClass: "scent-5",
+  },
 
   {
-    "category": "Fresh Citrus",
-    "icon": "🍋",
-    "label": "Citrus Spiral",
-    "val": "floating twisted citrus peels with glossy juicy texture and dynamic fresh motion"
+    category: "Fresh Citrus",
+    icon: "🍋",
+    label: "Citrus Spiral",
+    val: "floating twisted citrus peels with glossy juicy texture and dynamic fresh motion",
   },
   {
-    "category": "Fresh Citrus",
-    "icon": "💧",
-    "label": "Citrus Droplets",
-    "val": "large suspended citrus-infused water droplets with reflective glossy surface"
+    category: "Fresh Citrus",
+    icon: "💧",
+    label: "Citrus Droplets",
+    val: "large suspended citrus-infused water droplets with reflective glossy surface",
   },
   {
-    "category": "Fresh Spicy",
-    "icon": "🌶️",
-    "label": "Pink Pepper Cluster",
-    "val": "floating pink peppercorn clusters with rich texture and spicy aromatic feel"
+    category: "Fresh Spicy",
+    icon: "🌶️",
+    label: "Pink Pepper Cluster",
+    val: "floating pink peppercorn clusters with rich texture and spicy aromatic feel",
   },
   {
-    "category": "Fresh Spicy",
-    "icon": "🫚",
-    "label": "Ginger Slices",
-    "val": "fresh ginger slices suspended in air with juicy fibrous texture"
+    category: "Fresh Spicy",
+    icon: "🫚",
+    label: "Ginger Slices",
+    val: "fresh ginger slices suspended in air with juicy fibrous texture",
   },
   {
-    "category": "Aromatic Herbal",
-    "icon": "🌿",
-    "label": "Lavender Bundle",
-    "val": "floating lavender stems tied naturally with soft purple floral texture"
+    category: "Aromatic Herbal",
+    icon: "🌿",
+    label: "Lavender Bundle",
+    val: "floating lavender stems tied naturally with soft purple floral texture",
   },
   {
-    "category": "Aromatic Herbal",
-    "icon": "🍃",
-    "label": "Herbal Leaves",
-    "val": "fresh herbal leaves swirling naturally with layered botanical texture"
+    category: "Aromatic Herbal",
+    icon: "🍃",
+    label: "Herbal Leaves",
+    val: "fresh herbal leaves swirling naturally with layered botanical texture",
   },
   {
-    "category": "Amber Warm",
-    "icon": "🟠",
-    "label": "Amber Resin",
-    "val": "translucent amber resin stones glowing under warm soft lighting"
+    category: "Amber Warm",
+    icon: "🟠",
+    label: "Amber Resin",
+    val: "translucent amber resin stones glowing under warm soft lighting",
   },
   {
-    "category": "Amber Warm",
-    "icon": "🧊",
-    "label": "Golden Resin Glass",
-    "val": "molten amber-like translucent glass fragments with glossy reflections"
+    category: "Amber Warm",
+    icon: "🧊",
+    label: "Golden Resin Glass",
+    val: "molten amber-like translucent glass fragments with glossy reflections",
   },
   {
-    "category": "Woody",
-    "icon": "🪵",
-    "label": "Sandalwood Pieces",
-    "val": "smooth sandalwood chunks with creamy natural wood grain texture"
+    category: "Woody",
+    icon: "🪵",
+    label: "Sandalwood Pieces",
+    val: "smooth sandalwood chunks with creamy natural wood grain texture",
   },
   {
-    "category": "Woody",
-    "icon": "🌲",
-    "label": "Cedar Wood Shavings",
-    "val": "curled cedar wood shavings scattered naturally with dry woody texture"
+    category: "Woody",
+    icon: "🌲",
+    label: "Cedar Wood Shavings",
+    val: "curled cedar wood shavings scattered naturally with dry woody texture",
   },
   {
-    "category": "Vanilla Sweet",
-    "icon": "🍦",
-    "label": "Vanilla Pods",
-    "val": "split vanilla pods with visible vanilla seeds and rich glossy texture"
+    category: "Vanilla Sweet",
+    icon: "🍦",
+    label: "Vanilla Pods",
+    val: "split vanilla pods with visible vanilla seeds and rich glossy texture",
   },
   {
-    "category": "Vanilla Sweet",
-    "icon": "🥛",
-    "label": "Vanilla Cream Cube",
-    "val": "soft creamy vanilla cubes with smooth glossy dessert-like texture"
+    category: "Vanilla Sweet",
+    icon: "🥛",
+    label: "Vanilla Cream Cube",
+    val: "soft creamy vanilla cubes with smooth glossy dessert-like texture",
   },
 
   {
@@ -182,7 +685,7 @@ window.propsData = [
     icon: "☁️",
     label: "Powdery Soft Veil",
     val: "soft powder dust diffusion, velvety cosmetic particles floating in air, airy skincare aesthetic, clean muted beige atmosphere, luxurious soft-focus beauty editorial",
-    extraClass: "scent-1"
+    extraClass: "scent-1",
   },
 
   {
@@ -190,7 +693,7 @@ window.propsData = [
     icon: "🌸",
     label: "Creamy Tuberose Bloom",
     val: "creamy white tuberose petals, elegant floral arrangement, luxurious white blossom atmosphere, soft natural light, premium botanical skincare aesthetic",
-    extraClass: "scent-2"
+    extraClass: "scent-2",
   },
 
   {
@@ -198,7 +701,7 @@ window.propsData = [
     icon: "🪻",
     label: "White Violet Petals",
     val: "soft velvety violet petals with subtle white gradients, rich floral texture, elegant moody purple accents, refined botanical skincare aesthetic, clean ethereal atmosphere",
-    extraClass: "scent-3"
+    extraClass: "scent-3",
   },
 
   {
@@ -206,7 +709,7 @@ window.propsData = [
     icon: "🪵",
     label: "Soft Woody Musk",
     val: "smooth pale wood texture, soft musky atmosphere, creamy beige neutral tones, minimal spa-inspired composition, elegant warm skincare backdrop",
-    extraClass: "scent-4"
+    extraClass: "scent-4",
   },
 
   {
@@ -214,7 +717,7 @@ window.propsData = [
     icon: "🥥",
     label: "Coconut Silk Cream",
     val: "fresh cracked coconut shell, raw organic coconut meat, pure hydrating water droplets, tropical clean beauty aesthetic, luxurious moisturizing skincare mood",
-    extraClass: "scent-5"
+    extraClass: "scent-5",
   },
   {
     category: "Natural Texture",
@@ -238,9 +741,8 @@ window.propsData = [
     label: "Fresh Zesty Lemon",
     val: "vibrant lemon peel texture, dewy fresh droplets, bright citrus yellow tones, minimalist studio lighting, crisp and clean organic aesthetic, refreshing luxury skincare backdrop",
     extraClass: "scent-lemon",
-    image: "./assets/props/lemon.jpg"
+    image: "./assets/props/lemon.jpg",
   },
-
 
   {
     category: "Marine Citrus",
@@ -248,7 +750,7 @@ window.propsData = [
     label: "Lemon Slice Stack",
     val: "stacked fresh lemon slices, realistic citrus pulp texture, visible condensation droplets, placed on wet coastal stone, scattered sea salt crystals, luxury skincare product photography prop, studio macro lighting",
     extraClass: "scent-lemon-stack",
-    image: "./assets/props/lemon-stack.jpg"
+    image: "./assets/props/lemon-stack.jpg",
   },
 
   {
@@ -257,7 +759,7 @@ window.propsData = [
     label: "Floating Grapefruit Wedge",
     val: "single pink grapefruit wedge floating in shallow crystal-clear seawater, realistic water ripple reflections, glossy citrus surface, ocean-inspired skincare prop, clean aqua studio composition",
     extraClass: "scent-grapefruit-water",
-    image: "./assets/props/grapefruit-water.jpg"
+    image: "./assets/props/grapefruit-water.jpg",
   },
 
   {
@@ -266,7 +768,7 @@ window.propsData = [
     label: "Sea Salt Crystal Pile",
     val: "coarse natural sea salt crystal pile on reflective wet black stone, realistic mineral texture, ocean foam residue, macro skincare photography prop, minimal marine studio lighting",
     extraClass: "scent-sea-salt-pile",
-    image: "./assets/props/sea-salt-pile.jpg"
+    image: "./assets/props/sea-salt-pile.jpg",
   },
 
   {
@@ -275,7 +777,7 @@ window.propsData = [
     label: "Wet Volcanic Stone",
     val: "smooth wet volcanic stone with reflective seawater droplets, realistic dark mineral surface, subtle ocean mist, minimalist luxury skincare prop object, clean studio lighting",
     extraClass: "scent-volcanic-stone",
-    image: "./assets/props/volcanic-stone.jpg"
+    image: "./assets/props/volcanic-stone.jpg",
   },
 
   {
@@ -284,7 +786,7 @@ window.propsData = [
     label: "Aqua Glass Block",
     val: "translucent aqua glass block with soft water reflections, realistic transparent material, ocean-inspired light refraction, clean luxury skincare prop object, minimalist studio setup",
     extraClass: "scent-aqua-glass",
-    image: "./assets/props/aqua-glass.jpg"
+    image: "./assets/props/aqua-glass.jpg",
   },
 
   {
@@ -293,7 +795,7 @@ window.propsData = [
     label: "White Coral Fragment",
     val: "small white coral fragment with realistic porous texture, placed beside shallow seawater reflections, clean marine skincare prop composition, soft tropical studio lighting",
     extraClass: "scent-coral-fragment",
-    image: "./assets/props/coral-fragment.jpg"
+    image: "./assets/props/coral-fragment.jpg",
   },
 
   {
@@ -302,7 +804,7 @@ window.propsData = [
     label: "Clear Water Ripple Tray",
     val: "shallow transparent water ripple tray creating realistic ocean wave reflections, glossy liquid surface, clean aquatic skincare photography prop, bright minimal studio lighting",
     extraClass: "scent-water-ripple",
-    image: "./assets/props/water-ripple.jpg"
+    image: "./assets/props/water-ripple.jpg",
   },
 
   {
@@ -311,7 +813,7 @@ window.propsData = [
     label: "Ocean Foam Cluster",
     val: "soft ocean foam cluster with realistic bubble texture, floating on shallow seawater surface, glossy aquatic reflections, fresh marine skincare prop aesthetic, macro studio photography",
     extraClass: "scent-ocean-foam",
-    image: "./assets/props/ocean-foam.jpg"
+    image: "./assets/props/ocean-foam.jpg",
   },
   {
     category: "Nature",
@@ -319,7 +821,7 @@ window.propsData = [
     label: "River Stone",
     val: "smooth charcoal grey river stone, matte finish, wet texture, minimalist composition, balanced lighting, professional product styling",
     extraClass: "scent-river-stone",
-    image: ""
+    image: "",
   },
   {
     category: "Nature",
@@ -327,7 +829,7 @@ window.propsData = [
     label: "Water Ripple",
     val: "clear water ripple surface, soft light reflection, clinical clean vibe, shallow depth of field, macro shot, premium aesthetic",
     extraClass: "scent-water-ripple",
-    image: ""
+    image: "",
   },
   {
     category: "Nature",
@@ -335,7 +837,7 @@ window.propsData = [
     label: "Dewy Eucalyptus",
     val: "fresh eucalyptus leaves with water droplets, vibrant green, soft focus, minimal background, serene atmosphere, high-end skincare vibe",
     extraClass: "scent-eucalyptus-dew",
-    image: ""
+    image: "",
   },
   {
     category: "Professional",
@@ -343,7 +845,7 @@ window.propsData = [
     label: "Architectural Pen",
     val: "sleek brushed metal fountain pen, matte black finish, minimalist design, shadow play, sophisticated office desk context",
     extraClass: "scent-pro-pen",
-    image: ""
+    image: "",
   },
   {
     category: "Professional",
@@ -351,7 +853,7 @@ window.propsData = [
     label: "Minimalist Watch",
     val: "classic silver wrist watch, clean white dial, leather strap, soft studio lighting, sense of precision and time, luxury lifestyle prop",
     extraClass: "scent-pro-watch",
-    image: ""
+    image: "",
   },
   {
     category: "Professional",
@@ -359,7 +861,7 @@ window.propsData = [
     label: "Linen Texture",
     val: "crisp white linen fabric swatch, soft natural light, clean folds, minimalist background, evokes freshness and professional grooming",
     extraClass: "scent-pro-linen",
-    image: ""
+    image: "",
   },
   {
     category: "Others",
@@ -367,7 +869,7 @@ window.propsData = [
     label: "Crystal Glass",
     val: "clear crystal water glass, light refraction, clean minimalist edges, condensation droplets, sophisticated studio setup",
     extraClass: "scent-others-glass",
-    image: ""
+    image: "",
   },
   {
     category: "Others",
@@ -375,7 +877,7 @@ window.propsData = [
     label: "Concrete Block",
     val: "smooth white concrete base, sharp geometric angles, minimalist architectural prop, soft diffused studio lighting, modern clean look",
     extraClass: "scent-others-concrete",
-    image: ""
+    image: "",
   },
   {
     category: "Others",
@@ -383,9 +885,6 @@ window.propsData = [
     label: "Morning Light",
     val: "soft morning sunlight streaming through a window, window frame shadows (gobo), dreamy atmosphere, clean airy aesthetic, professional photography style",
     extraClass: "scent-others-light",
-    image: ""
+    image: "",
   },
-
-
-
 ];

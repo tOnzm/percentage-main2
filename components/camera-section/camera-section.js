@@ -51,11 +51,14 @@ function _renderSingleSelectGroup(groupId, data) {
 
     // 2. ใช้ .pill-group เดิมวนลูปสร้างปุ่ม
     categories[category].forEach((item) => {
+      console.log(item);
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "pill"; // ใช้ Class เดิม
       btn.dataset.val = item.val;
+
       btn.textContent = item.label;
+      btn.title = item.hint || item.label;
       group.appendChild(btn);
     });
   });

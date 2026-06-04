@@ -4,6 +4,7 @@ window.cameraAngles = {
     {
       label: "Front",
       val: "straight-on front view of skincare bottle on laboratory surface, clean editorial composition",
+      hint: "ภาพถ่ายมุมมองด้านหน้าแบบคลาสสิก จัดองค์ประกอบภาพให้อยู่ตรงกลาง ฉากหลังเป็นสตูดิโอที่สะอาดตา",
     },
     {
       label: "Front Commercial",

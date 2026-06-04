@@ -1,76 +1,58 @@
-<div class="section-divider">มุมกล้อง &amp; การจัดแสง (Camera &amp; Lighting)</div>
-<div class="grid-2">
+<section class="workspace-section">
+  <div class="section-title">
+    <i class="ti ti-camera" aria-hidden="true"></i> Camera & Lighting
+  </div>
 
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-camera" aria-hidden="true"></i>
-      มุมกล้อง
-      <span class="selection-hint">เลือกได้ 1 รายการ</span>
+  <div class="section-content">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+      <div>
+        <div class="pm-label">Angle</div>
+        <div class="pill-group" id="angle-group" role="group" aria-label="เลือกมุมกล้อง"></div>
+      </div>
+
+      <div>
+        <div class="pm-label">Lens</div>
+        <div class="pill-group" id="lens-group" role="group" aria-label="เลือกลักษณะเลนส์"></div>
+      </div>
+
+      <div>
+        <div class="pm-label">Lighting</div>
+        <div class="pill-group" id="light-group" role="group" aria-label="เลือกการจัดแสง"></div>
+      </div>
     </div>
-    <div class="pill-group" id="angle-group" role="group" aria-label="เลือกมุมกล้อง"></div>
-  </div>
 
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-camera" aria-hidden="true"></i> ลักษณะเลนส์ (Lens/Focal Length)
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+      <div>
+        <div class="pm-label">Ratio</div>
+        <div class="pill-group" id="ratio-group" role="group">
+          <button type="button" class="pill active" data-val="9:16">9:16</button>
+          <button type="button" class="pill" data-val="1:1">1:1</button>
+          <button type="button" class="pill" data-val="16:9">16:9</button>
+          <button type="button" class="pill" data-val="4:5">4:5</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="pm-label">Quality</div>
+        <div class="pill-group" id="quality-group" role="group" aria-label="เลือกระดับคุณภาพ"></div>
+      </div>
+
+      <div>
+        <div class="pm-label">Finish</div>
+        <div class="pill-group" id="finish-group" role="group" aria-label="เลือกผิวฉลาก"></div>
+      </div>
     </div>
-    <div class="pill-group" id="lens-group" role="group" aria-label="เลือกลักษณะเลนส์"></div>
-  </div>
 
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-sun" aria-hidden="true"></i> การจัดแสง &amp; เงา (Lighting &amp; Shadow)
+    <div>
+      <div class="pm-label">Mood</div>
+      <div class="pill-group" id="mood-group" role="group" aria-label="เลือกอารมณ์ภาพ"></div>
+      <input class="pm-input mt-3" id="mood-custom" placeholder="หรือระบุเอง" autocomplete="off" />
     </div>
-    <div class="pill-group" id="light-group" role="group" aria-label="เลือกการจัดแสง"></div>
-  </div>
 
-</div>
-
-<div class="grid-2">
-
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-arrows-maximize" aria-hidden="true"></i> สัดส่วนภาพ (Aspect Ratio)
-    </div>
-    <div class="pill-group" id="ratio-group" role="group">
-      <button type="button" class="pill active" data-val="9:16">9:16 Story/Reels</button>
-      <button type="button" class="pill" data-val="1:1">1:1 Square</button>
-      <button type="button" class="pill" data-val="16:9">16:9 Landscape</button>
-      <button type="button" class="pill" data-val="4:5">4:5 Portrait</button>
+    <div>
+      <div class="pm-label">Extra Details</div>
+      <textarea class="pm-textarea" id="extra" rows="2"
+        placeholder="เช่น award-winning photography, volumetric smoke effects..."></textarea>
     </div>
   </div>
-
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-star" aria-hidden="true"></i> ระดับคุณภาพ (Quality)
-    </div>
-    <div class="pill-group" id="quality-group" role="group" aria-label="เลือกระดับคุณภาพ"></div>
-  </div>
-
-  <div class="pm-card">
-    <div class="pm-label">
-      <i class="ti ti-sparkles" aria-hidden="true"></i> ผิวฉลาก (Label Finish)
-    </div>
-    <div class="pill-group" id="finish-group" role="group" aria-label="เลือกผิวฉลาก"></div>
-  </div>
-
-</div>
-
-<div class="pm-card">
-  <div class="pm-label">
-    <i class="ti ti-mood" aria-hidden="true"></i> อารมณ์ภาพ (Mood)
-  </div>
-  <div class="pill-group" id="mood-group" role="group" aria-label="เลือกอารมณ์ภาพ"></div>
-  <div class="mt-3">
-    <input class="pm-input" id="mood-custom" placeholder="หรือระบุอารมณ์เอง เช่น vintage cinematic, hyper-minimalist"
-      autocomplete="off" />
-  </div>
-</div>
-
-<div class="pm-card">
-  <div class="pm-label">
-    <i class="ti ti-plus" aria-hidden="true"></i> รายละเอียดเพิ่มเติม (Extra)
-  </div>
-  <textarea class="pm-textarea" id="extra" rows="2"
-    placeholder="เช่น award-winning photography, volumetric smoke effects, ultra sharp product label..."></textarea>
-</div>
+</section>

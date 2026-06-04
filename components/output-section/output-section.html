@@ -1,50 +1,44 @@
-<div class="action-container">
-  <button type="button" class="action-btn" onclick="generatePrompt()">
-    <i class="ti ti-sparkles" aria-hidden="true"></i> สร้าง Prompt
-  </button>
-</div>
+<section class="workspace-section">
+  <div class="section-title">
+    <i class="ti ti-sparkles" aria-hidden="true"></i> ยังไม่มี Prompt
+  </div>
 
-<section class="out-panel" id="out-panel" aria-live="polite" aria-label="ผลลัพธ์ Prompt">
-  <div class="section-divider mt-3">ผลลัพธ์โครงสร้างข้อมูล (Output Prompt)</div>
+  <div class="section-content">
+    <!--  <button type="button" class="action-btn" onclick="generatePrompt()" style="width: 100%; margin-bottom: 12px;">
+      <i class="ti ti-sparkles" aria-hidden="true"></i> Generate
+    </button> -->
 
-  <div class="pm-card pm-full out-container">
-
-    <div class="out-header">
+    <div class="out-header" style="flex-direction: column; gap: 8px; margin-bottom: 12px;">
       <div class="out-title-block">
-        <span class="out-tag">READY TO GENERATE</span>
+        <span class="out-tag">รายละเอียด</span>
         <div class="out-scent" id="out-scent-name" aria-label="ชื่อสินค้า">-</div>
       </div>
-      <div class="flex-row">
-        <button type="button" id="btn-send-chat" class="send-btn" onclick="sendToChat()">
-          <i class="ti ti-brand-telegram" aria-hidden="true"></i> ส่งเข้าแชทหลัก
-        </button>
-        <button type="button" id="btn-copy-prompt" class="send-btn" onclick="copyAsPrompt()">
-          <i class="ti ti-clipboard" aria-hidden="true"></i> ก๊อปปี้เฉพาะ Prompt
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <!-- <button type="button" id="btn-send-chat" class="send-btn" onclick="sendToChat()" style="width: 100%;">
+          <i class="ti ti-brand-telegram" aria-hidden="true"></i> Send Chat
+        </button> -->
+        <button type="button" id="btn-copy-prompt" class="send-btn" onclick="copyAsPrompt()" style="width: 100%;">
+          <i class="ti ti-clipboard" aria-hidden="true"></i> คัดลอกเฉพาะ Prompt
         </button>
       </div>
     </div>
 
-    <!-- Hidden state fields — visually hidden but readable by JS -->
+    <!-- Hidden state fields -->
     <div class="prompt-fields" aria-hidden="true">
       <input id="f-product" /><input id="f-placement" /><input id="f-props" />
       <input id="f-bg" /><input id="f-color" /><input id="f-mood" />
-      <input id="f-light" /><input id="f-camera" /><input id="f-lens" /><input id="f-finish" /><input id="f-quality" /><input id="f-extra" />
+      <input id="f-light" /><input id="f-camera" /><input id="f-lens" /><input id="f-finish" /><input
+        id="f-quality" /><input id="f-extra" />
     </div>
 
-    <div style="position:relative; margin-top:12px;">
-      <textarea
-        class="out-compiled"
-        id="out-compiled"
-        readonly
-        placeholder="JSON output จะแสดงผลอัตโนมัติที่นี่..."
-        aria-label="JSON output"
-        aria-readonly="true"
-      ></textarea>
+    <div style="position: relative;">
+      <textarea class="out-compiled" id="out-compiled" readonly placeholder="" aria-label="JSON output"
+        aria-readonly="true"></textarea>
       <button type="button" class="copy-btn" id="copy-btn" onclick="copyPrompt()">
-        <i class="ti ti-copy" aria-hidden="true"></i> Copy JSON
+        <i class="ti ti-copy" aria-hidden="true"></i> คัดลอก JSON
       </button>
     </div>
 
-    <div class="char-count" id="char-count" aria-live="polite">0 chars in prompt</div>
+    <div class="char-count" id="char-count" aria-live="polite">0 ตัวอักษร</div>
   </div>
 </section>

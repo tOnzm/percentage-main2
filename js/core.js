@@ -20,68 +20,38 @@ function buildPromptString(f) {
   const count = f.productCount || 1;
   const isMulti = count > 1;
 
-  // ── Layout instruction for multi-product ────────────────────────────
-  // Tell Banana the exact count + arrangement so all items stay visible
-  const layoutHint = (() => {
-    if (!isMulti) return "";
-    const nums = ["two","three","four","five","six","seven","eight"];
-    const word = nums[count - 2] || `${count}`;
-    // Vary arrangement by count for best render result
-    const arrangement = count <= 3
-      ? "side by side in a row"
-      : count <= 5
-        ? "arranged in a slight arc, evenly spaced"
-        : "grouped in a flat-lay cluster";
-    return `Exactly ${word} distinct skincare products ${arrangement}, each product fully visible and clearly separated, all labels legible.`;
-  })();
+  // 1. คำสั่งควบคุมหลัก (Mandatory) - ให้ AI รู้ว่านี่คือ Source of Truth
+  const integrity =
+    "Strictly preserve original product/packaging from reference image. Do not change branding, logo, text, or label. Do not redesign packaging. Do not generate new products.";
 
-  // ── Subject line ─────────────────────────────────────────────────────
-  let subjectLine;
-  if (isMulti) {
-    // Multi: lead with layout, then identify the collection by brand
-    const brand = f.productNames.length ? f.productNames[0].split(" ")[0] : "Percentage";
-    switch (f.displayMode) {
-      case "box_only":
-        subjectLine = `${f.quality} product photograph. ${layoutHint} Showing retail packaging boxes of the ${brand} skincare collection.`;
-        break;
-      case "product_box":
-        subjectLine = `${f.quality} product photograph. ${layoutHint} Each product is shown together with its matching retail packaging box.`;
-        break;
-      default:
-        subjectLine = `${f.quality} product photograph. ${layoutHint} Products: ${f.product}.`;
-    }
-  } else {
-    // Single: original clean subject
-    switch (f.displayMode) {
-      case "box_only":
-        subjectLine = `${f.quality} product photograph of the retail packaging box of ${f.product}.`;
-        break;
-      case "product_box":
-        subjectLine = `${f.quality} product photograph of ${f.product} with its matching retail packaging box displayed beside it.`;
-        break;
-      default:
-        subjectLine = `${f.quality} product photograph of ${f.product}.`;
-    }
-  }
+  // 2. Layout (ลดการเรียกชื่อสินค้า เปลี่ยนเป็นตำแหน่ง)
+  const layoutHint = isMulti
+    ? (() => {
+        const arrangement =
+          count <= 3
+            ? "side by side in a row"
+            : "arranged in a balanced cluster";
+        return `Maintain the existence of exactly ${count} products as seen in the reference. Display them ${arrangement}.`;
+      })()
+    : "Maintain the single product from the reference.";
+
+  // 3. Subject Line (เน้นการแต่งภาพ ไม่ใช่การบอกให้วาดภาพ)
+  const subjectLine = `${f.quality} commercial photography, focusing on scene and environment modification while keeping the original product assets unchanged.`;
 
   const parts = [
+    integrity,
     subjectLine,
-    f.placement ? `The ${isMulti ? "products are" : "product is"} ${f.placement}.` : "",
-    f.props ? `Surrounding scene elements: ${f.props}.` : "",
+    layoutHint,
+    `Placement: ${f.placement}.`,
+    f.props ? `Scene elements: ${f.props}.` : "",
     `Background: ${f.background}.`,
-    f.color ? `Overall color palette: ${f.color}.` : "",
-    `Camera angle: ${f.camera}.`,
-    `Lens: ${f.lens}.`,
     `Lighting: ${f.light}.`,
+    `Camera: ${f.camera}, ${f.lens}.`,
     `Mood: ${f.mood}.`,
-    isMulti
-      ? `Shallow depth of field, all product labels sharp and legible, no product cropped.`
-      : `Shallow depth of field, product label sharp and legible.`,
-    f.finish ? `${f.finish}.` : "",
-    `Professional luxury beauty commercial photography.`,
-    f.extra ? `${f.extra}.` : "",
-    `No text overlays, no people, no watermarks.`,
+    "Shallow depth of field, product labels remain crisp and original.",
+    "No text overlays, no people, no watermark.",
   ];
+
   return parts.filter(Boolean).join(" ");
 }
 
@@ -264,51 +234,58 @@ function generatePrompt() {
 // ─ Recompile (live rebuild while output panel is open) ────────────────────
 function recompile() {
   const f = {
-    product:      getInputValueById("f-product"),
-    displayMode:  getInputValueById("f-display-mode") || "product",
+    product: getInputValueById("f-product"),
+    displayMode: getInputValueById("f-display-mode") || "product",
     productCount: parseInt(getInputValueById("f-product-count") || "1", 10),
-    productNames: (getInputValueById("f-product-names") || "").split(",").filter(Boolean),
-    placement:    getInputValueById("f-placement"),
-    props:       getInputValueById("f-props"),
-    background:  getInputValueById("f-bg"),
-    color:       getInputValueById("f-color"),
-    mood:        getInputValueById("f-mood"),
-    light:       getInputValueById("f-light"),
-    camera:      getInputValueById("f-camera"),
-    lens:        getInputValueById("f-lens"),
-    finish:      getInputValueById("f-finish"),
-    quality:     getInputValueById("f-quality"),
-    extra:       getInputValueById("f-extra"),
+    placement: getInputValueById("f-placement"),
+    background: getInputValueById("f-bg"),
+    mood: getInputValueById("f-mood"),
+    light: getInputValueById("f-light"),
+    camera: getInputValueById("f-camera"),
+    lens: getInputValueById("f-lens"),
+    finish: getInputValueById("f-finish"),
+    quality: getInputValueById("f-quality"),
+    extra: getInputValueById("f-extra"),
   };
+  const prompt = [
+    "Commercial luxury beauty photography, professional product shoot.",
+    "Strictly maintain the reference image product geometry, label, and packaging branding.",
+    `Background: ${f.background}.`,
+    `Lighting: ${f.light}.`,
+    `Composition: ${f.camera}, ${f.lens}.`,
+    `Mood: ${f.mood}.`,
+    f.finish ? `Product details: ${f.finish}.` : "",
+    "Result must look like a high-end studio photograph, seamless and clean.",
+    "No text overlays, no people, no watermark, no new products created.",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-  const prompt = buildPromptString(f);
   const ratioEl = document.querySelector("#ratio-group .pill.active");
 
   // Google Banana compatible JSON (img2img format)
   const json = {
     prompt,
     negative_prompt:
-      "text, watermark, logo, people, hands, blurry label, distorted bottle, extra objects, cluttered background, oversaturated, unrealistic proportions",
-    image: null, // img2img source — set externally before submit
+      "generated product, distorted product, altered logo, fake label, extra objects, cluttered background, blurry text, low resolution, unrefined shadows",
+    image: null,
     parameters: {
-      aspect_ratio: ratioEl ? ratioEl.dataset.val : "9:16",
-      image_guidance_scale: 1.5,
-      guidance_scale: 7.5,
-      num_inference_steps: 30,
+      style: "photorealistic",
+      aspect_ratio: "1:1",
+      quality: "high",
+      // เพิ่มค่าควบคุมความเหมือน เพื่อไม่ให้ AI วาดใหม่
+      image_guidance_scale: 4.0, // เพิ่มค่านี้เพื่อให้ยึดติดกับรูปต้นฉบับ
+      denoising_strength: 0.35, // ค่านี้น้อยๆ จะเป็นการเปลี่ยนฉากโดยไม่แตะต้องตัวสินค้า
+      num_inference_steps: 35,
       seed: null,
     },
     metadata: {
-      product:       f.product,
-      product_count: f.productCount,
-      display_mode:  f.displayMode,
-      placement:     f.placement,
-      background:   f.background,
-      mood:         f.mood,
-      camera:       f.camera,
-      lens:         f.lens,
-      lighting:     f.light,
-      props:        f.props ? f.props.split(", ").filter(Boolean) : [],
-      finish:       f.finish || "",
+      product: f.product,
+      display_mode: f.displayMode,
+      environment: f.background,
+      lighting: f.light,
+      camera_settings: `${f.camera}, ${f.lens}`,
+      finish_details: f.finish,
     },
   };
 
@@ -316,7 +293,7 @@ function recompile() {
   updateDOMValue("out-compiled", compiled);
   updateDOMText(
     "char-count",
-    `${prompt.length} chars in prompt · ${compiled.length} chars total`,
+    `${prompt.length} ตัวอักษร (Prompt) · ${compiled.length} ตัวอักษรทั้งหมด`,
   );
   autoResize();
 }
@@ -330,40 +307,62 @@ function autoResize() {
 }
 
 // ─ Copy helpers ───────────────────────────────────────────────────────────
-function flashCopyFeedback(btnId, successHtml, delay = 1600) {
+/* function flashCopyFeedback(btnId, successHtml, delay = 1600) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
   const orig = btn.innerHTML;
   btn.innerHTML = successHtml;
   setTimeout(() => (btn.innerHTML = orig), delay);
-}
+} */
+function flashCopyFeedback(btnId, successHtml, delay = 1600) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
 
+  const originalHtml =
+    '<i class="ti ti-clipboard" aria-hidden="true"></i> คัดลอกเฉพาะ Prompt'; // กำหนดค่าเริ่มต้นใหม่เป็นภาษาไทย
+
+  btn.innerHTML = successHtml;
+
+  clearTimeout(btn._copyTimer);
+
+  btn._copyTimer = setTimeout(() => {
+    const currentBtn = document.getElementById(btnId);
+    if (currentBtn) {
+      currentBtn.innerHTML = originalHtml;
+    }
+  }, delay);
+}
 function copyAsPrompt() {
   const f = {
-    product:      getInputValueById("f-product"),
-    displayMode:  getInputValueById("f-display-mode") || "product",
+    product: getInputValueById("f-product"),
+    displayMode: getInputValueById("f-display-mode") || "product",
     productCount: parseInt(getInputValueById("f-product-count") || "1", 10),
-    productNames: (getInputValueById("f-product-names") || "").split(",").filter(Boolean),
-    placement:    getInputValueById("f-placement"),
-    props:        getInputValueById("f-props"),
-    background:   getInputValueById("f-bg"),
-    color:        getInputValueById("f-color"),
-    mood:         getInputValueById("f-mood"),
-    light:        getInputValueById("f-light"),
-    camera:       getInputValueById("f-camera"),
-    lens:         getInputValueById("f-lens"),
-    finish:       getInputValueById("f-finish"),
-    quality:      getInputValueById("f-quality"),
-    extra:        getInputValueById("f-extra"),
+    productNames: (getInputValueById("f-product-names") || "")
+      .split(",")
+      .filter(Boolean),
+    placement: getInputValueById("f-placement"),
+    props: getInputValueById("f-props"),
+    background: getInputValueById("f-bg"),
+    color: getInputValueById("f-color"),
+    mood: getInputValueById("f-mood"),
+    light: getInputValueById("f-light"),
+    camera: getInputValueById("f-camera"),
+    lens: getInputValueById("f-lens"),
+    finish: getInputValueById("f-finish"),
+    quality: getInputValueById("f-quality"),
+    extra: getInputValueById("f-extra"),
   };
   navigator.clipboard.writeText(buildPromptString(f)).then(() => {
-    flashCopyFeedback("btn-copy-prompt", '<i class="ti ti-check"></i> Copied!');
+    flashCopyFeedback(
+      "btn-copy-prompt",
+      '<i class="ti ti-check"></i> คัดลอกแล้ว!',
+    );
   });
 }
 
 function copyPrompt() {
   navigator.clipboard.writeText(getInputValueById("out-compiled")).then(() => {
-    flashCopyFeedback("copy-btn", '<i class="ti ti-check"></i> Copied!');
+    flashCopyFeedback("copy-btn", '<i class="ti ti-check"></i> คัดลอกแล้ว!');
   });
 }
 

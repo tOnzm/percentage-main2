@@ -83,15 +83,23 @@ function renderProductTabs() {
 
 /** Update the scent-detail panel to show selected product info. */
 function applySelectedScents() {
-  const selected = [...selectedProducts].map((id) => products[id]).filter(Boolean);
+  const selected = [...selectedProducts]
+    .map((id) => products[id])
+    .filter(Boolean);
 
   if (!selected.length) {
-    updateDOMHtml("scent-detail", '<div class="snotes">ยังไม่ได้เลือกสินค้า</div>');
+    updateDOMHtml(
+      "scent-detail",
+      '<div class="snotes">ยังไม่ได้เลือกสินค้า</div>',
+    );
     return;
   }
 
   const html = selected
-    .map((product) => `<div class="snotes">${product.brand} — ${product.name}</div>${product.desc}`)
+    .map(
+      (product) =>
+        `<div class="snotes">${product.brand} — ${product.name}</div>${product.desc}`,
+    )
     .join('<hr style="margin:12px 0;">');
 
   updateDOMHtml("scent-detail", html);
@@ -120,7 +128,11 @@ function resetToDefaultProduct() {
 
 /** Wire up events for custom product inputs and display-mode select. */
 function initProductComponentEvents() {
-  const fieldIds = ["product-custom-brand", "product-custom-name", "product-custom-label"];
+  const fieldIds = [
+    "product-custom-brand",
+    "product-custom-name",
+    "product-custom-label",
+  ];
 
   fieldIds.forEach((id) => {
     const el = document.getElementById(id);
@@ -143,7 +155,7 @@ function initProductComponentEvents() {
         }
         updateDOMHtml(
           "scent-detail",
-          '<div class="snotes">Custom Product Mode</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...'
+          '<div class="snotes">ระบุสินค้าเอง</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...',
         );
       } else {
         resetToDefaultProduct();

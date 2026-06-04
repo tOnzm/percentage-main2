@@ -1,13 +1,17 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromptGen — Percentage Body Oil</title>
+  <title>PromptGen â€” Percentage Body Oil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/preview.css">
@@ -15,30 +19,52 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="workspace-layout">
+    <!-- Header -->
+    <header class="workspace-header">
+      <h1 class="workspace-title"> %PromptGen | พร้อมเจน </h1>
+      <span class="workspace-subtitle">version 0.2 </span>
 
-    <header class="pm-header">
-      <div>
-        <div class="pm-title">PromptGen | พร้อมเจน</div>
-        <div class="pm-sub">สำหรับ Percentage </div>
-      </div>
-      <nav class="nav-group" aria-label="Main navigation">
-        <a href="./index.html" class="nav-btn nav-btn--active" aria-current="page">หน้าแรก</a>
-        <a href="./active.html" class="nav-btn">สารสกัด</a>
-      </nav>
     </header>
 
-    <main id="app-root">
-      <div id="product-section-placeholder"   class="section-placeholder" aria-busy="true"></div>
-      <div id="scene-section-placeholder"      class="section-placeholder" aria-busy="true"></div>
-      <div id="background-section-placeholder" class="section-placeholder" aria-busy="true"></div>
-      <div id="camera-section-placeholder"     class="section-placeholder" aria-busy="true"></div>
-      <div id="output-section-placeholder"     class="section-placeholder" aria-busy="true"></div>
-    </main>
+    <!-- Main Workspace -->
+    <div class="workspace-container">
+      <!-- LEFT PANEL: WHAT appears -->
+      <aside class="workspace-panel workspace-left">
+        <div id="product-section-placeholder"></div>
+        <div id="scene-section-placeholder"></div>
+      </aside>
 
+      <!-- CENTER PANEL: OUTPUT workspace -->
+      <main class="workspace-panel workspace-center">
+        <div id="output-section-placeholder"></div>
+      </main>
+
+      <!-- RIGHT PANEL: HOW image is created -->
+      <aside class="workspace-panel workspace-right">
+        <div id="background-section-placeholder"></div>
+        <div id="camera-section-placeholder"></div>
+      </aside>
+    </div>
+
+    <!-- BOTTOM: Prompt Input Bar -->
+    <footer class="workspace-footer">
+      <div class="prompt-input-container " style="justify-content: center;">
+
+        <button type="button" class="action-btn" onclick="generatePrompt()" style="width: 20%; margin-bottom: 12px; ">
+          <i class="ti ti-sparkles" aria-hidden="true"></i> Generate
+        </button>
+        <!--     <div class="prompt-input-wrapper">
+
+          <textarea id="prompt-textarea" class="prompt-textarea"
+            placeholder="Enter additional prompt details or custom instructions..." rows="2"
+            autocomplete="off"></textarea>
+
+        </div> -->
+      </div>
+    </footer>
   </div>
 
-  <!-- ① Data globals — โหลดก่อน JS ทุกไฟล์ (ไม่ซ้ำ ไม่มีขาด) -->
   <script src="./data/products.js"></script>
   <script src="./data/background_data.js"></script>
   <script src="./data/placementData.js"></script>
@@ -50,18 +76,18 @@
   <script src="./data/lensData.js"></script>
   <script src="./data/labelTexture.js"></script>
 
-  <!-- ② Core utilities -->
+  <!-- â‘¡ Core utilities -->
   <script src="./js/config.js"></script>
   <script src="./js/helpers.js"></script>
   <script src="./js/core.js"></script>
 
-  <!-- ③ Component logic -->
+  <!-- â‘¢ Component logic -->
   <script src="./components/product-section/product-section.js"></script>
   <script src="./components/scene-section/scene-section.js"></script>
   <script src="./components/background-section/background-section.js"></script>
   <script src="./components/camera-section/camera-section.js"></script>
 
-  <!-- ④ Bootstrap -->
+  <!-- â‘£ Bootstrap -->
   <script src="./js/main.js"></script>
 </body>
 
