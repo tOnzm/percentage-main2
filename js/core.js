@@ -27,12 +27,12 @@ function buildPromptString(f) {
   // 2. Layout (ลดการเรียกชื่อสินค้า เปลี่ยนเป็นตำแหน่ง)
   const layoutHint = isMulti
     ? (() => {
-        const arrangement =
-          count <= 3
-            ? "side by side in a row"
-            : "arranged in a balanced cluster";
-        return `Maintain the existence of exactly ${count} products as seen in the reference. Display them ${arrangement}.`;
-      })()
+      const arrangement =
+        count <= 3
+          ? "side by side in a row"
+          : "arranged in a balanced cluster";
+      return `Maintain the existence of exactly ${count} products as seen in the reference. Display them ${arrangement}.`;
+    })()
     : "Maintain the single product from the reference.";
 
   // 3. Subject Line (เน้นการแต่งภาพ ไม่ใช่การบอกให้วาดภาพ)
@@ -96,7 +96,7 @@ function getBgValue() {
         : bgCustom
           ? `${bgCustom} seamless studio backdrop`
           : sel("#studio-bg-grid .bg-color-swatch.selected") ||
-            "pure white seamless studio backdrop";
+          "pure white seamless studio backdrop";
 
       const floorHex = iv("studio-floor-hex");
       const floorCustom = iv("studio-floor-custom");
@@ -105,7 +105,7 @@ function getBgValue() {
         : floorCustom
           ? `${floorCustom} studio floor`
           : sel("#studio-floor-grid .bg-color-swatch.selected") ||
-            "white studio floor";
+          "white studio floor";
 
       const shadow =
         sel("#studio-shadow-group .pill.active") || "soft natural drop shadow";
@@ -250,6 +250,7 @@ function recompile() {
   const prompt = [
     "Commercial luxury beauty photography, professional product shoot.",
     "Strictly maintain the reference image product geometry, label, and packaging branding.",
+    `Placement: ${f.placement}.`,
     `Background: ${f.background}.`,
     `Lighting: ${f.light}.`,
     `Composition: ${f.camera}, ${f.lens}.`,
@@ -282,6 +283,7 @@ function recompile() {
     metadata: {
       product: f.product,
       display_mode: f.displayMode,
+      placement: f.placement,
       environment: f.background,
       lighting: f.light,
       camera_settings: `${f.camera}, ${f.lens}`,
@@ -370,7 +372,7 @@ function sendToChat() {
   if (typeof sendPrompt === "function") {
     sendPrompt(
       "ช่วยปรับปรุง prompt นี้ให้ creative และสวยขึ้น:\n\n" +
-        getInputValueById("out-compiled"),
+      getInputValueById("out-compiled"),
     );
   }
 }
