@@ -229,10 +229,10 @@ function generatePrompt() {
     outPanel.classList.add("show");
     outPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  document.querySelector('.workspace-center').scrollIntoView({ 
-        behavior: 'smooth', // เลื่อนแบบนุ่มนวล
-        block: 'start'      // ให้ขอบบนของพื้นที่มาอยู่ด้านบนของจอ
-    });
+  document.querySelector('.workspace-center').scrollIntoView({
+    behavior: 'smooth', // เลื่อนแบบนุ่มนวล
+    block: 'start'      // ให้ขอบบนของพื้นที่มาอยู่ด้านบนของจอ
+  });
 }
 
 // ─ Recompile (live rebuild while output panel is open) ────────────────────
@@ -256,6 +256,12 @@ function recompile() {
   const prompt = [
     "Commercial luxury beauty photography, professional product shoot.",
     "Strictly maintain the reference image product geometry, label, and packaging branding.",
+
+    f.productCount > 1
+      ? `CRITICAL: Preserve all ${f.productCount} original products from the reference image. Every product must remain visible. Do not remove, merge, duplicate, replace, or hide any product.`
+      : "Preserve the original single product from the reference image.",
+  
+
     `Placement: ${f.placement}.`,
     `Background: ${f.background}.`,
     f.props ? `Scene elements: ${f.props}.` : "",
@@ -293,6 +299,8 @@ function recompile() {
       placement: f.placement,
       props: f.props,
       environment: f.background,
+      product_count: f.productCount,
+      display_mode: f.displayMode,
       lighting: f.light,
       camera_settings: `${f.camera}, ${f.lens}`,
       finish_details: f.finish,
