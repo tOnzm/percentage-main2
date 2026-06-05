@@ -238,6 +238,8 @@ function recompile() {
     displayMode: getInputValueById("f-display-mode") || "product",
     productCount: parseInt(getInputValueById("f-product-count") || "1", 10),
     placement: getInputValueById("f-placement"),
+    props: getInputValueById("f-props"), // ✅ เพิ่มบรรทัดนี้
+
     background: getInputValueById("f-bg"),
     mood: getInputValueById("f-mood"),
     light: getInputValueById("f-light"),
@@ -252,6 +254,7 @@ function recompile() {
     "Strictly maintain the reference image product geometry, label, and packaging branding.",
     `Placement: ${f.placement}.`,
     `Background: ${f.background}.`,
+    f.props ? `Scene elements: ${f.props}.` : "",
     `Lighting: ${f.light}.`,
     `Composition: ${f.camera}, ${f.lens}.`,
     `Mood: ${f.mood}.`,
@@ -284,6 +287,7 @@ function recompile() {
       product: f.product,
       display_mode: f.displayMode,
       placement: f.placement,
+      props: f.props,
       environment: f.background,
       lighting: f.light,
       camera_settings: `${f.camera}, ${f.lens}`,

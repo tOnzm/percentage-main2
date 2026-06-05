@@ -18,6 +18,10 @@ window.placementData = [
     label: "Luxury Stone",
     val: "luxury stone pedestal"
   },
+{
+  label: "Premium Wooden Table",
+  val: "premium wooden tabletop, elegant natural wood grain, smooth matte finish"
+},
   {
     label: "Acrylic Stand",
     val: "transparent acrylic display stand"

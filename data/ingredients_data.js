@@ -887,4 +887,20 @@ window.propsData = [
     extraClass: "scent-others-light",
     image: "",
   },
+    {
+    category: "Rock & Stone",
+    icon: "🪨",
+    label: "dark jagged textured rocks",
+    val: "dark jagged textured rocks",
+    extraClass: "scent-others-light",
+    image: "",
+  },
+     {
+    category: "Wood & Earth",
+    icon: "🪵",
+    label: "weathered organic driftwood",
+    val: "weathered organic driftwood",
+    extraClass: "scent-others-light",
+    image: "",
+  },
 ];
