@@ -201,6 +201,80 @@ const sceneCards = [
     desc: "ท้องฟ้ายามค่ำสีม่วง bokeh ไฟระยิบระยับ บรรยากาศ magical",
     val: "background: softly blurred outdoor scene with evening purple sky, distant bokeh lights, magical and ethereal atmosphere",
   },
+
+  {
+    icon: '<i class="ti ti-circle-filled" style="color: #F4E9D5;"></i>',
+    title: "Minimalist Warm Cream",
+    desc: "พื้นหลังสีครีมอุ่นเรียบง่าย สไตล์โมเดิร์นมินิมอล สะอาดและขับสินค้าให้เด่นชัด",
+    val: "background: seamless minimalist warm cream solid color background, soft diffused studio lighting, perfectly clean and elegant",
+  },
+
+
+  {
+    icon: '',
+    title: "Dreamy Cloudy Pastel Sky",
+    desc: "ท้องฟ้าพาสเทลมีเมฆนุ่มละมุนคู่กับฐานวางสีชมพูอ่อน ให้บรรยากาศหวานชวนฝันแบบต้นฉบับ",
+    val: "background: a dreamlike pastel pink studio platform under a soft pink and light blue cloudy sky backdrop, dreamy and ethereal atmosphere, soft studio lighting",
+  },
+  {
+    icon: '',
+    title: "Sunset Horizon Glow",
+    desc: "ท้องฟ้ายามเย็นสีพีชอมทองอุ่นๆ พร้อมปุยเมฆไล่เฉดสีชมพูส้ม ดูหรูหราและพรีเมียม",
+    val: "background: a luxurious matte soft peach platform, backdrop of sunset golden hour sky with wispy pastel pink and orange clouds, warm soft glow, high-end beauty vibe",
+  },
+  {
+    icon: '',
+    title: "Serene Morning Sky",
+    desc: "ท้องฟ้าวันฟ้าใสสีครามสว่างพร้อมก้อนเมฆสีขาวปุกปุย ให้ความรู้สึกคลีน สะอาด และสดชื่น",
+    val: "background: a minimal pale pink surface, backdrop of bright clear blue sky with fluffy white clouds, soft clean daylight, fresh and pristine aesthetic",
+  },
+  {
+    icon: '<i class="ti ti-plant"></i>',
+    title: "Tiered Platform & Botanical Sky",
+    desc: "แท่นเรขาคณิตเล่นระดับ ตกแต่งด้วยพืชพรรณธรรมชาติ ด้านหลังเป็นท้องฟ้าและปุยเมฆอ่อนนุ่ม",
+    val: "background: a tiered geometric display platform with multiple levels, surrounded by lush botanical plants and leafy foliage, backdrop of a clear sky with soft fluffy clouds, realistic studio daylight and gentle shadows",
+  },
+  {
+    icon: '<i class="ti ti-cloud"></i>',
+    title: "Minimalist Platform & Cloudy Sky",
+    desc: "แท่นวางสินค้าผิวเรียบด้านแบบมินิมอล ฉากหลังเป็นท้องฟ้าและก้อนเมฆนุ่มละมุน",
+    val: "background: a sleek minimalist matte product platform, backdrop of a serene sky with soft fluffy cumulus clouds, gentle diffused studio lighting",
+  },
+
+  {
+    icon: '<i class="ti ti-window"></i>',
+    title: "Minimalist Window & Cactus",
+    desc: "ผนังเรขาคณิตมินิมอลที่มีช่องหน้าต่างขนาดเล็ก เปิดโล่งเผยให้เห็นต้นกระบองเพชรด้านหลังอย่างมีสไตล์",
+    val: "background: a minimalist architectural matte wall with a small geometric window cutout revealing a clean minimalist cactus behind it, flat horizontal platform in the foreground, soft natural studio light and delicate shadow play",
+  },
+  {
+    icon: '<i class="ti ti-category-2"></i>',
+    title: "Abstract Geometric Steps & Skies",
+    desc: "แท่นวางรูปทรงเรขาคณิตแบบขั้นบันไดและทรงกระบอกเรียงเล่นระดับ ฉากหลังเป็นท้องฟ้าอบอุ่นพร้อมปุยเมฆนุ่มนวล",
+    val: "background: elegant abstract geometric steps and cylindrical platforms with a clean matte finish, backdrop of a dreamy warm-toned sky with soft clouds, natural volumetric shadows",
+  },
+  {
+    icon: '<i class="ti ti-columns"></i>',
+    title: "Floating Geometric Pillars & Arc",
+    desc: "เสาทรงกระบอกและซุ้มโค้งเรขาคณิตลอยตัวบนแผ่นใสกลางอากาศ ท่ามกลางหมอกและผืนฟ้านุ่มนวล",
+    val: "background: minimalist geometric pillars and curved archways set on a clear glass floating platform, surrounded by a serene cloudy sky with soft hazy fog and ethereal pastel light",
+  },
+
+
+  {
+    icon: '<i class="ti ti-sun" style="color: #EAD8C7;"></i>',
+    title: "Sun-Dappled Beige",
+    desc: "พื้นหลังสีเบจละมุนพร้อมแสงแดดอุ่นและเงารำไรจากใบไม้ธรรมชาติ เพิ่มมิติให้แบรนด์",
+    val: "background: soft warm beige studio backdrop with delicate leaf shadow overlays and gentle sun-dappled lighting",
+  },
+  {
+    icon: '<i class="ti ti-texture" style="color: #FDFBF7;"></i>',
+    title: "Luxury Textured Plaster",
+    desc: "ผนังปูนฉาบสีครีมสว่างมีเทกเจอร์หรูหราแบบพรีเมียม เพิ่มความคลาสสิกและดูแพง",
+    val: "background: high-end luxury light cream plaster wall with subtle matte texture, soft volumetric studio lighting, clean elegant atmosphere",
+  },
+
+
   {
     icon: '<i class="ti ti-plant"></i>',
     title: "Zen Garden Mist",

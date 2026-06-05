@@ -98,7 +98,7 @@ const products = {
     category: "body oil",
   },
   11: {
-    name: "Pandora Glow",
+    name: "5 Body Oil Box",
     brand: "Percentage",
     label: ["percentage", "BODY OIL"],
     desc: "กล่องสำหรับใส่ BODY OIL ทั้ง 5 กลิ่น",
