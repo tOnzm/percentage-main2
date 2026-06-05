@@ -15,6 +15,18 @@ window.placementData = [
     val: "minimal cube pedestal"
   },
   {
+    label: "Glass Shelf",
+    val: "placed on a clean transparent glass shelf with polished edges"
+  },
+   {
+    label: "Acrylic Sheet",
+    val: "placed on a clear transparent acrylic sheet"
+  },
+   {
+    label: "Glass Panel",
+    val: "levitating transparent glass panel with no visible support"
+  },
+  {
     label: "Luxury Stone",
     val: "luxury stone pedestal"
   },

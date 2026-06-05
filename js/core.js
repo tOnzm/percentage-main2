@@ -229,6 +229,10 @@ function generatePrompt() {
     outPanel.classList.add("show");
     outPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+  document.querySelector('.workspace-center').scrollIntoView({ 
+        behavior: 'smooth', // เลื่อนแบบนุ่มนวล
+        block: 'start'      // ให้ขอบบนของพื้นที่มาอยู่ด้านบนของจอ
+    });
 }
 
 // ─ Recompile (live rebuild while output panel is open) ────────────────────
