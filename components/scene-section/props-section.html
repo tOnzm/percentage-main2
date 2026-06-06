@@ -1,0 +1,51 @@
+<section class="workspace-section">
+    <div class="section-title">
+        <span class="material-symbols-outlined">slide_library</span>พร็อพ (Props)
+    </div>
+
+    <div class="section-content">
+        <button type="button" class="action-btn" id="open-props-modal" style="width: 100%;">
+            <i class="ti ti-plus"></i> เลือกพร็อพ
+        </button>
+        <div class="product-detail" id="props-detail" aria-live="polite">
+            ยังไม่เลือกพร็อพ
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="props-modal" class="pm-modal" role="dialog" aria-modal="true" aria-labelledby="props-modal-title">
+        <div class="pm-modal-overlay" id="props-modal-overlay"></div>
+        <div class="pm-modal-container">
+            <div class="pm-modal-header">
+                <div class="header-brand">
+                    <h3 class="workspace-title" id="props-modal-title" style="font-size: 20px;">จัดการพร็อพ (Props)</h3>
+                </div>
+                <button type="button" class="theme-toggle-btn" id="close-props-modal"
+                    style="border:none; background:none;">
+                    <i class="ti ti-x"></i>
+                </button>
+            </div>
+
+            <div class="pm-modal-body pm-modal-body--with-sidebar">
+                <aside class="pm-modal-sidebar">
+                    <div class="sidebar-toggle-container"
+                        style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+                        <button type="button" id="props-sidebar-toggle" class="theme-toggle-btn"
+                            style="width: 28px; height: 28px; font-size: 12px;">
+                            <i class="ti ti-chevron-left"></i>
+                        </button>
+                    </div>
+                    <div id="props-sidebar-nav" class="modal-sidebar-nav"
+                        style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    </div>
+                </aside>
+                <div class="pm-modal-main" id="props-modal-main">
+                </div>
+            </div>
+            <div class="pm-modal-footer" style="gap: 8px;">
+                <button type="button" class="clear-btn" id="clear-props-selection">ล้างค่า</button>
+                <button type="button" class="main-btn" id="confirm-props-selection">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</section>

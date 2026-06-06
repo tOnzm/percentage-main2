@@ -1,25 +1,27 @@
 <section class="workspace-section">
   <div class="section-title">
-    <i class="ti ti-sparkles" aria-hidden="true"></i> ยังไม่มี Prompt
+    <i class="ti ti-sparkles" aria-hidden="true"></i> Prompt Output
   </div>
 
   <div class="section-content">
-    <!--  <button type="button" class="action-btn" onclick="generatePrompt()" style="width: 100%; margin-bottom: 12px;">
-      <i class="ti ti-sparkles" aria-hidden="true"></i> Generate
-    </button> -->
+
 
     <div class="out-header" style="flex-direction: column; gap: 8px; margin-bottom: 12px;">
       <div class="out-title-block">
-        <span class="out-tag">รายละเอียด</span>
-        <div class="out-scent" id="out-scent-name" aria-label="ชื่อสินค้า">-</div>
+        <span class="out-tag"></span>
+        <div class="out-scent" id="out-scent-name" aria-label="ชื่อสินค้า"></div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <!-- <button type="button" id="btn-send-chat" class="send-btn" onclick="sendToChat()" style="width: 100%;">
-          <i class="ti ti-brand-telegram" aria-hidden="true"></i> Send Chat
-        </button> -->
-        <button type="button" id="btn-copy-prompt" class="send-btn" onclick="copyAsPrompt()" style="width: 100%;">
-          <i class="ti ti-clipboard" aria-hidden="true"></i> คัดลอกเฉพาะ Prompt
+      <div style="display: flex; flex-direction: row; gap: 8px; width: 100%;">
+
+        <button type="button" id="btn-copy-prompt" class="send-btn" onclick="copyAsPrompt()"
+          style="flex: 1; justify-content: center; height: 38px;">
+          <span class="material-symbols-outlined">content_paste</span> คัดลอกเฉพาะ Prompt
         </button>
+        <button type="button" class="copy-btn" id="copy-btn" onclick="copyPrompt()"
+          style="position: static; flex: 1; justify-content: center; height: 38px; font-size: 12px;">
+          <span class="material-symbols-outlined">content_copy</span> คัดลอก JSON
+        </button>
+
       </div>
     </div>
 
@@ -31,12 +33,10 @@
         id="f-quality" /><input id="f-extra" />
     </div>
 
-    <div style="position: relative;">
+    <div style="position: relative; flex: 1; display: flex;">
       <textarea class="out-compiled" id="out-compiled" readonly placeholder="" aria-label="JSON output"
         aria-readonly="true"></textarea>
-      <button type="button" class="copy-btn" id="copy-btn" onclick="copyPrompt()">
-        <i class="ti ti-copy" aria-hidden="true"></i> คัดลอก JSON
-      </button>
+
     </div>
 
     <div class="char-count" id="char-count" aria-live="polite">0 ตัวอักษร</div>

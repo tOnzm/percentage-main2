@@ -1,198 +1,5 @@
-// data/background_data.js
+// data/scene_data.js
 // Plain globals — loaded via <script src> (ไม่ใช้ ES module export)
-
-const baseColors = [
-  {
-    label: "Midnight Purple",
-    hex: "#2a1040",
-    val: "deep midnight purple solid background",
-    textColor: "#c9b8f0",
-  },
-  {
-    label: "Violet",
-    hex: "#6B4FA0",
-    val: "rich violet solid background",
-    textColor: "#EEEDFE",
-  },
-  {
-    label: "Matte Black",
-    hex: "#0a0a0a",
-    val: "pure matte black solid background",
-    textColor: "#888",
-  },
-  {
-    label: "Charcoal",
-    hex: "#1a1a1a",
-    val: "dark charcoal solid background",
-    textColor: "#666",
-  },
-  {
-    label: "Pure White",
-    hex: "#ffffff",
-    val: "pure white clean solid background",
-    textColor: "#aaa",
-  },
-  {
-    label: "Cream",
-    hex: "#f5f0e8",
-    val: "warm cream ivory solid background",
-    textColor: "#8a7a5a",
-  },
-  {
-    label: "Forest",
-    hex: "#1c3a2a",
-    val: "deep forest green solid background",
-    textColor: "#7ecba0",
-  },
-
-  {
-    label: "Burgundy",
-    hex: "#5a1020",
-    val: "deep burgundy solid background",
-    textColor: "#f09595",
-  },
-  {
-    label: "Dark Brown",
-    hex: "#3a2010",
-    val: "warm dark brown solid background",
-    textColor: "#FAC775",
-  },
-  {
-    label: "Blush Pink",
-    hex: "#F594A6",
-    val: "soft rose blush solid background",
-    textColor: "#993556",
-  },
-  {
-    label: "Sage",
-    hex: "#c8d8c8",
-    val: "soft sage green solid background",
-    textColor: "#3B6D11",
-  },
-  {
-    label: "PHA Orange",
-    hex: "#FF9D23",
-    val: "warm orange solid background",
-    textColor: "#000000",
-  },
-  {
-    label: "Aqua Teal",
-    hex: "#3EBEB8",
-    val: "#3EBEB8",
-    textColor: "#0F4F4C",
-  },
-  {
-    label: "A Day Glow",
-    hex: "#2d527b",
-    val: "#2d527b",
-    textColor: "#FFFFFF",
-  },
-  {
-    label: "Mochi Musky",
-    hex: "#F9A6CC",
-    val: "#F9A6CC",
-    textColor: "#2D2D2D ",
-  },
-  {
-    label: "Mono Glam",
-    hex: "#FEBD25",
-    val: "#FEBD25",
-    textColor: "#2D2D2D",
-  },
-  {
-    label: "Red Iconic",
-    hex: "#98163C",
-    val: "#98163C",
-    textColor: "#2D2D2D",
-  },
-  {
-    label: "Pandora Glow",
-    hex: "#7458A2",
-    val: "#7458A2",
-    textColor: "#2D2D2D",
-  },
-  {
-    label: "Baby Whisper",
-    hex: "#EF9798",
-    val: "#EF9798",
-    textColor: "#2D2D2D",
-  },
-  {
-    label: "Brown Sugar",
-    hex: "#8F6B38",
-    val: "#8F6B38",
-    textColor: "#2D2D2D",
-  },
-  {
-    label: "Oolong Terrace",
-    hex: "#093C5D",
-    val: "#093C5D",
-    textColor: "#2D2D2D",
-  },
-];
-
-const studioColors = [
-  { label: "White", hex: "#ffffff", val: "pure white studio" },
-  { label: "Off White", hex: "#f5f5f5", val: "off white studio" },
-  { label: "Warm Cream", hex: "#e8e0d8", val: "warm cream studio" },
-  { label: "Light Gray", hex: "#d8d8d8", val: "light gray studio" },
-  { label: "Mid Gray", hex: "#a0a0a0", val: "medium gray studio" },
-  { label: "Dark Gray", hex: "#404040", val: "dark gray studio" },
-  { label: "Near Black", hex: "#1a1a1a", val: "near black studio" },
-  { label: "Matte Black", hex: "#0a0a0a", val: "matte black studio" },
-  { label: "Blush Beige", hex: "#e8d8d0", val: "blush beige studio" },
-  { label: "Sage Mist", hex: "#d0d8d0", val: "sage mist studio" },
-];
-
-const gradientColors = [
-  {
-    label: "Purple Dusk",
-    css: "linear-gradient(160deg,#2a1040,#6B4FA0)",
-    val: "deep purple to violet gradient background, dark to light from bottom to top",
-  },
-  {
-    label: "Black → Purple",
-    css: "linear-gradient(160deg,#0a0a0a,#2a1040)",
-    val: "black to deep purple gradient background, moody and cinematic",
-  },
-  {
-    label: "Navy Violet",
-    css: "linear-gradient(160deg,#1a3a5c,#6B4FA0)",
-    val: "deep navy to violet gradient background",
-  },
-  {
-    label: "Forest Teal",
-    css: "linear-gradient(160deg,#1c3a2a,#2a6e8a)",
-    val: "deep forest green to teal gradient background",
-  },
-  {
-    label: "Brown Amber",
-    css: "linear-gradient(160deg,#3a2010,#7a5a1a)",
-    val: "dark brown to warm amber gradient background",
-  },
-  {
-    label: "Burgundy Rose",
-    css: "linear-gradient(160deg,#5a1020,#b85888)",
-    val: "deep burgundy to rose pink gradient background",
-  },
-  {
-    label: "Black Navy",
-    css: "linear-gradient(160deg,#0a0a0a,#1a3a5c)",
-    val: "pure black to deep navy gradient background, ultra dramatic",
-  },
-  {
-    label: "Cream Blush",
-    css: "linear-gradient(160deg,#f5f0e8,#e8c8d8)",
-    val: "warm cream to soft blush pink gradient background, gentle and romantic",
-  },
-];
-
-const gradientDirections = [
-  { label: "Top → Bottom", val: "top to bottom" },
-  { label: "Bottom → Top", val: "bottom to top" },
-  { label: "Diagonal", val: "diagonal top-left to bottom-right" },
-  { label: "Radial", val: "radial center outward" },
-];
 
 const sceneCards = [
   {
@@ -201,29 +8,26 @@ const sceneCards = [
     desc: "ท้องฟ้ายามค่ำสีม่วง bokeh ไฟระยิบระยับ บรรยากาศ magical",
     val: "background: softly blurred outdoor scene with evening purple sky, distant bokeh lights, magical and ethereal atmosphere",
   },
-
   {
     icon: '<i class="ti ti-circle-filled" style="color: #F4E9D5;"></i>',
     title: "Minimalist Warm Cream",
     desc: "พื้นหลังสีครีมอุ่นเรียบง่าย สไตล์โมเดิร์นมินิมอล สะอาดและขับสินค้าให้เด่นชัด",
     val: "background: seamless minimalist warm cream solid color background, soft diffused studio lighting, perfectly clean and elegant",
   },
-
-
   {
-    icon: '',
+    icon: "",
     title: "Dreamy Cloudy Pastel Sky",
     desc: "ท้องฟ้าพาสเทลมีเมฆนุ่มละมุนคู่กับฐานวางสีชมพูอ่อน ให้บรรยากาศหวานชวนฝันแบบต้นฉบับ",
     val: "background: a dreamlike pastel pink studio platform under a soft pink and light blue cloudy sky backdrop, dreamy and ethereal atmosphere, soft studio lighting",
   },
   {
-    icon: '',
+    icon: "",
     title: "Sunset Horizon Glow",
     desc: "ท้องฟ้ายามเย็นสีพีชอมทองอุ่นๆ พร้อมปุยเมฆไล่เฉดสีชมพูส้ม ดูหรูหราและพรีเมียม",
     val: "background: a luxurious matte soft peach platform, backdrop of sunset golden hour sky with wispy pastel pink and orange clouds, warm soft glow, high-end beauty vibe",
   },
   {
-    icon: '',
+    icon: "",
     title: "Serene Morning Sky",
     desc: "ท้องฟ้าวันฟ้าใสสีครามสว่างพร้อมก้อนเมฆสีขาวปุกปุย ให้ความรู้สึกคลีน สะอาด และสดชื่น",
     val: "background: a minimal pale pink surface, backdrop of bright clear blue sky with fluffy white clouds, soft clean daylight, fresh and pristine aesthetic",
@@ -240,7 +44,6 @@ const sceneCards = [
     desc: "แท่นวางสินค้าผิวเรียบด้านแบบมินิมอล ฉากหลังเป็นท้องฟ้าและก้อนเมฆนุ่มละมุน",
     val: "background: a sleek minimalist matte product platform, backdrop of a serene sky with soft fluffy cumulus clouds, gentle diffused studio lighting",
   },
-
   {
     icon: '<i class="ti ti-window"></i>',
     title: "Minimalist Window & Cactus",
@@ -259,8 +62,6 @@ const sceneCards = [
     desc: "เสาทรงกระบอกและซุ้มโค้งเรขาคณิตลอยตัวบนแผ่นใสกลางอากาศ ท่ามกลางหมอกและผืนฟ้านุ่มนวล",
     val: "background: minimalist geometric pillars and curved archways set on a clear glass floating platform, surrounded by a serene cloudy sky with soft hazy fog and ethereal pastel light",
   },
-
-
   {
     icon: '<i class="ti ti-sun" style="color: #EAD8C7;"></i>',
     title: "Sun-Dappled Beige",
@@ -273,8 +74,6 @@ const sceneCards = [
     desc: "ผนังปูนฉาบสีครีมสว่างมีเทกเจอร์หรูหราแบบพรีเมียม เพิ่มความคลาสสิกและดูแพง",
     val: "background: high-end luxury light cream plaster wall with subtle matte texture, soft volumetric studio lighting, clean elegant atmosphere",
   },
-
-
   {
     icon: '<i class="ti ti-plant"></i>',
     title: "Zen Garden Mist",

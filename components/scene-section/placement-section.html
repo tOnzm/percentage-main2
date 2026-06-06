@@ -1,0 +1,48 @@
+<section class="workspace-section">
+    <div class="section-title">
+        <span class="material-symbols-outlined">check_box_outline_blank</span> การจัดวาง (Placement)
+    </div>
+
+    <div class="section-content">
+        <button type="button" class="action-btn" id="open-placement-modal" style="width: 100%;">
+            <i class="ti ti-plus"></i> เลือกการจัดวาง
+        </button>
+        <div class="product-detail" id="placement-detail" aria-live="polite">
+            ยังไม่เลือกการจัดวาง
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="placement-modal" class="pm-modal" role="dialog" aria-modal="true" aria-labelledby="placement-modal-title">
+        <div class="pm-modal-overlay" id="placement-modal-overlay"></div>
+        <div class="pm-modal-container">
+            <div class="pm-modal-header">
+                <div class="header-brand">
+                    <h3 class="workspace-title" id="placement-modal-title" style="font-size: 20px;">จัดการการจัดวาง</h3>
+                </div>
+                <button type="button" class="theme-toggle-btn" id="close-placement-modal"
+                    style="border:none; background:none;">
+                    <i class="ti ti-x"></i>
+                </button>
+            </div>
+
+            <div class="pm-modal-body">
+                <div class="section-content">
+                    <div>
+                        <div class="pm-label">เลือกจากรายการ</div>
+                        <div class="scene-grid" id="placement-group" role="group" aria-label="เลือกการจัดวาง"></div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="pm-label">หรือพิมพ์ระบุเอง</div>
+                        <input class="pm-input" id="placement-custom"
+                            placeholder="พิมพ์การจัดวางเอง เช่น placed on a mirror" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="pm-modal-footer" style="gap: 8px;">
+                <button type="button" class="clear-btn" id="clear-placement-selection">ล้างค่า</button>
+                <button type="button" class="main-btn" id="confirm-placement-selection">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</section>

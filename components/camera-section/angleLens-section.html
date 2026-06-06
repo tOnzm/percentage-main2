@@ -1,0 +1,68 @@
+<section class="workspace-section">
+    <div class="section-title">
+        <span class="material-symbols-outlined">photo_camera</span> Camera Angle & Lens
+    </div>
+
+    <div class="section-content">
+        <button type="button" class="action-btn" id="open-angleLens-modal" style="width: 100%;">
+            <span class="material-symbols-outlined">add</span> เลือกมุมกล้องและเลนส์
+        </button>
+        <div id="angleLens-display" class="chip-group mt-3">
+            <!-- Selected Angle and Lens chips will appear here -->
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="angleLens-modal" class="pm-modal" role="dialog" aria-modal="true" aria-labelledby="angleLens-modal-title">
+        <div class="pm-modal-overlay" id="angleLens-modal-overlay"></div>
+        <div class="pm-modal-container">
+            <div class="pm-modal-header">
+                <div class="header-brand">
+                    <h3 class="workspace-title" id="angleLens-modal-title" style="font-size: 20px;">
+                        จัดการมุมกล้องและเลนส์</h3>
+                </div>
+                <button type="button" class="theme-toggle-btn" id="close-angleLens-modal"
+                    style="border:none; background:none;">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <div class="pm-modal-body pm-modal-body--with-sidebar">
+                <aside class="pm-modal-sidebar">
+                    <div class="sidebar-toggle-container"
+                        style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+                        <button type="button" id="angleLens-sidebar-toggle" class="theme-toggle-btn"
+                            style="width: 28px; height: 28px; font-size: 12px;">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                    </div>
+                    <div class="modal-sidebar-nav"
+                        style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <button type="button" class="modal-nav-btn active" data-target="angle-section">
+                            <span class="material-symbols-outlined">photo_camera</span> <span>มุมกล้อง (Angle)</span>
+                        </button>
+                        <button type="button" class="modal-nav-btn" data-target="lens-section">
+                            <span class="material-symbols-outlined">center_focus_strong</span> <span>เลนส์ (Lens)</span>
+                        </button>
+                    </div>
+                </aside>
+                <div class="pm-modal-main">
+                    <div id="angle-section" class="modal-section">
+                        <div class="pm-label">เลือกมุมกล้อง (Angle)</div>
+                        <div id="angle-filter-container" class="pill-group mb-4"></div>
+                        <div id="angle-group" role="group"></div>
+                    </div>
+                    <div id="lens-section" class="modal-section" style="display: none;">
+                        <div class="pm-label">เลือกลักษณะเลนส์ (Lens)</div>
+                        <div id="lens-filter-container" class="pill-group mb-4"></div>
+                        <div id="lens-group" role="group"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pm-modal-footer" style="gap: 8px;">
+                <button type="button" class="clear-btn" id="clear-angleLens-selection">ล้างค่า</button>
+                <button type="button" class="main-btn" id="confirm-angleLens-selection">ตกลง</button>
+            </div>
+        </div>
+    </div>
+</section>

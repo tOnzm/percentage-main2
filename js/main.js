@@ -41,6 +41,50 @@ function initSidebar() {
 }
 
 /**
+ * Initialize theme switching (Dark/Light mode).
+ * Supports system preference and local storage persistence.
+ */
+function initTheme() {
+  const themeToggle = document.getElementById("theme-toggle");
+  const currentTheme =
+    localStorage.getItem("theme") ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
+
+  const updateIcon = (isDark) => {
+    if (!themeToggle) return;
+    const icon = themeToggle.querySelector("i");
+    if (icon) {
+      icon.textContent = isDark ? "dark_mode" : "light_mode";
+    }
+  };
+
+  if (currentTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    updateIcon(true);
+  } else {
+    updateIcon(false);
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const isDark =
+        document.documentElement.getAttribute("data-theme") === "dark";
+      if (isDark) {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("theme", "light");
+        updateIcon(false);
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+        updateIcon(true);
+      }
+    });
+  }
+}
+
+/**
  * Initialize product display mode pill buttons.
  * Syncs pill clicks to hidden input for backward compatibility with core.js
  */
@@ -58,6 +102,9 @@ function initProductDisplayModeButtons() {
       btn.classList.add("active");
       // Update hidden input value
       hiddenInput.value = btn.getAttribute("data-value");
+
+      // Trigger change event to notify product-section.js logic
+      hiddenInput.dispatchEvent(new Event("change"));
     });
   });
 }
@@ -71,9 +118,12 @@ function initProductDisplayModeButtons() {
 async function initApplication() {
   const placeholderIds = [
     "product-section-placeholder",
-    "scene-section-placeholder",
+    "placement-section-placeholder",
+    "props-section-placeholder",
     "background-section-placeholder",
-    "camera-section-placeholder",
+    "angleLens-section-placeholder",
+    "lighting-section-placeholder",
+    "quality-section-placeholder",
     "output-section-placeholder",
   ];
 
@@ -85,16 +135,28 @@ async function initApplication() {
         "components/product-section/product-section.html",
       ),
       loadComponent(
-        "scene-section-placeholder",
-        "components/scene-section/scene-section.html",
+        "placement-section-placeholder",
+        "components/scene-section/placement-section.html",
+      ),
+      loadComponent(
+        "props-section-placeholder",
+        "components/scene-section/props-section.html",
       ),
       loadComponent(
         "background-section-placeholder",
         "components/background-section/background-section.html",
       ),
       loadComponent(
-        "camera-section-placeholder",
-        "components/camera-section/camera-section.html",
+        "angleLens-section-placeholder",
+        "components/camera-section/angleLens-section.html",
+      ),
+      loadComponent(
+        "lighting-section-placeholder",
+        "components/camera-section/lighting-section.html",
+      ),
+      loadComponent(
+        "quality-section-placeholder",
+        "components/camera-section/quality-section.html",
       ),
       loadComponent(
         "output-section-placeholder",
@@ -103,14 +165,19 @@ async function initApplication() {
     ]);
 
     // ── Step 2: Wire up component events ────────────────────────────────
+    initTheme();
     initSidebar();
     initProductDisplayModeButtons();
     renderProductTabs();
+    initProductModal();
     resetToDefaultProduct();
     initProductComponentEvents();
-    initSceneComponentEvents();
+    initPlacementComponentEvents();
+    initPropsComponentEvents();
     initBackgroundComponentEvents();
-    initCameraComponentEvents();
+    initAngleLensComponentEvents();
+    initLightingComponentEvents();
+    initQualityComponentEvents();
 
     // ── Step 3: Reveal UI with fade-in ──────────────────────────────────
     placeholderIds.forEach((id) => {

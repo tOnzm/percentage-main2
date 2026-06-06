@@ -9,25 +9,27 @@
 function getSel(id) {
   const el = document.getElementById(id);
   if (!el) return [];
-  return [...el.querySelectorAll('.pill.active')].map(p => p.dataset.val).filter(Boolean);
+  return [...el.querySelectorAll(".pill.active")]
+    .map((p) => p.dataset.val)
+    .filter(Boolean);
 }
 
 /** @param {string} id @returns {string} */
 function getInputValueById(id) {
   const el = document.getElementById(id);
-  return el ? el.value.trim() : '';
+  return el ? el.value.trim() : "";
 }
 
 /** @param {string} selector @returns {string} */
 function getActiveText(selector) {
   const el = document.querySelector(selector);
-  return el ? el.textContent.trim() : '';
+  return el ? el.textContent.trim() : "";
 }
 
 /** @param {string} id */
 function clearInputElement(id) {
   const el = document.getElementById(id);
-  if (el) el.value = '';
+  if (el) el.value = "";
 }
 
 /** @param {string} id @param {string} txt */
@@ -53,16 +55,16 @@ function updateDOMHtml(id, html) {
  * Avoids wasted work while the panel is hidden.
  */
 function tryRecompile() {
-  const panel = document.getElementById('out-panel');
-  if (panel && panel.classList.contains('show')) recompile();
+  const panel = document.getElementById("out-panel");
+  if (panel && panel.classList.contains("show")) recompile();
 }
 
 /**
  * Auto-fit textarea heights to their content.
  */
 function autoResize() {
-  document.querySelectorAll('.out-compiled, .pm-textarea').forEach(el => {
-    el.style.height = 'auto';
+  document.querySelectorAll(".out-compiled, .pm-textarea").forEach((el) => {
+    el.style.height = "auto";
     el.style.height = `${el.scrollHeight}px`;
   });
 }
@@ -76,16 +78,16 @@ function autoResize() {
 function setBgType(type) {
   currentBgType = type;
 
-  document.querySelectorAll('.bg-type-tab').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.type === type);
+  document.querySelectorAll(".bg-type-tab").forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.type === type);
   });
 
-  document.querySelectorAll('.bg-section').forEach(section => {
-    section.classList.remove('show');
+  document.querySelectorAll(".bg-section").forEach((section) => {
+    section.classList.remove("show");
   });
 
   const target = document.getElementById(`bg-${type}`);
-  if (target) target.classList.add('show');
+  if (target) target.classList.add("show");
 
   tryRecompile();
 }
@@ -102,20 +104,33 @@ function handleHexInput(val, previewId, gridSelector, customInputId) {
   const v = val.trim();
   const isValid = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v);
   const preview = document.getElementById(previewId);
-  if (preview) preview.style.background = isValid ? v : 'transparent';
+  if (preview) preview.style.background = isValid ? v : "transparent";
   if (isValid) {
-    document.querySelectorAll(gridSelector).forEach(x => x.classList.remove('selected'));
+    document
+      .querySelectorAll(gridSelector)
+      .forEach((x) => x.classList.remove("selected"));
     clearInputElement(customInputId);
     tryRecompile();
+    if (typeof tryRecompile === "function") tryRecompile();
   }
 }
 
 function applyStudioBgHex(val) {
-  handleHexInput(val, 'studio-bg-hex-preview', '#studio-bg-grid .bg-color-swatch', 'studio-bg-custom');
+  handleHexInput(
+    val,
+    "studio-bg-hex-preview",
+    "#studio-bg-grid .bg-color-swatch",
+    "studio-bg-custom",
+  );
 }
 
 function applyStudioFloorHex(val) {
-  handleHexInput(val, 'studio-floor-hex-preview', '#studio-floor-grid .bg-color-swatch', 'studio-floor-custom');
+  handleHexInput(
+    val,
+    "studio-floor-hex-preview",
+    "#studio-floor-grid .bg-color-swatch",
+    "studio-floor-custom",
+  );
 }
 
 /**
@@ -126,15 +141,17 @@ function applyStudioFloorHex(val) {
  * @param {string=} previewId   Optional — preview div to reset on selection
  */
 function setupSwatchEvent(selector, customId, hexId, previewId) {
-  document.querySelectorAll(selector).forEach(swatch => {
-    swatch.addEventListener('click', () => {
-      document.querySelectorAll(selector).forEach(x => x.classList.remove('selected'));
-      swatch.classList.add('selected');
+  document.querySelectorAll(selector).forEach((swatch) => {
+    swatch.addEventListener("click", () => {
+      document
+        .querySelectorAll(selector)
+        .forEach((x) => x.classList.remove("selected"));
+      swatch.classList.add("selected");
       if (customId) clearInputElement(customId);
       if (hexId) clearInputElement(hexId);
       if (previewId) {
         const el = document.getElementById(previewId);
-        if (el) el.style.background = 'transparent';
+        if (el) el.style.background = "transparent";
       }
       tryRecompile();
     });

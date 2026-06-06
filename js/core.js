@@ -27,12 +27,12 @@ function buildPromptString(f) {
   // 2. Layout (ลดการเรียกชื่อสินค้า เปลี่ยนเป็นตำแหน่ง)
   const layoutHint = isMulti
     ? (() => {
-      const arrangement =
-        count <= 3
-          ? "side by side in a row"
-          : "arranged in a balanced cluster";
-      return `Maintain the existence of exactly ${count} products as seen in the reference. Display them ${arrangement}.`;
-    })()
+        const arrangement =
+          count <= 3
+            ? "side by side in a row"
+            : "arranged in a balanced cluster";
+        return `Maintain the existence of exactly ${count} products as seen in the reference. Display them ${arrangement}.`;
+      })()
     : "Maintain the single product from the reference.";
 
   // 3. Subject Line (เน้นการแต่งภาพ ไม่ใช่การบอกให้วาดภาพ)
@@ -96,7 +96,7 @@ function getBgValue() {
         : bgCustom
           ? `${bgCustom} seamless studio backdrop`
           : sel("#studio-bg-grid .bg-color-swatch.selected") ||
-          "pure white seamless studio backdrop";
+            "pure white seamless studio backdrop";
 
       const floorHex = iv("studio-floor-hex");
       const floorCustom = iv("studio-floor-custom");
@@ -105,7 +105,7 @@ function getBgValue() {
         : floorCustom
           ? `${floorCustom} studio floor`
           : sel("#studio-floor-grid .bg-color-swatch.selected") ||
-          "white studio floor";
+            "white studio floor";
 
       const shadow =
         sel("#studio-shadow-group .pill.active") || "soft natural drop shadow";
@@ -156,7 +156,7 @@ function generatePrompt() {
   // ── Placement ──
   const customPlacement = getInputValueById("placement-custom");
   const placementPill = (() => {
-    const el = document.querySelector("#placement-group .pill.active");
+    const el = document.querySelector("#placement-group .scene-card.selected");
     return el ? el.dataset.val || "" : "";
   })();
   const placement = customPlacement
@@ -185,12 +185,13 @@ function generatePrompt() {
     "85mm lens, refined proportions, soft creamy bokeh";
 
   // ── Finish (ID = finish-group) ──
-  const finishVal = getSel("finish-group")[0] || "";
+  const finishVal = getSel("finish-group")[0] || "matte label texture";
 
   // ── Lighting (ID = light-group) ──
   const lightVal =
     getSel("light-group")[0] ||
     "soft diffused backlight with soft elegant shadows";
+  ("soft diffused backlight with soft elegant shadows");
 
   // ── Quality & Extra ──
   const qualityVal =
@@ -203,15 +204,15 @@ function generatePrompt() {
     ? customName || customLabel || "Custom Product"
     : selectedProductsData.length
       ? selectedProductsData.map((p) => p.name).join(", ")
-      : "No Product";
+      : "";
   // ── Push into hidden fields ──
   updateDOMText("out-scent-name", scentLabel);
-  updateDOMValue("f-product", productStr);
+  updateDOMValue("f-product", productStr || "");
   updateDOMValue("f-display-mode", displayMode);
   updateDOMValue("f-product-count", String(productCount));
   updateDOMValue("f-product-names", productNames.join(","));
-  updateDOMValue("f-placement", placement);
-  updateDOMValue("f-props", props);
+  updateDOMValue("f-placement", placement || "");
+  updateDOMValue("f-props", props || "");
   updateDOMValue("f-bg", bg);
   updateDOMValue("f-color", "");
   updateDOMValue("f-mood", mood);
@@ -224,33 +225,36 @@ function generatePrompt() {
 
   recompile();
 
+  // เลื่อนหน้าจอ และ Panel ทั้งหมดกลับไปด้านบนสุด
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.querySelectorAll(".workspace-panel").forEach((panel) => {
+    panel.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
   const outPanel = document.getElementById("out-panel");
   if (outPanel) {
     outPanel.classList.add("show");
-    outPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  document.querySelector('.workspace-center').scrollIntoView({
-    behavior: 'smooth', // เลื่อนแบบนุ่มนวล
-    block: 'start'      // ให้ขอบบนของพื้นที่มาอยู่ด้านบนของจอ
-  });
 }
 
 // ─ Recompile (live rebuild while output panel is open) ────────────────────
 function recompile() {
+  const qVal = getSel("quality-group").join(", ");
+  const fVal = getSel("finish-group")[0];
+
   const f = {
     product: getInputValueById("f-product"),
     displayMode: getInputValueById("f-display-mode") || "product",
     productCount: parseInt(getInputValueById("f-product-count") || "1", 10),
     placement: getInputValueById("f-placement"),
-    props: getInputValueById("f-props"), // ✅ เพิ่มบรรทัดนี้
-
+    props: getInputValueById("f-props"),
     background: getInputValueById("f-bg"),
     mood: getInputValueById("f-mood"),
     light: getInputValueById("f-light"),
     camera: getInputValueById("f-camera"),
     lens: getInputValueById("f-lens"),
-    finish: getInputValueById("f-finish"),
-    quality: getInputValueById("f-quality"),
+    finish: fVal || getInputValueById("f-finish"),
+    quality: qVal || getInputValueById("f-quality"),
     extra: getInputValueById("f-extra"),
   };
   const prompt = [
@@ -260,10 +264,9 @@ function recompile() {
     f.productCount > 1
       ? `CRITICAL: Preserve all ${f.productCount} original products from the reference image. Every product must remain visible. Do not remove, merge, duplicate, replace, or hide any product.`
       : "Preserve the original single product from the reference image.",
-  
 
-    `Placement: ${f.placement}.`,
-    `Background: ${f.background}.`,
+    f.placement ? `Placement: ${f.placement}.` : "",
+    f.background ? `Background: ${f.background}.` : "",
     f.props ? `Scene elements: ${f.props}.` : "",
     `Lighting: ${f.light}.`,
     `Composition: ${f.camera}, ${f.lens}.`,
@@ -275,7 +278,9 @@ function recompile() {
     .filter(Boolean)
     .join(" ");
 
+  // ดึงค่า Aspect Ratio จาก dropdown list (คลาส .pill.active)
   const ratioEl = document.querySelector("#ratio-group .pill.active");
+  const selectedRatio = ratioEl ? ratioEl.dataset.val : "1:1";
 
   // Google Banana compatible JSON (img2img format)
   const json = {
@@ -285,7 +290,7 @@ function recompile() {
     image: null,
     parameters: {
       style: "photorealistic",
-      aspect_ratio: "1:1",
+      aspect_ratio: selectedRatio,
       quality: "high",
       // เพิ่มค่าควบคุมความเหมือน เพื่อไม่ให้ AI วาดใหม่
       image_guidance_scale: 4.0, // เพิ่มค่านี้เพื่อให้ยึดติดกับรูปต้นฉบับ
@@ -300,7 +305,6 @@ function recompile() {
       props: f.props,
       environment: f.background,
       product_count: f.productCount,
-      display_mode: f.displayMode,
       lighting: f.light,
       camera_settings: `${f.camera}, ${f.lens}`,
       finish_details: f.finish,
@@ -336,18 +340,16 @@ function flashCopyFeedback(btnId, successHtml, delay = 1600) {
   const btn = document.getElementById(btnId);
   if (!btn) return;
 
-  const originalHtml =
-    '<i class="ti ti-clipboard" aria-hidden="true"></i> คัดลอกเฉพาะ Prompt'; // กำหนดค่าเริ่มต้นใหม่เป็นภาษาไทย
+  // เก็บค่า HTML ดั้งเดิมไว้ถ้ายังไม่มีการเก็บ
+  if (!btn._originalHtml) {
+    btn._originalHtml = btn.innerHTML;
+  }
 
   btn.innerHTML = successHtml;
-
   clearTimeout(btn._copyTimer);
-
   btn._copyTimer = setTimeout(() => {
-    const currentBtn = document.getElementById(btnId);
-    if (currentBtn) {
-      currentBtn.innerHTML = originalHtml;
-    }
+    btn.innerHTML = btn._originalHtml;
+    btn._originalHtml = null; // ล้างค่าเพื่อความถูกต้องในครั้งถัดไป
   }, delay);
 }
 function copyAsPrompt() {
@@ -373,14 +375,17 @@ function copyAsPrompt() {
   navigator.clipboard.writeText(buildPromptString(f)).then(() => {
     flashCopyFeedback(
       "btn-copy-prompt",
-      '<i class="ti ti-check"></i> คัดลอกแล้ว!',
+      '<span class="material-symbols-outlined">check</span> คัดลอกแล้ว!',
     );
   });
 }
 
 function copyPrompt() {
   navigator.clipboard.writeText(getInputValueById("out-compiled")).then(() => {
-    flashCopyFeedback("copy-btn", '<i class="ti ti-check"></i> คัดลอกแล้ว!');
+    flashCopyFeedback(
+      "copy-btn",
+      '<span class="material-symbols-outlined">check</span> คัดลอก JSON แล้ว!',
+    );
   });
 }
 
@@ -388,7 +393,7 @@ function sendToChat() {
   if (typeof sendPrompt === "function") {
     sendPrompt(
       "ช่วยปรับปรุง prompt นี้ให้ creative และสวยขึ้น:\n\n" +
-      getInputValueById("out-compiled"),
+        getInputValueById("out-compiled"),
     );
   }
 }

@@ -38,7 +38,7 @@ window.cameraAngles = {
       label: "Tilted 15°",
       val: "15-degree dutch-angle tilt, dynamic composition, off-center framing",
     },
-        {
+    {
       label: "f",
       val: "straight-on eye-level view, perfectly front-facing",
     },
@@ -60,11 +60,11 @@ window.cameraAngles = {
       label: "Base Foundation",
       val: "low angle ground view focusing on the product base, light reflecting through the bottom, grounding the subject",
     },
-     {
+    {
       label: "low-angle perspective",
       val: "dramatic low-angle perspective",
     },
-       {
+    {
       label: "upward camera tilt",
       val: "upward camera tilt, majestic hero shot",
     },

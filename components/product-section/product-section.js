@@ -48,6 +48,15 @@ function renderProductTabs() {
       btn.setAttribute("aria-selected", "false");
       btn.type = "button";
 
+      // ตรวจสอบสถานะการเลือกปัจจุบัน
+      if (selectedProducts.has(Number(item.id))) {
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+        btn.style.backgroundColor = btn.dataset.activeBg;
+        btn.style.color = btn.dataset.activeText;
+        btn.style.border = "1px solid transparent";
+      }
+
       btn.addEventListener("click", () => {
         const id = Number(item.id);
         clearCustomProductInputs();
@@ -68,7 +77,7 @@ function renderProductTabs() {
           btn.style.border = "1px solid transparent";
         }
 
-        applySelectedScents();
+        applySelectedProducts();
         tryRecompile();
       });
 
@@ -81,28 +90,60 @@ function renderProductTabs() {
   });
 }
 
-/** Update the scent-detail panel to show selected product info. */
-function applySelectedScents() {
-  const selected = [...selectedProducts]
-    .map((id) => products[id])
-    .filter(Boolean);
+/** Update the product-detail panel to show selected product chips. */
+function applySelectedProducts() {
+  const container = document.getElementById("product-detail");
+  if (!container) return;
 
-  if (!selected.length) {
+  if (selectedProducts.size === 0) {
     updateDOMHtml(
-      "scent-detail",
-      '<div class="snotes">ยังไม่ได้เลือกสินค้า</div>',
+      "product-detail",
+      '<div class="snotes">ยังไม่เลือกสินค้าใดๆ</div>',
     );
     return;
   }
 
-  const html = selected
-    .map(
-      (product) =>
-        `<div class="snotes">${product.brand} — ${product.name}</div>${product.desc}`,
-    )
-    .join('<hr style="margin:12px 0;">');
+  container.innerHTML = "";
+  const row = document.createElement("div");
+  row.className = "flex-row";
+  row.style.gap = "8px";
+  row.style.flexWrap = "wrap";
 
-  updateDOMHtml("scent-detail", html);
+  const labelEl = document.createElement("span");
+  labelEl.className = "sub-label";
+  labelEl.style.marginBottom = "0";
+  labelEl.textContent = "Product :";
+  row.appendChild(labelEl);
+
+  selectedProducts.forEach((id) => {
+    const product = products[id];
+    if (!product) return;
+
+    const chip = document.createElement("div");
+    chip.className = "product-chip";
+
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = product.name;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "chip-remove";
+    removeBtn.innerHTML =
+      '<span class="material-symbols-outlined">close</span>';
+
+    removeBtn.addEventListener("click", () => {
+      selectedProducts.delete(id);
+      renderProductTabs(); // ซิงค์สถานะใน Modal
+      applySelectedProducts();
+      tryRecompile();
+    });
+
+    chip.appendChild(nameSpan);
+    chip.appendChild(removeBtn);
+    row.appendChild(chip);
+  });
+
+  container.appendChild(row);
 }
 
 /** Return array of selected product data objects. */
@@ -119,11 +160,44 @@ function getDisplayMode() {
   return el ? el.value : "product";
 }
 
-/** Reset selection to first available product tab. */
+/** Reset selection and custom inputs. */
 function resetToDefaultProduct() {
   selectedProducts.clear();
-  const firstTab = document.querySelector("#product-tabs-container .stab");
-  if (firstTab) firstTab.click();
+  clearCustomProductInputs();
+  renderProductTabs(); // Refresh UI in modal
+  applySelectedProducts();
+  tryRecompile();
+}
+
+/**
+ * Initialize the modal opening/closing logic.
+ */
+function initProductModal() {
+  const modal = document.getElementById("product-modal");
+  const openBtn = document.getElementById("open-product-modal");
+  const closeBtn = document.getElementById("close-product-modal");
+  const overlay = document.getElementById("product-modal-overlay");
+  const confirmBtn = document.getElementById("confirm-product-selection");
+  const clearBtn = document.getElementById("clear-product-selection");
+
+  if (!modal || !openBtn) return;
+
+  const toggleModal = (show) => {
+    modal.classList.toggle("active", show);
+    document.body.style.overflow = show ? "hidden" : "";
+    if (!show) tryRecompile(); // Re-sync prompt when closing
+  };
+
+  openBtn.addEventListener("click", () => toggleModal(true));
+  closeBtn?.addEventListener("click", () => toggleModal(false));
+  overlay?.addEventListener("click", () => toggleModal(false));
+  confirmBtn?.addEventListener("click", () => toggleModal(false));
+  clearBtn?.addEventListener("click", () => resetToDefaultProduct());
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active"))
+      toggleModal(false);
+  });
 }
 
 /** Wire up events for custom product inputs and display-mode select. */
@@ -154,7 +228,7 @@ function initProductComponentEvents() {
           });
         }
         updateDOMHtml(
-          "scent-detail",
+          "product-detail",
           '<div class="snotes">ระบุสินค้าเอง</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...',
         );
       } else {

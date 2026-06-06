@@ -1,33 +1,59 @@
 <section class="workspace-section">
   <div class="section-title">
-    <i class="ti ti-droplet" aria-hidden="true"></i> สินค้า
+    <span class="material-symbols-outlined">water_drop</span> สินค้า
   </div>
 
   <div class="section-content">
-    <div>
-      <div class="pm-label">เลือกสินค้า</div>
-      <div class="scent-tabs" id="product-tabs-container" role="tablist" aria-label="เลือกสินค้า"></div>
+    <button type="button" class="action-btn" id="open-product-modal" style="width: 100%;">
+      <span class="material-symbols-outlined">add</span> เลือกสินค้า / ระบุรายละเอียด
+    </button>
+    <div class="product-detail" id="product-detail" aria-live="polite">
+      ยังไม่เลือกสินค้าใดๆ
     </div>
+  </div>
 
-    <div>
-      <div class="pm-label">ระบุเอง</div>
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <input class="pm-input" id="product-custom-brand" placeholder="ระบุแบรนด์" autocomplete="off" />
-        <input class="pm-input" id="product-custom-name" placeholder="ระบุชื่อสินค้า" autocomplete="off" />
-        <input class="pm-input" id="product-custom-label" placeholder="ระบุข้อความบนฉลาก" autocomplete="off" />
+  <!-- Modal Structure -->
+  <div id="product-modal" class="pm-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <div class="pm-modal-overlay" id="product-modal-overlay"></div>
+    <div class="pm-modal-container">
+      <div class="pm-modal-header">
+        <div class="header-brand">
+          <h3 class="workspace-title" id="product-modal-title" style="font-size: 20px;">จัดการสินค้า</h3>
+        </div>
+        <button type="button" class="theme-toggle-btn" id="close-product-modal" style="border:none; background:none;">
+          <span class="material-symbols-outlined">close</span>
+        </button>
       </div>
-    </div>
 
-    <div class="scent-detail" id="scent-detail" aria-live="polite">
-      คลิกสินค้าเพื่อดูรายละเอียด
-    </div>
+      <div class="pm-modal-body">
+        <div class="section-content">
+          <div>
+            <div class="pm-label">เลือกจากรายการ</div>
+            <div class="scent-tabs" id="product-tabs-container" role="tablist" aria-label="เลือกสินค้า"></div>
+          </div>
 
-    <div>
-      <div class="pm-label">ตัวเลือกการแสดงผล</div>
-      <div class="pill-group" id="product-display-mode-group" role="group" aria-label="เลือกรูปแบบการแสดงสินค้า">
-        <button type="button" class="pill active" data-value="product">สินค้า</button>
-        <button type="button" class="pill" data-value="product_box">สินค้า+กล่อง</button>
-        <button type="button" class="pill" data-value="box_only">กล่อง</button>
+          <div class="mt-4">
+            <div class="pm-label">หรือระบุข้อมูลเอง</div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input class="pm-input" id="product-custom-brand" placeholder="ระบุแบรนด์" autocomplete="off" />
+              <input class="pm-input" id="product-custom-name" placeholder="ระบุชื่อสินค้า" autocomplete="off" />
+              <input class="pm-input" id="product-custom-label" placeholder="ระบุข้อความบนฉลาก" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="pm-label">ตัวเลือกการแสดงผล</div>
+            <div class="pill-group" id="product-display-mode-group" role="group">
+              <button type="button" class="pill active" data-value="product">สินค้า</button>
+              <button type="button" class="pill" data-value="product_box">สินค้า+กล่อง</button>
+              <button type="button" class="pill" data-value="box_only">กล่อง</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pm-modal-footer" style="gap: 8px;">
+        <button type="button" class="clear-btn" id="clear-product-selection">ล้างค่า</button>
+        <button type="button" class="main-btn" id="confirm-product-selection">ตกลง</button>
       </div>
     </div>
   </div>
