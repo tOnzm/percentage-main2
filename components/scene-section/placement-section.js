@@ -87,7 +87,7 @@ function updatePlacementDisplay() {
   const labelEl = document.createElement("span");
   labelEl.className = "sub-label";
   labelEl.style.marginBottom = "0";
-  labelEl.textContent = "Placement :";
+  labelEl.textContent = "การจัดวาง :";
 
   const chip = document.createElement("div");
   chip.className = "product-chip";

@@ -1080,7 +1080,8 @@
   .scene-card__image-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: 150px;
+    flex-shrink: 0;
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border);
   }
@@ -1281,22 +1282,28 @@
   /* ── 23. RESPONSIVE ───────────────────────────────────────────────────── */
   @media (max-width: 1280px) {
     .workspace-container {
-      grid-template-columns: minmax(700px, 1fr) 320px;
+      grid-template-columns: minmax(300px, 1fr) 1fr 1fr;
     }
 
     .workspace-left {
-      display: none;
+      display: flex;
     }
   }
 
   @media (max-width: 768px) {
     .workspace-container {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
     }
 
     .workspace-left,
     .workspace-right {
-      display: none;
+      display: flex;
+      
+    }
+    .workspace-center {
+      border: none;
+    
     }
 
     .workspace-header {

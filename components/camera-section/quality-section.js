@@ -139,9 +139,9 @@ function updateQualityDisplay() {
   container.style.gap = "12px";
 
   const groups = [
-    { id: "ratio-group", label: "Ratio" },
-    { id: "quality-group", label: "Quality" },
-    { id: "finish-group", label: "Label Texture" },
+    { id: "ratio-group", label: "อัตราส่วน" },
+    { id: "quality-group", label: "คุณภาพ" },
+    { id: "finish-group", label: "รายละเอียดฉลาก" },
   ];
 
   let hasSelection = false;

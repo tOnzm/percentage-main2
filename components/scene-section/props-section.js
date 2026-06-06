@@ -72,7 +72,7 @@ function updatePropsDisplay() {
   const labelEl = document.createElement("span");
   labelEl.className = "sub-label";
   labelEl.style.marginBottom = "0";
-  labelEl.textContent = "Props :";
+  labelEl.textContent = "วัตถุประกอบฉาก :";
   row.appendChild(labelEl);
 
   activePills.forEach((pill) => {
