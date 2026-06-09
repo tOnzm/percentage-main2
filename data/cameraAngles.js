@@ -42,6 +42,10 @@ window.cameraAngles = {
       label: "f",
       val: "straight-on eye-level view, perfectly front-facing",
     },
+       {
+      label: "High angle shot",
+      val: "High angle shot (eye-level to slightly high angle), three-quarter perspective",
+    },
   ],
   "Low & Hero Angles": [
     {
@@ -82,6 +86,7 @@ window.cameraAngles = {
       label: "Cap Top View",
       val: "top-down view looking at the product cap, perfectly symmetrical, center-focused, soft highlights on lid surface",
     },
+ 
   ],
   "Macro & Detail": [
     {

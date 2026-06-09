@@ -26,6 +26,13 @@
                 </button>
             </div>
 
+            <!-- ย้ายช่องค้นหามาไว้ด้านบนสุด (นอกส่วน Body เพื่อไม่ให้โดนทับหรือโดนล้างค่า) -->
+            <div class="props-search-wrapper" style="padding: 16px 24px 8px 24px; border-bottom: 1px solid var(--border);">
+                <div class="pm-label">ค้นหาพร็อพ</div>
+                <input type="text" id="props-search-input" class="pm-input" 
+                    placeholder="พิมพ์เพื่อค้นหา... (เช่น Argan, Water, Stone)" autocomplete="off" />
+            </div>
+
             <div class="pm-modal-body pm-modal-body--with-sidebar">
                 <aside class="pm-modal-sidebar">
                     <div class="sidebar-toggle-container"
@@ -35,8 +42,9 @@
                             <i class="ti ti-chevron-left"></i>
                         </button>
                     </div>
-                    <div id="props-sidebar-nav" class="modal-sidebar-nav"
-                        style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <!-- ปรับให้ Nav เลื่อนได้ถ้าข้อมูลล้น (overflow-y: auto) -->
+                    <div id="props-sidebar-nav" class="modal-sidebar-nav" 
+                        style="display: flex; flex-direction: column; gap: 8px; width: 100%; overflow-y: auto; flex: 1; padding-bottom: 16px;">
                     </div>
                 </aside>
                 <div class="pm-modal-main" id="props-modal-main">

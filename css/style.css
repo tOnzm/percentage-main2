@@ -742,13 +742,16 @@
     padding: var(--sp-6);
     overflow-y: auto;
     flex: 1;
-    /* ซ่อน Scrollbar สำหรับ IE, Edge และ Firefox */
+  }
+
+  /* ซ่อน Scrollbar สำหรับ IE, Edge และ Firefox */
+  .pm-modal-body, .modal-sidebar-nav {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
   /* ซ่อน Scrollbar สำหรับ Chrome, Safari และ Opera */
-  .pm-modal-body::-webkit-scrollbar {
+  .pm-modal-body::-webkit-scrollbar, .modal-sidebar-nav::-webkit-scrollbar {
     display: none;
   }
 
@@ -867,25 +870,69 @@
     transition: width var(--transition-base), padding var(--transition-base);
   }
 
-  .pm-modal-sidebar.collapsed {
+ .pm-modal-sidebar--right {
+    flex-shrink: 0; /* Prevent shrinking */
+    border-right: none; /* Remove default right border */
+    border-left: 1px solid var(--border); /* Add left border for right sidebar */
+    border-left: 0 solid transparent; /* เริ่มต้นด้วยการไม่มีเส้นขอบ */
+    width: 0; /* Hidden by default */
+    padding: 0;
+    overflow: hidden; /* Hide content when collapsed */
+    visibility: hidden; /* ซ่อนจากการมองเห็นและตัวอ่านหน้าจอ */
+    transition: width var(--transition-base), padding var(--transition-base);
+    /* Ensure it's a flex container even when hidden to manage its children */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pm-modal-sidebar--right.active {
+    width: 220px; /* Expanded width */
+    padding: var(--sp-4);
+    overflow-y: auto; /* Allow scrolling when expanded */
+    border-left: 1px solid var(--border); /* แสดงเส้นขอบเมื่อถูกเรียกใช้เท่านั้น */
+    visibility: visible;
+  }
+
+  /* ปรับให้แสดงผลการพับ เฉพาะตอนที่ Sidebar ถูกเปิดใช้งาน (Active) เท่านั้น */
+  .pm-modal-sidebar--right.active.collapsed {
+    width: 64px; /* Collapsed width */
+    padding: var(--sp-4) var(--sp-2);
+    overflow: hidden;
+    visibility: visible;
+  }
+
+  .pm-modal-sidebar--right.active.collapsed .sidebar-toggle-container {
+    justify-content: center !important;
+  }
+
+  .pm-modal-sidebar--right.active.collapsed .material-symbols-outlined {
+    transform: rotate(180deg); /* Rotate chevron for collapsed state */
+  }
+
+  /* ปรับแก้ให้คลาส collapsed ทั่วไปส่งผลเฉพาะ Sidebar ด้านซ้ายเท่านั้น และแก้ไข Syntax ที่ซ้อนกันผิด */
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) {
     width: 64px;
     padding: var(--sp-4) var(--sp-2);
   }
 
-  .pm-modal-sidebar.collapsed .sidebar-toggle-container {
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) .sidebar-toggle-container {
     justify-content: center !important;
   }
 
-  .pm-modal-sidebar.collapsed .ti-chevron-left {
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) .material-symbols-outlined {
+    transform: rotate(180deg); /* Rotate chevron_left to chevron_right for left sidebar */
+  }
+
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) .ti-chevron-left {
     transform: rotate(180deg);
   }
 
-  .pm-modal-sidebar.collapsed .modal-nav-btn {
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) .modal-nav-btn {
     justify-content: center;
     padding: var(--sp-3) 0;
   }
 
-  .pm-modal-sidebar.collapsed .modal-nav-btn span {
+  .pm-modal-sidebar.collapsed:not(.pm-modal-sidebar--right) .modal-nav-btn span {
     display: none;
   }
 
@@ -916,9 +963,9 @@
 
     box-shadow: var(--shadow-sm);
   }
-
-  .pm-modal-main {
+    .pm-modal-main {
     flex: 1;
+    min-width: 0; /* ยอมให้พื้นที่หลักยืดหดได้อย่างอิสระ */
     padding: var(--sp-6);
     overflow-y: auto;
   }

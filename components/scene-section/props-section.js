@@ -3,6 +3,7 @@ function initPropsComponentEvents() {
   renderProps();
   initPropsModal();
   updatePropsDisplay();
+  initPropsSearch();
 }
 
 function renderProps() {
@@ -134,6 +135,16 @@ function initPropsModal() {
   if (navBtns) {
     navBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
+        // ล้างค่าการค้นหาเมื่อมีการคลิกเปลี่ยนหมวดหมู่ด้วยตนเอง
+        const searchInput = document.getElementById("props-search-input");
+        if (searchInput && searchInput.value) {
+          searchInput.value = "";
+          navBtns.forEach((b) => (b.style.display = ""));
+          sections.forEach((sec) =>
+            sec.querySelectorAll(".pill").forEach((p) => (p.style.display = ""))
+          );
+        }
+
         const targetId = btn.dataset.target;
         navBtns.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
@@ -154,12 +165,63 @@ function initPropsModal() {
       .querySelectorAll("#props-modal-main .pill.active")
       .forEach((p) => p.classList.remove("active"));
     updatePropsDisplay();
+
+    const searchInput = document.getElementById("props-search-input");
+    if (searchInput) {
+      searchInput.value = "";
+      searchInput.dispatchEvent(new Event("input"));
+    }
     tryRecompile();
   });
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active"))
       toggleModal(false);
+  });
+}
+
+/**
+ * Initialize prop search logic.
+ */
+function initPropsSearch() {
+  const searchInput = document.getElementById("props-search-input");
+  if (!searchInput) return;
+
+  searchInput.addEventListener("input", () => {
+    const term = searchInput.value.toLowerCase().trim();
+    const sections = document.querySelectorAll("#props-modal-main .modal-section");
+    const navBtns = document.querySelectorAll("#props-sidebar-nav .modal-nav-btn");
+
+    if (!term) {
+      // กรณีช่องค้นหาว่าง: แสดงผลตามหมวดหมู่ที่เลือกไว้ (Active)
+      navBtns.forEach((btn) => (btn.style.display = ""));
+      const activeNav = document.querySelector("#props-sidebar-nav .modal-nav-btn.active");
+      const targetId = activeNav?.dataset.target;
+
+      sections.forEach((sec) => {
+        sec.style.display = sec.id === targetId ? "block" : "none";
+        sec.querySelectorAll(".pill").forEach((p) => (p.style.display = ""));
+      });
+      return;
+    }
+
+    // กรณีมีการพิมพ์ค้นหา: กรองข้อมูลทุกหมวดหมู่ (Global Search)
+    sections.forEach((section) => {
+      const pills = section.querySelectorAll(".pill");
+      let hasMatch = false;
+
+      pills.forEach((pill) => {
+        const isMatch = pill.textContent.toLowerCase().includes(term);
+        pill.style.display = isMatch ? "" : "none";
+        if (isMatch) hasMatch = true;
+      });
+
+      // แสดง Section ถ้ามีผลลัพธ์ที่ตรงกัน
+      section.style.display = hasMatch ? "block" : "none";
+      // แสดง/ซ่อนปุ่มนำทางใน Sidebar ตามผลการค้นหา
+      const navBtn = document.querySelector(`#props-sidebar-nav .modal-nav-btn[data-target="${section.id}"]`);
+      if (navBtn) navBtn.style.display = hasMatch ? "" : "none";
+    });
   });
 }
 

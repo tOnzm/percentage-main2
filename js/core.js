@@ -24,6 +24,19 @@ function buildPromptString(f) {
   const integrity =
     "Strictly preserve original product/packaging from reference image. Do not change branding, logo, text, or label. Do not redesign packaging. Do not generate new products.";
 
+  // 1.1 การแสดงผลสินค้า (Display Mode Instruction)
+  const displayInstr = (() => {
+    switch (f.displayMode) {
+      case "product_box":
+        return "Show both the main product container and its matching retail packaging box together in the frame.";
+      case "box_only":
+        return "Focus exclusively on the outer packaging box.";
+      case "product":
+      default:
+        return "Focus exclusively on the primary product container or bottle.";
+    }
+  })();
+
   // 2. Layout (ลดการเรียกชื่อสินค้า เปลี่ยนเป็นตำแหน่ง)
   const layoutHint = isMulti
     ? (() => {
@@ -40,6 +53,7 @@ function buildPromptString(f) {
 
   const parts = [
     integrity,
+    displayInstr,
     subjectLine,
     layoutHint,
     `Placement: ${f.placement}.`,
@@ -53,6 +67,21 @@ function buildPromptString(f) {
   ];
 
   return parts.filter(Boolean).join(" ");
+}
+
+/**
+ * Helper to replace placeholders with user-defined tones
+ */
+function applyCustomTones(baseString) {
+  if (!baseString) return "";
+  const platTone = getInputValueById("scene-platform-tone") || "neutral colored";
+  const plantTone = getInputValueById("scene-plant-tone") || "natural green";
+  const skyTone = getInputValueById("scene-sky-tone") || "clear";
+
+  return baseString
+    .replace(/\[PLATFORM\]/g, platTone)
+    .replace(/\[PLANTS\]/g, plantTone)
+    .replace(/\[SKY\]/g, skyTone);
 }
 
 // ─ Background resolver ─────────────────────────────────────────────────────
@@ -81,13 +110,14 @@ function getBgValue() {
       const dir = sel("#grad-dir-group .pill.active");
       return dir ? `${base}, gradient direction: ${dir}` : base;
     }
-    case "scene":
-      return (
-        sel("#scene-grid .scene-card.selected") ||
-        "softly blurred outdoor evening purple sky, bokeh lights"
-      );
-    case "custom":
-      return iv("bg-custom-text") || "custom background as specified";
+    case "scene": {
+      let base = sel("#scene-grid .scene-card.selected") || "a minimalist platform in a clean environment";
+      return applyCustomTones(base);
+    }
+    case "custom": {
+      let customText = iv("bg-custom-text") || "custom background as specified";
+      return applyCustomTones(customText);
+    }
     case "studio": {
       const bgHex = iv("studio-bg-hex");
       const bgCustom = iv("studio-bg-custom");
@@ -191,7 +221,6 @@ function generatePrompt() {
   const lightVal =
     getSel("light-group")[0] ||
     "soft diffused backlight with soft elegant shadows";
-  ("soft diffused backlight with soft elegant shadows");
 
   // ── Quality & Extra ──
   const qualityVal =
@@ -258,22 +287,34 @@ function recompile() {
     extra: getInputValueById("f-extra"),
   };
   const prompt = [
-    "Commercial luxury beauty photography, professional product shoot.",
-    "Strictly maintain the reference image product geometry, label, and packaging branding.",
-
+    "A high-end commercial luxury beauty photography. The subject is the exact product from the reference image.",
+    "Strictly maintain the original geometry, label, and branding of the reference packaging without any alterations.",
     f.productCount > 1
-      ? `CRITICAL: Preserve all ${f.productCount} original products from the reference image. Every product must remain visible. Do not remove, merge, duplicate, replace, or hide any product.`
-      : "Preserve the original single product from the reference image.",
+      ? `Ensure all ${f.productCount} products are clearly visible and unchanged in their original positions.`
+      : "The single product must remain perfectly unchanged.",
+    
+    // Display Mode Logic for Google Banana
+    (() => {
+      switch (f.displayMode) {
+        case "product_box":
+          return "The scene features both the product container and its matching retail packaging box side-by-side.";
+        case "box_only":
+          return "The focus is exclusively on the product's outer packaging box.";
+        case "product":
+        default:
+          return "The focus is exclusively on the primary product container or bottle.";
+      }
+    })(),
 
-    f.placement ? `Placement: ${f.placement}.` : "",
-    f.background ? `Background: ${f.background}.` : "",
-    f.props ? `Scene elements: ${f.props}.` : "",
-    `Lighting: ${f.light}.`,
-    `Composition: ${f.camera}, ${f.lens}.`,
-    `Mood: ${f.mood}.`,
-    f.finish ? `Product details: ${f.finish}.` : "",
-    "Result must look like a high-end studio photograph, seamless and clean.",
-    "No text overlays, no people, no watermark, no new products created.",
+    f.placement ? `The product is ${f.placement}.` : "",
+    f.background ? `The scene features a ${f.background}.` : "",
+    f.props ? `With ${f.props} as supporting scene elements.` : "",
+    `The lighting is ${f.light}, expertly integrated to match the product and environment perfectly.`,
+    `Mood is ${f.mood}.`,
+    `Photographed using ${f.camera} and ${f.lens}.`,
+    f.finish ? `Showcasing ${f.finish}.` : "",
+    f.extra ? f.extra : "",
+    "Clean editorial composition, 8k resolution, photorealistic, professional color grading, no watermarks, seamless integration."
   ]
     .filter(Boolean)
     .join(" ");
@@ -286,14 +327,14 @@ function recompile() {
   const json = {
     prompt,
     negative_prompt:
-      "generated product, distorted product, altered logo, fake label, extra objects, cluttered background, blurry text, low resolution, unrefined shadows",
+      "deformed packaging, modified label text, blurred branding, additional products, low quality, messy environment, distorted shadows, people, hands",
     image: null,
     parameters: {
       style: "photorealistic",
       aspect_ratio: selectedRatio,
       quality: "high",
-      // เพิ่มค่าควบคุมความเหมือน เพื่อไม่ให้ AI วาดใหม่
-      image_guidance_scale: 4.0, // เพิ่มค่านี้เพื่อให้ยึดติดกับรูปต้นฉบับ
+      // เหมาะสำหรับ Google Banana (Img2Img)
+      image_guidance_scale: 5.0, 
       denoising_strength: 0.35, // ค่านี้น้อยๆ จะเป็นการเปลี่ยนฉากโดยไม่แตะต้องตัวสินค้า
       num_inference_steps: 35,
       seed: null,
