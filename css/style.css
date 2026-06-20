@@ -1747,6 +1747,74 @@
     color: var(--brand-orange-text);
   }
 
+  /* ── Product Detail Modal ─────────────────────────────────────────────── */
+  .pm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-4);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .pm-modal.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .pm-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .pm-modal-container {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg, 0 20px 60px rgba(0,0,0,.3));
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), opacity 0.2s ease;
+    overflow: hidden;
+  }
+
+  .pm-modal.active .pm-modal-container {
+    transform: translateY(0) scale(1);
+  }
+
+  .pm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pm-modal-body {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  @media (max-width: 640px) {
+    .pm-modal-container {
+      max-height: 95vh !important;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .pm-modal {
+      align-items: flex-end;
+      padding: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
   }

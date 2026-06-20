@@ -51,7 +51,7 @@
       <!-- Product Gallery Container -->
       <div class="product-gallery-container">
         <header class="gallery-header">
-          <h2>คลังข้อมูลสินค้า (Product Catalog)</h2>
+          <h2>คลังข้อมูลสินค้า</h2>
           <p>เลือกดูและจัดการรายการสินค้าในระบบเพื่อนำไปสร้าง Prompt</p>
         </header>
 
@@ -60,25 +60,48 @@
         </div>
       </div>
     </div>
+  </div> <!-- closes .workspace-layout -->
+
+  <!-- Product Detail Modal -->
+  <div id="detail-modal" class="pm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-product-name">
+    <div class="pm-modal-overlay" id="detail-modal-overlay"></div>
+    <div class="pm-modal-container" style="max-width: 600px; height: auto; max-height: 90vh;">
+      <div class="pm-modal-header" style="border-bottom: 1px solid var(--border); padding: var(--sp-4) var(--sp-6);">
+        <h3 id="modal-product-name" class="workspace-title" style="font-size: 20px; margin: 0;">รายละเอียดสินค้า</h3>
+        <button type="button" class="theme-toggle-btn" id="close-detail-modal"
+          style="border:none; background:none; cursor:pointer;">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="pm-modal-body" style="padding: var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-4);">
+        <div id="modal-content"></div>
+      </div>
+      <div class="pm-modal-footer"
+        style="padding: var(--sp-4) var(--sp-6); border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: var(--sp-3); background: var(--surface-secondary);">
+        <button type="button" class="clear-btn" id="modal-close-btn"
+          style="border: 1px solid var(--border-dark); border-radius: var(--radius-sm); padding: 8px 16px; background: transparent; cursor: pointer; color: var(--text-secondary); transition: all 0.2s;">ปิด</button>
+        <button type="button" class="main-btn" id="modal-select-btn"
+          style="background: var(--brand-orange); color: #fff; border: none; border-radius: var(--radius-sm); padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; transition: all 0.2s;">
+          <span class="material-symbols-outlined">auto_awesome</span> เลือกใช้สินค้านี้
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="./data/products.js"></script>
   <script>
-    // Theme switching logic (Dark/Light mode)
+    // ── Theme ──────────────────────────────────────────────────────────────
     function initTheme() {
       const themeToggle = document.getElementById("theme-toggle");
       const currentTheme =
         localStorage.getItem("theme") ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light");
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
       const updateIcon = (isDark) => {
         if (!themeToggle) return;
         const icon = themeToggle.querySelector("span") || themeToggle.querySelector("i");
-        if (icon) {
-          icon.textContent = isDark ? "dark_mode" : "light_mode";
-        }
+        if (icon) icon.textContent = isDark ? "dark_mode" : "light_mode";
       };
 
       if (currentTheme === "dark") {
@@ -90,8 +113,7 @@
 
       if (themeToggle) {
         themeToggle.addEventListener("click", () => {
-          const isDark =
-            document.documentElement.getAttribute("data-theme") === "dark";
+          const isDark = document.documentElement.getAttribute("data-theme") === "dark";
           if (isDark) {
             document.documentElement.removeAttribute("data-theme");
             localStorage.setItem("theme", "light");
@@ -105,92 +127,297 @@
       }
     }
 
-    // Format label details elegantly
-    function formatLabels(labelData) {
-      if (!labelData) return '<div class="product-label-value">—</div>';
-      if (Array.isArray(labelData)) {
-        return labelData.map(l => `<div class="product-label-value">• ${l}</div>`).join('');
+    // ── Toast ──────────────────────────────────────────────────────────────
+    function copyText(text) {
+      if (!text) return;
+      // Primary: Clipboard API (requires HTTPS or localhost)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => showToast("คัดลอกข้อมูลสำเร็จ!"))
+          .catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
       }
-      return `<div class="product-label-value">• ${labelData}</div>`;
     }
 
-    // Render all product cards dynamically
+    function fallbackCopy(text) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.cssText = "position:fixed;top:-9999px;left:-9999px;opacity:0;";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("คัดลอกข้อมูลสำเร็จ!");
+      } catch (e) {
+        showToast("ไม่สามารถคัดลอกได้ กรุณาลองใหม่");
+      }
+    }
+
+    function showToast(message) {
+      let toast = document.getElementById("copy-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "copy-toast";
+        Object.assign(toast.style, {
+          position: "fixed", bottom: "24px", right: "24px",
+          background: "var(--text-primary)", color: "var(--surface)",
+          padding: "12px 20px", borderRadius: "var(--radius-sm)",
+          boxShadow: "var(--shadow-md)", zIndex: "2000",
+          fontSize: "13px", fontWeight: "500", fontFamily: "var(--font-sans)",
+          display: "flex", alignItems: "center", gap: "8px",
+          opacity: "0", transform: "translateY(8px)",
+          transition: "opacity 0.2s, transform 0.2s",
+          pointerEvents: "none"
+        });
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span class="material-symbols-outlined" style="font-size:17px;color:#34d399">check_circle</span> ${message}`;
+      void toast.offsetHeight; // force repaint
+      toast.style.opacity = "1";
+      toast.style.transform = "translateY(0)";
+      if (window._toastTimer) clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(8px)";
+      }, 2200);
+    }
+
+    // ── Label Formatters ────────────────────────────────────────────────────
+    function formatCardLabels(labelData) {
+      if (!labelData) return '<div class="product-label-value">—</div>';
+      const items = Array.isArray(labelData) ? labelData : [labelData];
+      return items.map(l => `
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:2px;">
+          <div class="product-label-value" style="font-size:11px;flex:1;">• ${l}</div>
+          <button type="button" onclick="event.stopPropagation();copyText(${JSON.stringify(l)})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:flex;align-items:center;padding:2px;flex-shrink:0;opacity:.6;transition:opacity .2s;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอก">
+            <span class="material-symbols-outlined" style="font-size:12px;">content_copy</span>
+          </button>
+        </div>`).join('');
+    }
+
+    function formatModalLabels(labelData) {
+      if (!labelData) return '<div class="product-label-value">—</div>';
+      const items = Array.isArray(labelData) ? labelData : [labelData];
+      return items.map(l => `
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed var(--border);">
+          <span style="font-size:13px;color:var(--text-primary);font-weight:500;flex:1;">${l}</span>
+          <button type="button" onclick="copyText(${JSON.stringify(l)})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-secondary);display:inline-flex;align-items:center;padding:4px 6px;border-radius:6px;transition:background .15s;"
+            onmouseover="this.style.background='var(--surface-secondary)'" onmouseout="this.style.background='none'" title="คัดลอก">
+            <span class="material-symbols-outlined" style="font-size:15px;">content_copy</span>
+          </button>
+        </div>`).join('');
+    }
+
+    // ── Modal ────────────────────────────────────────────────────────────────
+    let activeModalProductId = null;
+
+    function openDetailModal(id) {
+      const item = products[id];
+      if (!item) return;
+      activeModalProductId = id;
+
+      const content = document.getElementById("modal-content");
+      if (!content) return;
+
+      const labelData = item.label;
+      content.innerHTML = `
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Color swatch + hex -->
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.15);background:${item.color || '#fff'};flex-shrink:0;"></div>
+            <span style="font-size:12px;font-weight:600;text-transform:uppercase;color:var(--text-secondary);letter-spacing:.04em;">${item.color || '—'}</span>
+            <button type="button" onclick="copyText(${JSON.stringify(item.color || '')})"
+              style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.6;transition:opacity .2s;"
+              onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอกรหัสสี">
+              <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+            </button>
+          </div>
+
+          <!-- Brand -->
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-orange);">${item.brand || 'Percentage'}</span>
+              <button type="button" onclick="copyText(${JSON.stringify(item.brand || 'Percentage')})"
+                style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.6;transition:opacity .2s;"
+                onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอกแบรนด์">
+                <span class="material-symbols-outlined" style="font-size:13px;">content_copy</span>
+              </button>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;">
+              <h2 style="font-size:20px;font-weight:600;color:var(--text-primary);margin:0;line-height:1.3;">${item.name}</h2>
+              <button type="button" onclick="copyText(${JSON.stringify(item.name)})"
+                style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:4px;margin-top:2px;opacity:.6;transition:opacity .2s;"
+                onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอกชื่อสินค้า">
+                <span class="material-symbols-outlined" style="font-size:15px;">content_copy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="product-tag-cat" style="margin:0;">${item.category || 'อื่นๆ'}</span>
+            <button type="button" onclick="copyText(${JSON.stringify(item.category || 'อื่นๆ')})"
+              style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.6;transition:opacity .2s;"
+              onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอกหมวดหมู่">
+              <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+            </button>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+              <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-tertiary);">รายละเอียด</span>
+              <button type="button" onclick="copyText(${JSON.stringify(item.desc || '')})"
+                style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.6;transition:opacity .2s;"
+                onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.6'" title="คัดลอกรายละเอียด">
+                <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+              </button>
+            </div>
+            <p style="font-size:13.5px;color:var(--text-secondary);line-height:1.7;margin:0;">${item.desc || '—'}</p>
+          </div>
+
+          <!-- Labels -->
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-tertiary);margin-bottom:8px;">ข้อความบนฉลาก</div>
+            <div style="background:var(--surface-secondary);border-radius:var(--radius-sm);padding:8px 12px;">
+              ${formatModalLabels(labelData)}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("detail-modal").classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById("detail-modal");
+      if (modal) modal.classList.remove("active");
+      document.body.style.overflow = "";
+      activeModalProductId = null;
+    }
+
+    function initDetailModalEvents() {
+      document.getElementById("close-detail-modal")?.addEventListener("click", closeDetailModal);
+      document.getElementById("modal-close-btn")?.addEventListener("click", closeDetailModal);
+      document.getElementById("detail-modal-overlay")?.addEventListener("click", closeDetailModal);
+
+      document.getElementById("modal-select-btn")?.addEventListener("click", () => {
+        if (activeModalProductId) {
+          localStorage.setItem("selectedProductId", activeModalProductId);
+          window.location.href = "index.html";
+        }
+      });
+
+      window.addEventListener("keydown", (e) => {
+        const modal = document.getElementById("detail-modal");
+        if (e.key === "Escape" && modal?.classList.contains("active")) closeDetailModal();
+      });
+    }
+
+    // ── Render Cards ──────────────────────────────────────────────────────────
     function renderProducts() {
       const grid = document.getElementById("product-grid");
       if (!grid) return;
-
       grid.innerHTML = "";
 
       Object.entries(products).forEach(([id, item]) => {
         const card = document.createElement("div");
         card.className = "product-card";
 
-        // Stripe representing product primary color
-        const stripeColor = item.color || "var(--border-dark)";
+        // Color stripe
         const colorStripe = document.createElement("div");
         colorStripe.className = "product-card-color-stripe";
-        colorStripe.style.backgroundColor = stripeColor;
+        colorStripe.style.backgroundColor = item.color || "var(--border-dark)";
         card.appendChild(colorStripe);
 
-        // Header info (Brand & Category Tag)
-        const cardHeader = document.createElement("div");
-        cardHeader.className = "product-card-header";
-        
-        const brandSpan = document.createElement("span");
-        brandSpan.className = "product-brand";
-        brandSpan.textContent = item.brand || "Percentage";
-        
-        const catSpan = document.createElement("span");
-        catSpan.className = "product-tag-cat";
-        catSpan.textContent = item.category || "อื่นๆ";
-        
-        cardHeader.appendChild(brandSpan);
-        cardHeader.appendChild(catSpan);
-        card.appendChild(cardHeader);
+        // Header: Brand + Category with copy icons
+        const headerRow = document.createElement("div");
+        headerRow.className = "product-card-header";
+        headerRow.style.marginTop = "6px";
 
-        // Product Name
-        const nameHeading = document.createElement("h3");
-        nameHeading.className = "product-name";
-        nameHeading.textContent = item.name;
-        card.appendChild(nameHeading);
+        const brandWrap = document.createElement("div");
+        brandWrap.style.cssText = "display:flex;align-items:center;gap:4px;";
+        brandWrap.innerHTML = `
+          <span class="product-brand">${item.brand || 'Percentage'}</span>
+          <button type="button" onclick="event.stopPropagation();copyText(${JSON.stringify(item.brand || 'Percentage')})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:1px;opacity:.5;transition:opacity .2s;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.5'" title="คัดลอกแบรนด์">
+            <span class="material-symbols-outlined" style="font-size:12px;">content_copy</span>
+          </button>`;
 
-        // Description
-        const descPara = document.createElement("p");
-        descPara.className = "product-desc";
-        descPara.textContent = item.desc || "ไม่มีข้อมูลรายละเอียดสินค้า";
-        card.appendChild(descPara);
+        const catWrap = document.createElement("div");
+        catWrap.style.cssText = "display:flex;align-items:center;gap:4px;";
+        catWrap.innerHTML = `
+          <span class="product-tag-cat">${item.category || 'อื่นๆ'}</span>
+          <button type="button" onclick="event.stopPropagation();copyText(${JSON.stringify(item.category || 'อื่นๆ')})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:1px;opacity:.5;transition:opacity .2s;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.5'" title="คัดลอกหมวดหมู่">
+            <span class="material-symbols-outlined" style="font-size:12px;">content_copy</span>
+          </button>`;
 
-        // Label Info Box
+        headerRow.appendChild(brandWrap);
+        headerRow.appendChild(catWrap);
+        card.appendChild(headerRow);
+
+        // Product name with copy icon
+        const nameRow = document.createElement("div");
+        nameRow.style.cssText = "display:flex;justify-content:space-between;align-items:flex-start;gap:8px;";
+        nameRow.innerHTML = `
+          <h3 class="product-name" style="flex:1;">${item.name}</h3>
+          <button type="button" onclick="event.stopPropagation();copyText(${JSON.stringify(item.name)})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.5;transition:opacity .2s;flex-shrink:0;margin-top:3px;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.5'" title="คัดลอกชื่อสินค้า">
+            <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+          </button>`;
+        card.appendChild(nameRow);
+
+        // Description with copy icon
+        const descRow = document.createElement("div");
+        descRow.style.cssText = "display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex:1;";
+        descRow.innerHTML = `
+          <p class="product-desc" style="flex:1;">${item.desc || 'ไม่มีข้อมูลรายละเอียดสินค้า'}</p>
+          <button type="button" onclick="event.stopPropagation();copyText(${JSON.stringify(item.desc || '')})"
+            style="background:none;border:none;cursor:pointer;color:var(--text-tertiary);display:inline-flex;align-items:center;padding:2px;opacity:.5;transition:opacity .2s;flex-shrink:0;margin-top:2px;"
+            onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.5'" title="คัดลอกรายละเอียด">
+            <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+          </button>`;
+        card.appendChild(descRow);
+
+        // Labels with individual copy icons
         const labelBox = document.createElement("div");
         labelBox.className = "product-label-box";
-        
         const labelTitle = document.createElement("div");
         labelTitle.className = "product-label-title";
         labelTitle.textContent = "ฉลากสินค้า (Labels)";
-        
         labelBox.appendChild(labelTitle);
-        labelBox.innerHTML += formatLabels(item.label);
+        labelBox.innerHTML += formatCardLabels(item.label);
         card.appendChild(labelBox);
 
-        // Use Product CTA Button
-        const selectBtn = document.createElement("button");
-        selectBtn.type = "button";
-        selectBtn.className = "use-product-btn";
-        selectBtn.innerHTML = '<span class="material-symbols-outlined">auto_awesome</span> เลือกใช้สินค้านี้';
-        selectBtn.addEventListener("click", () => {
-          localStorage.setItem("selectedProductId", id);
-          window.location.href = "index.html";
-        });
-        card.appendChild(selectBtn);
+        // View Details button
+        const detailBtn = document.createElement("button");
+        detailBtn.type = "button";
+        detailBtn.className = "use-product-btn";
+        detailBtn.style.cssText = "background:var(--surface-secondary);color:var(--text-primary);border:1px solid var(--border);";
+        detailBtn.innerHTML = '<span class="material-symbols-outlined">open_in_new</span> ดูรายละเอียดสินค้า';
+        detailBtn.addEventListener("click", () => openDetailModal(id));
+        card.appendChild(detailBtn);
 
         grid.appendChild(card);
       });
     }
 
-    // Initialize Page
+    // ── Bootstrap ──────────────────────────────────────────────────────────────
     document.addEventListener("DOMContentLoaded", () => {
       initTheme();
       renderProducts();
+      initDetailModalEvents();
     });
   </script>
 </body>
