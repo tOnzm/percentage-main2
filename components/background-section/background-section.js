@@ -384,7 +384,10 @@ function initBackgroundModal() {
   const sidebarToggle = modal?.querySelector("#background-sidebar-toggle");
   const navBtns = modal?.querySelectorAll(".modal-nav-btn");
   const sections = modal?.querySelectorAll(".modal-section");
-
+  
+  const sceneCustomSidebar = document.getElementById("background-scene-custom-sidebar");
+  const sceneCustomToggle = document.getElementById("background-scene-custom-toggle");
+  
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", () =>
       sidebar.classList.toggle("collapsed"),
@@ -393,8 +396,28 @@ function initBackgroundModal() {
 
   if (!modal || !openBtn) return;
 
+  // Right sidebar toggle logic
+  if (sceneCustomToggle && sceneCustomSidebar) {
+    sceneCustomToggle.addEventListener("click", () => {
+      sceneCustomSidebar.classList.toggle("collapsed");
+    });
+  }
+
   const toggleModal = (show) => {
     modal.classList.toggle("active", show);
+    if (show) {
+      // Ensure currentBgType is correctly set when modal opens based on the active tab
+      const activeNavBtn = modal?.querySelector(".modal-nav-btn.active");
+      if (activeNavBtn) {
+        const targetId = activeNavBtn.dataset.target;
+        if (targetId.includes("solid")) currentBgType = "solid";
+        else if (targetId.includes("gradient")) currentBgType = "gradient";
+        else if (targetId.includes("studio")) currentBgType = "studio";
+        else if (targetId.includes("scene")) currentBgType = "scene";
+        else if (targetId.includes("custom")) currentBgType = "custom";
+      }
+    }
+    sceneCustomSidebar?.classList.toggle("active", show && currentBgType === "scene"); // Re-evaluate after currentBgType is set
     document.body.style.overflow = show ? "hidden" : "";
     if (!show) tryRecompile();
   };
@@ -414,6 +437,11 @@ function initBackgroundModal() {
         else if (targetId.includes("studio")) currentBgType = "studio";
         else if (targetId.includes("scene")) currentBgType = "scene";
         else if (targetId.includes("custom")) currentBgType = "custom";
+
+        // ควบคุมการแสดงผล Sidebar ขวาตามประเภทพื้นหลัง
+        sceneCustomSidebar?.classList.toggle("active", currentBgType === "scene");
+        // รีเซ็ตการพับเก็บให้กางออกเสมอเมื่อสลับมาที่ Scene
+        sceneCustomSidebar?.classList.remove("collapsed");
 
         updateBackgroundDisplay();
       });
@@ -440,6 +468,9 @@ function initBackgroundModal() {
       "studio-floor-hex",
       "studio-floor-custom",
       "bg-custom-text",
+      "scene-platform-tone",
+      "scene-plant-tone",
+      "scene-sky-tone",
     ];
     inputs.forEach((id) => {
       if (document.getElementById(id)) document.getElementById(id).value = "";
@@ -556,6 +587,9 @@ function initBackgroundComponentEvents() {
     "bg-custom-text",
     "studio-bg-custom",
     "studio-floor-custom",
+    "scene-platform-tone",
+    "scene-plant-tone",
+    "scene-sky-tone"
   ].forEach((id) => {
     const el = document.getElementById(id);
     if (el) {

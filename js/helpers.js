@@ -9,7 +9,7 @@
 function getSel(id) {
   const el = document.getElementById(id);
   if (!el) return [];
-  return [...el.querySelectorAll(".pill.active")]
+  return [...el.querySelectorAll(".pill.active, .scene-card.selected")]
     .map((p) => p.dataset.val)
     .filter(Boolean);
 }

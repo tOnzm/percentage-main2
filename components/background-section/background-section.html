@@ -117,6 +117,29 @@
               placeholder="เช่น a luxurious living room with marble floors and large windows..."></textarea>
           </div>
         </div>
+
+        <!-- Right Sidebar for Scene Customization - ย้ายมาไว้หลัง pm-modal-main -->
+        <aside class="pm-modal-sidebar pm-modal-sidebar--right" id="background-scene-custom-sidebar">
+          <div class="sidebar-toggle-container" style="display: flex; justify-content: flex-start; margin-bottom: 12px;">
+            <button type="button" id="background-scene-custom-toggle" class="theme-toggle-btn"
+              style="width: 28px; height: 28px; font-size: 12px;">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+          <div class="pm-label">ปรับแต่ง Scene</div>
+          <div class="pm-field mt-3">
+              <div class="pm-label">โทนสีแท่นวาง (Platform Tone)</div>
+              <input type="text" id="scene-platform-tone" class="pm-input" placeholder="เช่น Warm Cream, Matte Black" autocomplete="off" />
+          </div>
+          <div class="pm-field mt-3">
+              <div class="pm-label">โทนสีพืชพรรณ (Plant Tone)</div>
+              <input type="text" id="scene-plant-tone" class="pm-input" placeholder="เช่น Tropical Green, Autumn Red" autocomplete="off" />
+          </div>
+          <div class="pm-field mt-3">
+              <div class="pm-label">โทนสีท้องฟ้า (Sky Tone)</div>
+              <input type="text" id="scene-sky-tone" class="pm-input" placeholder="เช่น Pastel Pink, Deep Blue" autocomplete="off" />
+          </div>
+        </aside>
       </div>
 
       <div class="pm-modal-footer" style="gap: 8px;">

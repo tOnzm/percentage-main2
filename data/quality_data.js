@@ -8,7 +8,7 @@ const qualityData = {
     },
     {
       label: "Ultra Realistic",
-      val: "High-End Editorialultra realistic",
+      val: "high-end editorial, ultra realistic",
       hint: "ภาพสมจริงมาก",
     },
     {

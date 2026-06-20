@@ -1,0 +1,49 @@
+<section class="workspace-section">
+    <div class="section-title">
+        <span class="material-symbols-outlined">palette</span> พื้นหลัง
+    </div>
+
+    <div class="section-content">
+        <div class="bg-tabs-container" id="bg-type-tabs">
+            <!-- Tabs will be rendered here by JS -->
+        </div>
+
+        <div id="bg-solid" class="bg-section">
+            <!-- Solid color content -->
+        </div>
+
+        <div id="bg-gradient" class="bg-section">
+            <!-- Gradient content -->
+        </div>
+
+        <div id="bg-studio" class="bg-section">
+            <!-- Studio content -->
+        </div>
+
+        <div id="bg-scene" class="bg-section show">
+            <div class="scene-grid" id="scene-grid">
+                <!-- Scene cards will be rendered here by JS -->
+            </div>
+            <div class="pm-field mt-4">
+                <div class="pm-label">โทนสีแท่นวาง (Platform Tone)</div>
+                <input type="text" id="scene-platform-tone" class="pm-input" placeholder="เช่น Warm Cream, Matte Black" autocomplete="off" />
+            </div>
+            <div class="pm-field mt-3">
+                <div class="pm-label">โทนสีพืชพรรณ (Plant Tone)</div>
+                <input type="text" id="scene-plant-tone" class="pm-input" placeholder="เช่น Tropical Green, Autumn Red" autocomplete="off" />
+            </div>
+            <div class="pm-field mt-3">
+                <div class="pm-label">โทนสีท้องฟ้า (Sky Tone)</div>
+                <input type="text" id="scene-sky-tone" class="pm-input" placeholder="เช่น Pastel Pink, Deep Blue" autocomplete="off" />
+            </div>
+        </div>
+
+        <div id="bg-custom" class="bg-section">
+            <!-- Custom background content -->
+        </div>
+
+        <div class="product-detail mt-4" id="background-detail" aria-live="polite">
+            ยังไม่เลือกพื้นหลัง
+        </div>
+    </div>
+</section>
