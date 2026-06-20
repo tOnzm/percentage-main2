@@ -242,3 +242,22 @@ function initProductComponentEvents() {
   const displayModeEl = document.getElementById("product-display-mode");
   if (displayModeEl) displayModeEl.addEventListener("change", tryRecompile);
 }
+
+/**
+ * Check if a product ID has been passed via localStorage (e.g. from the product catalog page),
+ * select it, and clear it from localStorage.
+ */
+function checkLocalStorageProduct() {
+  const storedId = localStorage.getItem("selectedProductId");
+  if (storedId) {
+    const id = Number(storedId);
+    if (products && products[id]) {
+      selectedProducts.clear();
+      selectedProducts.add(id);
+      applySelectedProducts();
+      renderProductTabs();
+      tryRecompile();
+    }
+    localStorage.removeItem("selectedProductId");
+  }
+}

@@ -54,7 +54,7 @@ function initTheme() {
 
   const updateIcon = (isDark) => {
     if (!themeToggle) return;
-    const icon = themeToggle.querySelector("i");
+    const icon = themeToggle.querySelector("span") || themeToggle.querySelector("i");
     if (icon) {
       icon.textContent = isDark ? "dark_mode" : "light_mode";
     }
@@ -171,6 +171,9 @@ async function initApplication() {
     renderProductTabs();
     initProductModal();
     resetToDefaultProduct();
+    if (typeof checkLocalStorageProduct === "function") {
+      checkLocalStorageProduct();
+    }
     initProductComponentEvents();
     initPlacementComponentEvents();
     initPropsComponentEvents();

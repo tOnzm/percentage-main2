@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 
 <head>
@@ -20,57 +20,66 @@
 </head>
 
 <body>
-  <div class="workspace-layout">
-    <!-- Header -->
-    <header class="workspace-header">
-      <div class="header-brand">
-        <h1 class="workspace-title">%PromptGen</h1>
-        <span class="workspace-subtitle">v0.3</span>
-      </div>
-      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-        <span class="material-symbols-outlined">light_mode</span>
-      </button>
-    </header>
-
-    <!-- Main Workspace -->
-    <div class="workspace-container">
-      <!-- LEFT PANEL: WHAT appears -->
-      <aside class="workspace-panel workspace-left">
-        <div id="product-section-placeholder"></div>
-        <div id="placement-section-placeholder"></div>
-        <div id="props-section-placeholder"></div>
-      </aside>
-
-      <!-- CENTER PANEL: OUTPUT workspace -->
-      <main class="workspace-panel workspace-center">
-        <div id="output-section-placeholder"></div>
-      </main>
-
-      <!-- RIGHT PANEL: HOW image is created -->
-      <aside class="workspace-panel workspace-right">
-        <div id="background-section-placeholder"></div>
-        <div id="angleLens-section-placeholder"></div>
-        <div id="lighting-section-placeholder"></div>
-        <div id="quality-section-placeholder"></div>
-      </aside>
+  <!-- Top Header (No links) -->
+  <header class="top-header">
+    <div class="header-brand">
+      <h1 class="workspace-title">%PromptGen</h1>
+      <span class="workspace-subtitle">v0.3</span>
     </div>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+  </header>
 
-    <!-- BOTTOM: Prompt Input Bar -->
-    <footer class="workspace-footer">
-      <div class="prompt-input-container " style="justify-content: end;">
+  <div class="workspace-layout">
+    <!-- Sidebar Navbar -->
+    <aside class="workspace-sidebar">
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </a>
+        <a href="product.html" class="nav-link">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span>Product</span>
+        </a>
+      </nav>
+    </aside>
 
-        <button type="button" class="main-btn" onclick="generatePrompt()" style="width: 20%; margin-bottom: 12px; ">
-          <span class="material-symbols-outlined">auto_awesome</span> Generate
-        </button>
-        <!--     <div class="prompt-input-wrapper">
+    <!-- Main Workspace Content -->
+    <div class="workspace-main">
+      <!-- Main Workspace -->
+      <div class="workspace-container">
+        <!-- LEFT PANEL: WHAT appears -->
+        <aside class="workspace-panel workspace-left">
+          <div id="product-section-placeholder"></div>
+          <div id="placement-section-placeholder"></div>
+          <div id="props-section-placeholder"></div>
+        </aside>
 
-          <textarea id="prompt-textarea" class="prompt-textarea"
-            placeholder="Enter additional prompt details or custom instructions..." rows="2"
-            autocomplete="off"></textarea>
+        <!-- CENTER PANEL: OUTPUT workspace -->
+        <main class="workspace-panel workspace-center">
+          <div id="output-section-placeholder"></div>
+        </main>
 
-        </div> -->
+        <!-- RIGHT PANEL: HOW image is created -->
+        <aside class="workspace-panel workspace-right">
+          <div id="background-section-placeholder"></div>
+          <div id="angleLens-section-placeholder"></div>
+          <div id="lighting-section-placeholder"></div>
+          <div id="quality-section-placeholder"></div>
+        </aside>
       </div>
-    </footer>
+
+      <!-- BOTTOM: Prompt Input Bar -->
+      <footer class="workspace-footer">
+        <div class="prompt-input-container " style="justify-content: end;">
+          <button type="button" class="main-btn" onclick="generatePrompt()" style="width: 20%; margin-bottom: 12px; ">
+            <span class="material-symbols-outlined">auto_awesome</span> Generate
+          </button>
+        </div>
+      </footer>
+    </div>
   </div>
 
   <script src="./data/products.js"></script>
