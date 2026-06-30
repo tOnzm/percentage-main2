@@ -153,7 +153,7 @@ function generatePrompt() {
   const displayMode =
     typeof getDisplayMode === "function" ? getDisplayMode() : "product";
 
-  const customPlacement = getInputValueById("placement-custom");
+  const customPlacement = getInputValueById("placement-custom-textarea");
   const placementPill = (() => {
     const el = document.querySelector("#placement-group .scene-card.selected");
     return el ? el.dataset.val || "" : "";
@@ -259,36 +259,35 @@ function recompile() {
   };
 
   const prompt = [
-    "Commercial luxury beauty editorial shot featuring the exact product from the reference image.",
-    "Strictly preserve the original packaging geometry, label, branding, and text without any alterations.",
+    `${f.quality} commercial product photography. Preserve original packaging, branding, and text exactly.`,
     f.productCount > 1
-      ? `All ${f.productCount} products must remain clearly visible and perfectly unchanged in their original positions, arranged ${f.arrangement}.`
-      : "The single product must remain perfectly unchanged.",
+      ? `${f.productCount} products arranged ${f.arrangement}.`
+      : "Single product, hero placement.",
     (() => {
       switch (f.displayMode) {
         case "product_box":
-          return "The scene includes both the product container and its matching retail packaging box arranged side-by-side.";
+          return "Display: product container + retail packaging box side-by-side.";
         case "box_only":
-          return "The composition focuses exclusively on the product's outer packaging box.";
+          return "Display: outer packaging box only.";
         case "product":
         default:
-          return "The composition focuses exclusively on the primary product container or bottle.";
+          return "Display: primary product container only.";
       }
     })(),
-    `Using the product as the main subject, create a ${f.theme} commercial product photography scene.`,
-    f.placement ? `Product placed ${f.placement}.` : "",
-    f.background ? `Environment: ${f.background}.` : "",
-    f.props ? `Styled with ${f.props} as supporting scene elements, emphasizing their tactile materiality.` : "",
-    f.lighting ? `Lighting designed with ${f.lighting}.` : "",
-    f.atmosphere ? `Atmospheric treatment: ${f.atmosphere}.` : "",
-    f.colorLock ? `Maintain strict color accent using hex ${f.colorLock} for scene accents and background details.` : "",
+    `Theme: ${f.theme} beauty scene.`,
+    f.placement ? `Placement: ${f.placement}.` : "",
+    f.background ? `Background: ${f.background}.` : "",
+    f.props ? `Props: ${f.props}.` : "",
+    f.lighting ? `Lighting: ${f.lighting}.` : "",
+    f.atmosphere ? `Atmosphere: ${f.atmosphere}.` : "",
+    f.colorLock ? `Color accent: ${f.colorLock}.` : "",
     (f.camerabody
-      ? `Shot on a ${f.camerabody}, using ${f.camera} with ${f.lens}, controlling depth, perspective, and optical character.`
-      : `Captured using ${f.camera} with ${f.lens}, controlling depth, perspective, and optical character.`),
+      ? `Shot on ${f.camerabody}, ${f.camera}, ${f.lens}.`
+      : `Shot with ${f.camera}, ${f.lens}.`),
     f.composition ? `Composition: ${f.composition}.` : "",
-    f.effects ? `Optical effects: ${f.effects}.` : "",
+    f.effects ? `Effects: ${f.effects}.` : "",
     f.extra || "",
-    "Clean editorial composition, 8k resolution, photorealistic, professional color grading, no watermarks, seamless integration with the original product.",
+    "8k, photorealistic, professional color grading, no watermarks.",
   ]
     .filter(Boolean)
     .join(" ");
@@ -300,33 +299,14 @@ function recompile() {
     prompt,
     negative_prompt:
       "deformed packaging, modified label text, blurred branding, additional products, low quality, messy environment, distorted shadows, people, hands",
-    image: null,
     parameters: {
       style: "photorealistic",
       aspect_ratio: selectedRatio,
-      quality: "high",
-      image_guidance_scale: 5.0,
-      denoising_strength: 0.35,
-      num_inference_steps: 35,
-      seed: null,
     },
     metadata: {
       schemaVersion: "2.0",
       product: f.product,
-      display_mode: f.displayMode,
-      product_count: f.productCount,
-      arrangement: f.arrangement,
-      placement: f.placement,
-      props: f.props,
-      environment: f.background,
-      theme: f.theme,
-      lighting: f.lighting,
-      atmosphere: f.atmosphere,
-      color_lock: f.colorLock,
-      camera_body: f.camerabody || "",
-      camera_settings: `${f.camera}, ${f.lens}`,
-      composition: f.composition,
-      effects: f.effects,
+      aspect_ratio: selectedRatio,
     },
   };
 
