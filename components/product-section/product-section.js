@@ -1,19 +1,72 @@
-// ── PRODUCT COMPONENT ─────────────────────────────────────────────────────
+// ── PRODUCT COMPONENT (Single-select + Count + Arrangement) ────────────
 
-const selectedProducts = new Set();
+let _selectedProductId = null;
+let _customMode = false;
+let _productCurrentCategory = null;
 
-/** Clear all three custom product text inputs. */
 function clearCustomProductInputs() {
   clearInputElement("product-custom-brand");
   clearInputElement("product-custom-name");
   clearInputElement("product-custom-label");
 }
 
-/**
- * Render product tabs grouped by category.
- * Each tab supports multi-select; clicking a selected tab deselects it.
- */
-function renderProductTabs() {
+function filterProductTabs(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll("#product-tabs-container .product-category").forEach((block) => {
+    const stabs = block.querySelectorAll(".stab");
+    let anyVisible = false;
+    stabs.forEach((btn) => {
+      const text = btn.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      btn.style.display = match ? "" : "none";
+      if (match) anyVisible = true;
+    });
+    block.style.display = anyVisible ? "" : "none";
+  });
+}
+
+function renderProductCategorySidebar() {
+  const sidebar = document.getElementById("product-category-sidebar");
+  if (!sidebar) return;
+
+  const grouped = {};
+  Object.entries(products).forEach(([key, item]) => {
+    const category = item.category || "อื่นๆ";
+    if (!grouped[category]) grouped[category] = [];
+    grouped[category].push({ id: key, ...item });
+  });
+
+  const categories = Object.keys(grouped).sort();
+  sidebar.innerHTML = categories.map((cat) => `
+    <button type="button" class="modal-nav-btn" data-category="${cat}">
+      <span class="material-symbols-outlined">fiber_manual_record</span> ${cat}
+    </button>
+  `).join("");
+
+  // Set active category
+  const firstBtn = sidebar.querySelector(".modal-nav-btn");
+  if (firstBtn) {
+    _productCurrentCategory = firstBtn.dataset.category;
+    firstBtn.classList.add("active");
+  }
+
+  // Wire clicks
+  sidebar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".modal-nav-btn");
+    if (!btn) return;
+    sidebar.querySelectorAll(".modal-nav-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    _productCurrentCategory = btn.dataset.category;
+    const searchInput = document.getElementById("modal-product-search");
+    if (searchInput) {
+      searchInput.value = "";
+      filterProductTabs("");
+    }
+    _renderProductContent();
+  });
+}
+
+function _renderProductContent() {
   const container = document.getElementById("product-tabs-container");
   if (!container) return;
 
@@ -26,30 +79,68 @@ function renderProductTabs() {
     grouped[category].push({ id: key, ...item });
   });
 
-  Object.entries(grouped).forEach(([category, items]) => {
-    const categoryBlock = document.createElement("div");
-    categoryBlock.className = "product-category";
+  const targetCategory = _productCurrentCategory || Object.keys(grouped).sort()[0];
+  const items = grouped[targetCategory] || [];
+  if (!items.length) return;
 
-    const categoryTitle = document.createElement("div");
-    categoryTitle.className = "product-category-title";
-    categoryTitle.textContent = category;
+  const categoryBlock = document.createElement("div");
+  categoryBlock.className = "product-category";
 
-    const categoryTabs = document.createElement("div");
-    categoryTabs.className = "scent-tabs";
+  const categoryTitle = document.createElement("div");
+  categoryTitle.className = "product-category-title";
+  categoryTitle.textContent = targetCategory;
+  categoryBlock.appendChild(categoryTitle);
 
-    items.forEach((item) => {
-      const btn = document.createElement("button");
-      btn.className = "stab";
-      btn.textContent = item.name;
-      btn.dataset.id = item.id;
-      btn.dataset.activeBg = item.color || "#2b221a";
-      btn.dataset.activeText = item.textColor || "#ffffff";
-      btn.setAttribute("role", "tab");
-      btn.setAttribute("aria-selected", "false");
-      btn.type = "button";
+  const categoryTabs = document.createElement("div");
+  categoryTabs.className = "scent-tabs";
 
-      // ตรวจสอบสถานะการเลือกปัจจุบัน
-      if (selectedProducts.has(Number(item.id))) {
+  items.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.className = "stab";
+    btn.dataset.id = item.id;
+    btn.dataset.activeBg = item.color || "#2b221a";
+    btn.dataset.activeText = item.textColor || "#ffffff";
+    btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-selected", "false");
+    btn.type = "button";
+
+    const dot = document.createElement("span");
+    dot.className = "stab-color-dot";
+    dot.style.backgroundColor = item.color || "#999";
+    btn.appendChild(dot);
+
+    btn.appendChild(document.createTextNode(item.name));
+
+    if (String(_selectedProductId) === String(item.id) && !_customMode) {
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      btn.style.backgroundColor = btn.dataset.activeBg;
+      btn.style.color = btn.dataset.activeText;
+      btn.style.border = "1px solid transparent";
+    }
+
+    btn.addEventListener("click", () => {
+      clearCustomProductInputs();
+      _customMode = false;
+
+      const id = String(item.id);
+
+      if (_selectedProductId === id) {
+        _selectedProductId = null;
+        btn.classList.remove("active");
+        btn.setAttribute("aria-selected", "false");
+        btn.style.backgroundColor = "";
+        btn.style.color = "";
+        btn.style.border = "";
+      } else {
+        document.querySelectorAll("#product-tabs-container .stab.active").forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+          b.style.backgroundColor = "";
+          b.style.color = "";
+          b.style.border = "";
+        });
+        _selectedProductId = id;
         btn.classList.add("active");
         btn.setAttribute("aria-selected", "true");
         btn.style.backgroundColor = btn.dataset.activeBg;
@@ -57,121 +148,146 @@ function renderProductTabs() {
         btn.style.border = "1px solid transparent";
       }
 
-      btn.addEventListener("click", () => {
-        const id = Number(item.id);
-        clearCustomProductInputs();
-
-        if (selectedProducts.has(id)) {
-          selectedProducts.delete(id);
-          btn.classList.remove("active");
-          btn.setAttribute("aria-selected", "false");
-          btn.style.backgroundColor = "";
-          btn.style.color = "";
-          btn.style.border = "";
-        } else {
-          selectedProducts.add(id);
-          btn.classList.add("active");
-          btn.setAttribute("aria-selected", "true");
-          btn.style.backgroundColor = btn.dataset.activeBg;
-          btn.style.color = btn.dataset.activeText;
-          btn.style.border = "1px solid transparent";
-        }
-
-        applySelectedProducts();
-        tryRecompile();
-      });
-
-      categoryTabs.appendChild(btn);
+      applySelectedProducts();
+      tryRecompile();
     });
 
-    categoryBlock.appendChild(categoryTitle);
-    categoryBlock.appendChild(categoryTabs);
-    container.appendChild(categoryBlock);
+    categoryTabs.appendChild(btn);
   });
+
+  categoryBlock.appendChild(categoryTabs);
+  container.appendChild(categoryBlock);
 }
 
-/** Update the product-detail panel to show selected product chips. */
+function renderProductTabs() {
+  renderProductCategorySidebar();
+  _renderProductContent();
+}
+
 function applySelectedProducts() {
   const container = document.getElementById("product-detail");
   if (!container) return;
 
-  if (selectedProducts.size === 0) {
-    updateDOMHtml(
-      "product-detail",
-      '<div class="snotes">ยังไม่เลือกสินค้าใดๆ</div>',
+  if (_customMode) {
+    updateDOMHtml("product-detail",
+      '<div class="snotes">ระบุสินค้าเอง</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...'
     );
+    updateSelectionCountBadge();
     return;
   }
+
+  if (!_selectedProductId) {
+    updateDOMHtml("product-detail", '<div class="snotes">ยังไม่เลือกสินค้าใดๆ</div>');
+    updateSelectionCountBadge();
+    return;
+  }
+
+  const product = products[_selectedProductId];
+  if (!product) return;
 
   container.innerHTML = "";
   const row = document.createElement("div");
   row.className = "flex-row";
   row.style.gap = "8px";
   row.style.flexWrap = "wrap";
+  row.style.alignItems = "center";
 
-  const labelEl = document.createElement("span");
-  labelEl.className = "sub-label";
-  labelEl.style.marginBottom = "0";
-  labelEl.textContent = "Product :";
-  row.appendChild(labelEl);
+  const chip = document.createElement("div");
+  chip.className = "product-chip";
 
-  selectedProducts.forEach((id) => {
-    const product = products[id];
-    if (!product) return;
+  const dot = document.createElement("span");
+  dot.className = "chip-color-dot";
+  dot.style.backgroundColor = product.color || "#999";
+  chip.appendChild(dot);
 
-    const chip = document.createElement("div");
-    chip.className = "product-chip";
+  const nameSpan = document.createElement("span");
+  nameSpan.textContent = product.name;
+  nameSpan.style.fontWeight = "500";
+  chip.appendChild(nameSpan);
 
-    const nameSpan = document.createElement("span");
-    nameSpan.textContent = product.name;
+  if (product.brand) {
+    const brandSpan = document.createElement("span");
+    brandSpan.textContent = product.brand;
+    brandSpan.style.fontSize = "10px";
+    brandSpan.style.color = "var(--text-tertiary)";
+    brandSpan.style.marginLeft = "2px";
+    chip.appendChild(brandSpan);
+  }
 
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.className = "chip-remove";
-    removeBtn.innerHTML =
-      '<span class="material-symbols-outlined">close</span>';
-
-    removeBtn.addEventListener("click", () => {
-      selectedProducts.delete(id);
-      renderProductTabs(); // ซิงค์สถานะใน Modal
-      applySelectedProducts();
-      tryRecompile();
-    });
-
-    chip.appendChild(nameSpan);
-    chip.appendChild(removeBtn);
-    row.appendChild(chip);
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.className = "chip-remove";
+  removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
+  removeBtn.addEventListener("click", () => {
+    _selectedProductId = null;
+    renderProductTabs();
+    applySelectedProducts();
+    tryRecompile();
   });
+  chip.appendChild(removeBtn);
 
+  row.appendChild(chip);
   container.appendChild(row);
+
+  updateSelectionCountBadge();
 }
 
-/** Return array of selected product data objects. */
+function updateSelectionCountBadge() {
+  const btn = document.getElementById("open-product-modal");
+  if (!btn) return;
+  const old = btn.querySelector(".product-selection-count");
+  if (old) old.remove();
+  if (_selectedProductId || _customMode) {
+    const badge = document.createElement("span");
+    badge.className = "product-selection-count";
+    badge.textContent = "1";
+    btn.appendChild(badge);
+  }
+}
+
 function getSelectedProducts() {
-  return [...selectedProducts].map((id) => products[id]).filter(Boolean);
+  if (_customMode) {
+    const brand = getInputValueById("product-custom-brand");
+    const name = getInputValueById("product-custom-name");
+    const label = getInputValueById("product-custom-label");
+    if (name || label || brand) {
+      return [{ brand: brand || "Percentage", name: name || label || "Product" }];
+    }
+    return [];
+  }
+  if (_selectedProductId && products[_selectedProductId]) {
+    return [products[_selectedProductId]];
+  }
+  return [];
 }
 
-/**
- * Get display mode: 'product' | 'product_box' | 'box_only'
- * @returns {string}
- */
 function getDisplayMode() {
   const el = document.getElementById("product-display-mode");
   return el ? el.value : "product";
 }
 
-/** Reset selection and custom inputs. */
+function getProductCount() {
+  const active = document.querySelector("#product-count-group .pill.active");
+  if (!active) return 1;
+  const v = active.dataset.val;
+  if (v === "multiple") return 3;
+  return parseInt(v, 10) || 1;
+}
+
+function getProductArrangement() {
+  const active = document.querySelector("#product-arrangement-group .pill.active");
+  return active ? active.dataset.val : "single hero";
+}
+
 function resetToDefaultProduct() {
-  selectedProducts.clear();
+  _selectedProductId = null;
+  _customMode = false;
   clearCustomProductInputs();
-  renderProductTabs(); // Refresh UI in modal
+  renderProductTabs();
   applySelectedProducts();
   tryRecompile();
 }
 
-/**
- * Initialize the modal opening/closing logic.
- */
 function initProductModal() {
   const modal = document.getElementById("product-modal");
   const openBtn = document.getElementById("open-product-modal");
@@ -185,7 +301,14 @@ function initProductModal() {
   const toggleModal = (show) => {
     modal.classList.toggle("active", show);
     document.body.style.overflow = show ? "hidden" : "";
-    if (!show) tryRecompile(); // Re-sync prompt when closing
+    if (show) {
+      const searchInput = document.getElementById("modal-product-search");
+      if (searchInput) {
+        searchInput.value = "";
+        filterProductTabs("");
+      }
+    }
+    if (!show) tryRecompile();
   };
 
   openBtn.addEventListener("click", () => toggleModal(true));
@@ -200,7 +323,6 @@ function initProductModal() {
   });
 }
 
-/** Wire up events for custom product inputs and display-mode select. */
 function initProductComponentEvents() {
   const fieldIds = [
     "product-custom-brand",
@@ -216,23 +338,25 @@ function initProductComponentEvents() {
       const hasValue = fieldIds.some((fId) => getInputValueById(fId) !== "");
 
       if (hasValue) {
-        selectedProducts.clear();
-        const container = document.getElementById("product-tabs-container");
-        if (container) {
-          container.querySelectorAll(".stab").forEach((t) => {
-            t.classList.remove("active");
-            t.setAttribute("aria-selected", "false");
-            t.style.backgroundColor = "";
-            t.style.color = "";
-            t.style.border = "";
-          });
-        }
-        updateDOMHtml(
-          "product-detail",
-          '<div class="snotes">ระบุสินค้าเอง</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...',
+        _selectedProductId = null;
+        _customMode = true;
+        document.querySelectorAll("#product-tabs-container .stab").forEach((t) => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+          t.style.backgroundColor = "";
+          t.style.color = "";
+          t.style.border = "";
+        });
+        updateDOMHtml("product-detail",
+          '<div class="snotes">ระบุสินค้าเอง</div>กำลังใช้ข้อมูลที่คุณกำหนดเอง...'
         );
       } else {
-        resetToDefaultProduct();
+        _customMode = false;
+        if (!_selectedProductId) {
+          resetToDefaultProduct();
+        } else {
+          applySelectedProducts();
+        }
       }
 
       tryRecompile();
@@ -241,19 +365,48 @@ function initProductComponentEvents() {
 
   const displayModeEl = document.getElementById("product-display-mode");
   if (displayModeEl) displayModeEl.addEventListener("change", tryRecompile);
+
+  // Display mode pills
+  document.querySelectorAll("#product-display-mode-group .pill").forEach((p) => {
+    p.addEventListener("click", () => {
+      document.querySelectorAll("#product-display-mode-group .pill").forEach((b) => b.classList.remove("active"));
+      p.classList.add("active");
+      const input = document.getElementById("product-display-mode");
+      if (input) input.value = p.dataset.value;
+      tryRecompile();
+    });
+  });
+
+  // Count pills
+  document.querySelectorAll("#product-count-group .pill").forEach((p) => {
+    p.addEventListener("click", () => {
+      document.querySelectorAll("#product-count-group .pill").forEach((b) => b.classList.remove("active"));
+      p.classList.add("active");
+      tryRecompile();
+    });
+  });
+
+  // Arrangement pills
+  document.querySelectorAll("#product-arrangement-group .pill").forEach((p) => {
+    p.addEventListener("click", () => {
+      document.querySelectorAll("#product-arrangement-group .pill").forEach((b) => b.classList.remove("active"));
+      p.classList.add("active");
+      tryRecompile();
+    });
+  });
+
+  const modalSearch = document.getElementById("modal-product-search");
+  if (modalSearch) {
+    modalSearch.addEventListener("input", () => filterProductTabs(modalSearch.value));
+  }
 }
 
-/**
- * Check if a product ID has been passed via localStorage (e.g. from the product catalog page),
- * select it, and clear it from localStorage.
- */
 function checkLocalStorageProduct() {
   const storedId = localStorage.getItem("selectedProductId");
   if (storedId) {
-    const id = Number(storedId);
-    if (products && products[id]) {
-      selectedProducts.clear();
-      selectedProducts.add(id);
+    _selectedProductId = String(storedId);
+    _customMode = false;
+    if (products && products[_selectedProductId]) {
       applySelectedProducts();
       renderProductTabs();
       tryRecompile();

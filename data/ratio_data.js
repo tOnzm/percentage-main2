@@ -6,6 +6,7 @@ const ratioData = [
     icon: "ti ti-device-mobile",
     image: null,
     aspectRatio: "9/16",
+    use: "Mobile, TikTok, Reels, Stories",
   },
   {
     label: "1:1",
@@ -13,6 +14,7 @@ const ratioData = [
     icon: "ti ti-square",
     image: null,
     aspectRatio: "1/1",
+    use: "Instagram, PDP, Catalog",
   },
   {
     label: "16:9",
@@ -20,6 +22,7 @@ const ratioData = [
     icon: "ti ti-device-tv",
     image: null,
     aspectRatio: "16/9",
+    use: "Website hero, Social cover, Banner",
   },
   {
     label: "4:5",
@@ -27,5 +30,6 @@ const ratioData = [
     icon: "ti ti-photo",
     image: null,
     aspectRatio: "4/5",
+    use: "Instagram feed, Editorial, Print",
   },
 ];

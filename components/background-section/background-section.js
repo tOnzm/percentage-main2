@@ -62,7 +62,7 @@ function createSceneCard(item, isFirst) {
           ? `<img src="${item.image}" alt="${item.title}" class="scene-card__image" loading="lazy">`
           : `<div class="scene-card__icon-fallback ">${item.icon || "ไม่พบข้อมูล"}</div>`
       }
-      <button type="button" class="scene-card__info-trigger" title="คลิกเพื่อดูคำอธิบาย">
+      <button type="button" class="scene-card__info-trigger" title="${item.title}: ${item.desc}">
         <i class="material-symbols-outlined">info</i>
       </button>
     </div>
@@ -71,14 +71,7 @@ function createSceneCard(item, isFirst) {
     </div>
   `;
 
-  el.querySelector(".scene-card__info-trigger").addEventListener(
-    "click",
-    (e) => {
-      e.stopPropagation();
-      alert(`${item.title}\n\n${item.desc}`);
-      updateBackgroundDisplay();
-    },
-  );
+  // Info shown via CSS tooltip on title attribute — no alert() needed
 
   return el;
 }

@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PromptGen Percentage</title>
+  <title>PromptGen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&family=Baskervville+SC&display=swap"
     rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
@@ -15,71 +15,55 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard.css">
   <link rel="stylesheet" href="./css/preview.css">
   <link rel="stylesheet" href="./css/productColorBtn.css">
 </head>
 
 <body>
-  <!-- Top Header (No links) -->
+  <!-- Top Header -->
   <header class="top-header">
-    <div class="header-brand">
-      <h1 class="workspace-title">%PromptGen</h1>
-      <span class="workspace-subtitle">v0.3</span>
+    <div class="header-left">
+      <div class="header-brand">
+        <h1 class="workspace-title">%PromptGen</h1>
+        <span class="workspace-subtitle">v0.3</span>
+      </div>
     </div>
-    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-      <span class="material-symbols-outlined">light_mode</span>
-    </button>
+    <div class="header-right">
+      <button id="generate-btn" class="generate-btn">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        Generate
+      </button>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+        <span class="material-symbols-outlined">light_mode</span>
+      </button>
+    </div>
   </header>
 
   <div class="workspace-layout">
-    <!-- Sidebar Navbar -->
-    <aside class="workspace-sidebar">
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-link active">
-          <span class="material-symbols-outlined">home</span>
-          <span>Home</span>
-        </a>
-        <a href="product.html" class="nav-link">
-          <span class="material-symbols-outlined">inventory_2</span>
-          <span>Product</span>
-        </a>
-      </nav>
-    </aside>
-
-    <!-- Main Workspace Content -->
     <div class="workspace-main">
-      <!-- Main Workspace -->
       <div class="workspace-container">
-        <!-- LEFT PANEL: WHAT appears -->
-        <aside class="workspace-panel workspace-left">
-          <div id="product-section-placeholder"></div>
-          <div id="placement-section-placeholder"></div>
-          <div id="props-section-placeholder"></div>
-        </aside>
-
-        <!-- CENTER PANEL: OUTPUT workspace -->
-        <main class="workspace-panel workspace-center">
-          <div id="output-section-placeholder"></div>
-        </main>
-
-        <!-- RIGHT PANEL: HOW image is created -->
-        <aside class="workspace-panel workspace-right">
-          <div id="background-section-placeholder"></div>
-          <div id="angleLens-section-placeholder"></div>
-          <div id="lighting-section-placeholder"></div>
-          <div id="quality-section-placeholder"></div>
-        </aside>
-      </div>
-
-      <!-- BOTTOM: Prompt Input Bar -->
-      <footer class="workspace-footer">
-        <div class="prompt-input-container " style="justify-content: end;">
-          <button type="button" class="main-btn" onclick="generatePrompt()" style="width: 20%; margin-bottom: 12px; ">
-            <span class="material-symbols-outlined">auto_awesome</span> Generate
-          </button>
+        <!-- 3-COLUMN SaaS Layout -->
+        <div class="ws-3col">
+          <div class="ws-col ws-col-left">
+            <div id="dashboard-placeholder"></div>
+          </div>
+          <div class="ws-col ws-col-center">
+            <div id="dashboard-content" class="dashboard-content"></div>
+          </div>
+          <div class="ws-col ws-col-right">
+            <div id="output-section-placeholder"></div>
+          </div>
         </div>
-      </footer>
+      </div>
     </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="workspace-status">
+    <span class="status-dot"></span>
+    <span>Ready</span>
+    <span class="status-right">Nano Banana</span>
   </div>
 
   <script src="./data/products.js"></script>
@@ -93,25 +77,34 @@
   <script src="./data/mood_tone.js"></script>
   <script src="./data/ratio_data.js"></script>
   <script src="./data/quality_data.js"></script>
-  <script src="./data/labelTexture_data.js"></script>
   <script src="./data/lensData.js"></script>
-  <script src="./data/labelTexture.js"></script>
+  <script src="./data/cameraBodyData.js"></script>
+  <script src="./data/compositionData.js"></script>
+  <script src="./data/cameraEffectsData.js"></script>
+  <script src="./data/shadowData.js"></script>
+  <script src="./data/themeData.js"></script>
+  <script src="./data/atmosphereData.js"></script>
 
-  <!-- â‘¡ Core utilities -->
+  <!-- Core utilities -->
   <script src="./js/config.js"></script>
   <script src="./js/helpers.js"></script>
   <script src="./js/core.js"></script>
 
-  <!-- â‘¢ Component logic -->
+  <!-- Component logic -->
   <script src="./components/product-section/product-section.js"></script>
   <script src="./components/scene-section/placement-section.js"></script>
   <script src="./components/scene-section/props-section.js"></script>
   <script src="./components/background-section/background-section.js"></script>
   <script src="./components/camera-section/angleLens-section.js"></script>
-  <script src="./components/camera-section/lighting-section.js"></script>
-  <script src="./components/camera-section/quality-section.js"></script>
+  <script src="./components/scene-section/theme-section.js"></script>
+  <script src="./components/scene-section/lighting-section.js"></script>
+  <script src="./components/scene-section/atmosphere-section.js"></script>
+  <script src="./components/scene-section/color-lock-section.js"></script>
 
-  <!-- â‘£ Bootstrap -->
+  <!-- Dashboard -->
+  <script src="./components/dashboard/dashboard.js"></script>
+
+  <!-- Bootstrap -->
   <script src="./js/main.js"></script>
 </body>
 

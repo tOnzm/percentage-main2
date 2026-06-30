@@ -1,6 +1,6 @@
 // data/cameraAngles.js
 window.cameraAngles = {
-  "Standard Angles": [
+  "Front & Straight-On": [
     {
       label: "Front",
       val: "straight-on front view of skincare bottle on laboratory surface, clean editorial composition",
@@ -10,6 +10,8 @@ window.cameraAngles = {
       label: "Front Commercial",
       val: "straight-on front view of product, centered composition, clean studio commercial photography",
     },
+  ],
+  "Three-Quarter (3/4)": [
     {
       label: "3/4 Angle",
       val: "45-degree three-quarter angle view of skincare bottle, balanced composition",
@@ -19,7 +21,7 @@ window.cameraAngles = {
       val: "45-degree three-quarter angle view of product, slightly elevated perspective, premium commercial photography",
     },
     {
-      label: "Eye-Level Three-Quarter Angle",
+      label: "Eye-Level Three-Quarter",
       val: "eye-level three-quarter camera angle, slightly rotated product perspective, natural depth and dimensional view, balanced commercial composition",
     },
     {
@@ -30,24 +32,8 @@ window.cameraAngles = {
       label: "Editorial Offset",
       val: "off-center rule-of-thirds composition, clean negative space",
     },
-    {
-      label: "Side Profile",
-      val: "side profile view of skincare bottle, silhouette framing, clean background",
-    },
-    {
-      label: "Tilted 15°",
-      val: "15-degree dutch-angle tilt, dynamic composition, off-center framing",
-    },
-    {
-      label: "f",
-      val: "straight-on eye-level view, perfectly front-facing",
-    },
-       {
-      label: "High angle shot",
-      val: "High angle shot (eye-level to slightly high angle), three-quarter perspective",
-    },
   ],
-  "Low & Hero Angles": [
+  "Low & Hero": [
     {
       label: "Hero Low Angle",
       val: "slightly low-angle hero shot, powerful premium perspective, commercial advertising photography",
@@ -65,15 +51,11 @@ window.cameraAngles = {
       val: "low angle ground view focusing on the product base, light reflecting through the bottom, grounding the subject",
     },
     {
-      label: "low-angle perspective",
+      label: "Low-Angle Perspective",
       val: "dramatic low-angle perspective",
     },
-    {
-      label: "upward camera tilt",
-      val: "upward camera tilt, majestic hero shot",
-    },
   ],
-  "Overhead & Flat Views": [
+  "Overhead & Top-Down": [
     {
       label: "Flat Lay",
       val: "overhead flat lay top-down view, scientific props arranged around center, minimal negative space",
@@ -86,7 +68,10 @@ window.cameraAngles = {
       label: "Cap Top View",
       val: "top-down view looking at the product cap, perfectly symmetrical, center-focused, soft highlights on lid surface",
     },
- 
+    {
+      label: "High Angle Shot",
+      val: "high angle shot with three-quarter perspective, elevated view showing product and surface context",
+    },
   ],
   "Macro & Detail": [
     {
@@ -114,79 +99,14 @@ window.cameraAngles = {
       val: "close-up shot of the label area emphasizing active ingredients text, macro lens, subtle glow reflections",
     },
   ],
-  "Composition & Arrangement": [
+  "Profile & Tilted": [
     {
-      label: "Pyramid Layout",
-      val: "products arranged in a pyramid composition, hero product centered, supporting products surrounding",
+      label: "Side Profile",
+      val: "side profile view of skincare bottle, silhouette framing, clean background",
     },
     {
-      label: "Symmetrical",
-      val: "products arranged symmetrically around the center",
-    },
-    {
-      label: "Staggered Heights",
-      val: "products placed at varying heights on layered pedestals, asymmetrical arrangement",
-    },
-    { label: "Lineup", val: "products aligned in a clean horizontal lineup" },
-    {
-      label: "Duo Shot",
-      val: "two skincare bottles, front and side-angled positioning, balanced symmetry",
-    },
-    {
-      label: "Foreground Framing",
-      val: "skincare product framed by foreground objects, depth-of-field composition",
-    },
-    {
-      label: "Leading Lines",
-      val: "diagonal composition with lines pointing toward the product",
-    },
-    {
-      label: "Floating Shot",
-      val: "floating skincare bottle, central levitation composition, symmetrical surrounding elements",
-    },
-  ],
-  "Advanced & Effects": [
-    {
-      label: "Telephoto Compression",
-      val: "telephoto lens perspective, compressed depth, blurred background focus, high-end commercial aesthetic",
-    },
-    {
-      label: "Through Glass",
-      val: "skincare bottle viewed through transparent glass, refraction effect focus",
-    },
-    {
-      label: "Mirror Reflection",
-      val: "skincare bottle with visible reflection on surface below, symmetrical vertical alignment",
-    },
-    {
-      label: "Backlit Glow",
-      val: "backlit view focusing on bottle translucency and shape",
-    },
-    {
-      label: "Acrylic Layers",
-      val: "composition with layered acrylic panels, geometric perspective",
-    },
-    {
-      label: "Elevated Studio",
-      val: "slightly elevated front angle, luxury studio product photography, refined composition",
-    },
-    {
-      label: "Base Clarity",
-      val: "eye-level shot focused on the base, emphasizing transparency and purity of the serum, clean white background",
-    },
-  ],
-  Placement: [
-    {
-      label: "Front Edge",
-      val: "positioned near the front edge of the pedestal",
-    },
-    {
-      label: "Centered",
-      val: "positioned at the center of the pedestal surface",
-    },
-    {
-      label: "Back Edge",
-      val: "positioned near the back edge of the pedestal",
+      label: "Tilted 15°",
+      val: "15-degree dutch-angle tilt, dynamic composition, off-center framing",
     },
   ],
 };

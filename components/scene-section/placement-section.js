@@ -3,6 +3,22 @@ function initPlacementComponentEvents() {
   renderPlacement();
   initPlacementModal();
   updatePlacementDisplay();
+  initPlacementSearch();
+}
+
+/** Filter placement cards by search query */
+function filterPlacementCards(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll("#placement-group .scene-card").forEach((card) => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = !q || text.includes(q) ? "" : "none";
+  });
+}
+
+function initPlacementSearch() {
+  const input = document.getElementById("placement-search");
+  if (!input) return;
+  input.addEventListener("input", () => filterPlacementCards(input.value));
 }
 
 function renderPlacement() {
@@ -23,7 +39,7 @@ function renderPlacement() {
         ${
           hasImage
             ? `<img src="${item.image}" alt="${item.label}" class="scene-card__image" loading="lazy">`
-            : `<div class="scene-card__icon-fallback"><i class="ti ti-layout"></i></div>`
+            : `<div class="scene-card__icon-fallback"><span class="material-symbols-outlined" style="font-size:24px;">category</span></div>`
         }
       </div>
       <div class="scene-card__content">
@@ -40,22 +56,11 @@ function renderPlacement() {
       .querySelectorAll(".scene-card")
       .forEach((c) => c.classList.remove("selected"));
     card.classList.add("selected");
+    const customTextarea = document.getElementById("placement-custom-textarea");
+    if (customTextarea) customTextarea.value = "";
     updatePlacementDisplay();
     tryRecompile();
   });
-
-  const customInput = document.getElementById("placement-custom");
-  if (customInput) {
-    customInput.addEventListener("input", () => {
-      if (customInput.value.trim()) {
-        // ถ้าพิมพ์เอง ให้ล้างการเลือกจาก pill
-        group
-          .querySelectorAll(".scene-card")
-          .forEach((c) => c.classList.remove("selected"));
-      }
-      tryRecompile();
-    });
-  }
 }
 
 function updatePlacementDisplay() {
@@ -65,7 +70,8 @@ function updatePlacementDisplay() {
   const activeCard = document.querySelector(
     "#placement-group .scene-card.selected",
   );
-  const customVal = document.getElementById("placement-custom")?.value.trim();
+  const customTextarea = document.getElementById("placement-custom-textarea");
+  const customVal = customTextarea ? customTextarea.value.trim() : "";
 
   let displayLabel = "";
   if (customVal) {
@@ -83,6 +89,7 @@ function updatePlacementDisplay() {
   const row = document.createElement("div");
   row.className = "flex-row";
   row.style.gap = "8px";
+  row.style.alignItems = "center";
 
   const labelEl = document.createElement("span");
   labelEl.className = "sub-label";
@@ -92,18 +99,26 @@ function updatePlacementDisplay() {
   const chip = document.createElement("div");
   chip.className = "product-chip";
 
+  const iconSpan = document.createElement("span");
+  iconSpan.className = "material-symbols-outlined";
+  iconSpan.style.fontSize = "14px";
+  iconSpan.style.color = "var(--text-tertiary)";
+  iconSpan.textContent = "check_box_outline_blank";
+  chip.appendChild(iconSpan);
+
   const nameSpan = document.createElement("span");
   nameSpan.textContent = displayLabel;
+  nameSpan.style.fontWeight = "500";
+  chip.appendChild(nameSpan);
 
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
   removeBtn.className = "chip-remove";
-  removeBtn.innerHTML = '<i class="ti ti-x"></i>';
+  removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
 
   removeBtn.addEventListener("click", () => {
-    if (document.getElementById("placement-custom")) {
-      document.getElementById("placement-custom").value = "";
-    }
+    const textarea = document.getElementById("placement-custom-textarea");
+    if (textarea) textarea.value = "";
     document
       .querySelectorAll("#placement-group .scene-card")
       .forEach((c) => c.classList.remove("selected"));
@@ -111,7 +126,6 @@ function updatePlacementDisplay() {
     tryRecompile();
   });
 
-  chip.appendChild(nameSpan);
   chip.appendChild(removeBtn);
   row.appendChild(labelEl);
   row.appendChild(chip);
@@ -131,9 +145,38 @@ function initPlacementModal() {
 
   if (!modal || !openBtn) return;
 
+  // Wire sidebar nav
+  const navBtns = modal?.querySelectorAll("#placement-sidebar-nav .modal-nav-btn");
+  const sections = modal?.querySelectorAll("#placement-modal-main .modal-section");
+  if (navBtns) {
+    navBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.target;
+        navBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        sections.forEach((sec) => {
+          sec.style.display = sec.id === targetId ? "block" : "none";
+        });
+
+        // If switching to list pane, refresh display
+        if (targetId === "placement-list-pane") {
+          updatePlacementDisplay();
+        }
+      });
+    });
+  }
+
   const toggleModal = (show) => {
     modal.classList.toggle("active", show);
     document.body.style.overflow = show ? "hidden" : "";
+    if (show) {
+      const searchInput = document.getElementById("placement-search");
+      if (searchInput) {
+        searchInput.value = "";
+        filterPlacementCards("");
+      }
+      // Ensure the active nav state is preserved
+    }
     if (!show) tryRecompile();
   };
 
@@ -144,8 +187,8 @@ function initPlacementModal() {
 
   clearBtn?.addEventListener("click", () => {
     const group = document.getElementById("placement-group");
-    const customInput = document.getElementById("placement-custom");
-    if (customInput) customInput.value = "";
+    const textarea = document.getElementById("placement-custom-textarea");
+    if (textarea) textarea.value = "";
     if (group) {
       group
         .querySelectorAll(".scene-card")
@@ -154,6 +197,20 @@ function initPlacementModal() {
     updatePlacementDisplay();
     tryRecompile();
   });
+
+  // Wire custom textarea
+  const customTextarea = document.getElementById("placement-custom-textarea");
+  if (customTextarea) {
+    customTextarea.addEventListener("input", () => {
+      if (customTextarea.value.trim()) {
+        document
+          .querySelectorAll("#placement-group .scene-card")
+          .forEach((c) => c.classList.remove("selected"));
+      }
+      updatePlacementDisplay();
+      tryRecompile();
+    });
+  }
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("active"))

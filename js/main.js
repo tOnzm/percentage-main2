@@ -1,12 +1,5 @@
 // ── MAIN ──────────────────────────────────────────────────────────────────
-// Application bootstrap: load HTML components → wire events → reveal UI.
 
-/**
- * Fetch and inject one HTML component into a placeholder element.
- * @param {string} elementId   ID of the target placeholder
- * @param {string} filePath    Path to the component HTML file
- * @returns {Promise<void>}
- */
 async function loadComponent(elementId, filePath) {
   const response = await fetch(filePath);
   if (!response.ok) {
@@ -19,38 +12,21 @@ async function loadComponent(elementId, filePath) {
   if (el) el.innerHTML = html;
 }
 
-/**
- * Bootstrap the entire application.
- * 1. Fetch all component HTML in parallel
- * 2. Initialise UI logic & event listeners for each component
- * 3. Fade in placeholders via CSS
- */
-
-/**
- * Initialize sidebar toggle button functionality.
- */
-function initSidebar() {
-  const btn = document.getElementById("sidebar-toggle");
-  const sidebar = document.getElementById("app-sidebar");
-  if (!btn || !sidebar) return;
-
+function initGenerateBtn() {
+  const btn = document.getElementById("generate-btn");
+  if (!btn) return;
   btn.addEventListener("click", () => {
-    const isCollapsed = sidebar.classList.toggle("collapsed");
-    btn.setAttribute("aria-expanded", String(!isCollapsed));
+    if (typeof generatePrompt === "function") generatePrompt();
   });
 }
 
-/**
- * Initialize theme switching (Dark/Light mode).
- * Supports system preference and local storage persistence.
- */
 function initTheme() {
   const themeToggle = document.getElementById("theme-toggle");
   const currentTheme =
     localStorage.getItem("theme") ||
     (window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
-      : "light");
+      : "dark");
 
   const updateIcon = (isDark) => {
     if (!themeToggle) return;
@@ -84,10 +60,6 @@ function initTheme() {
   }
 }
 
-/**
- * Initialize product display mode pill buttons.
- * Syncs pill clicks to hidden input for backward compatibility with core.js
- */
 function initProductDisplayModeButtons() {
   const group = document.getElementById("product-display-mode-group");
   const hiddenInput = document.getElementById("product-display-mode");
@@ -96,100 +68,57 @@ function initProductDisplayModeButtons() {
   const buttons = group.querySelectorAll(".pill");
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // Remove active from all pills
       buttons.forEach((b) => b.classList.remove("active"));
-      // Add active to clicked pill
       btn.classList.add("active");
-      // Update hidden input value
       hiddenInput.value = btn.getAttribute("data-value");
-
-      // Trigger change event to notify product-section.js logic
       hiddenInput.dispatchEvent(new Event("change"));
     });
   });
 }
 
-/**
- * Bootstrap the entire application.
- * 1. Fetch all component HTML in parallel
- * 2. Initialise UI logic & event listeners for each component
- * 3. Fade in placeholders via CSS
- */
 async function initApplication() {
-  const placeholderIds = [
-    "product-section-placeholder",
-    "placement-section-placeholder",
-    "props-section-placeholder",
-    "background-section-placeholder",
-    "angleLens-section-placeholder",
-    "lighting-section-placeholder",
-    "quality-section-placeholder",
-    "output-section-placeholder",
-  ];
-
   try {
-    // ── Step 1: Load all component HTML ─────────────────────────────────
-    await Promise.all([
-      loadComponent(
-        "product-section-placeholder",
-        "components/product-section/product-section.html",
-      ),
-      loadComponent(
-        "placement-section-placeholder",
-        "components/scene-section/placement-section.html",
-      ),
-      loadComponent(
-        "props-section-placeholder",
-        "components/scene-section/props-section.html",
-      ),
-      loadComponent(
-        "background-section-placeholder",
-        "components/background-section/background-section.html",
-      ),
-      loadComponent(
-        "angleLens-section-placeholder",
-        "components/camera-section/angleLens-section.html",
-      ),
-      loadComponent(
-        "lighting-section-placeholder",
-        "components/camera-section/lighting-section.html",
-      ),
-      loadComponent(
-        "quality-section-placeholder",
-        "components/camera-section/quality-section.html",
-      ),
-      loadComponent(
-        "output-section-placeholder",
-        "components/output-section/output-section.html",
-      ),
-    ]);
+    // Load dashboard into left column
+    await loadComponent(
+      "dashboard-placeholder",
+      "components/dashboard/dashboard.html",
+    );
 
-    // ── Step 2: Wire up component events ────────────────────────────────
+    // Load output into right column (unchanged)
+    await loadComponent(
+      "output-section-placeholder",
+      "components/output-section/output-section.html",
+    );
+
+    // Init theme + generate button
     initTheme();
-    initSidebar();
+    initGenerateBtn();
+
+    // Init dashboard (loads sections into hidden containers, inits, renders buttons)
+    if (typeof initDashboard === "function") {
+      await initDashboard();
+    }
+
+    // Init product display mode (needed separately)
     initProductDisplayModeButtons();
-    renderProductTabs();
-    initProductModal();
-    resetToDefaultProduct();
+
+    // Check for stored product from product page
     if (typeof checkLocalStorageProduct === "function") {
       checkLocalStorageProduct();
     }
-    initProductComponentEvents();
-    initPlacementComponentEvents();
-    initPropsComponentEvents();
-    initBackgroundComponentEvents();
-    initAngleLensComponentEvents();
-    initLightingComponentEvents();
-    initQualityComponentEvents();
 
-    // ── Step 3: Reveal UI with fade-in ──────────────────────────────────
-    placeholderIds.forEach((id) => {
+    // Reveal UI
+    const revealIds = ["dashboard-placeholder", "output-section-placeholder"];
+    revealIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) {
         el.classList.add("loaded");
         el.removeAttribute("aria-busy");
       }
     });
+
+    // Trigger initial recompile
+    tryRecompile();
   } catch (err) {
     console.error("[PromptGen] Boot error:", err);
 

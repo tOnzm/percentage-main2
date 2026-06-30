@@ -55,6 +55,11 @@
           <p>เลือกดูและจัดการรายการสินค้าในระบบเพื่อนำไปสร้าง Prompt</p>
         </header>
 
+        <div class="product-search-wrapper">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="product-search-input" id="product-search-input" placeholder="ค้นหาสินค้าตามชื่อ หมวดหมู่ หรือคำอธิบาย..." autocomplete="off" />
+        </div>
+
         <div class="product-grid" id="product-grid">
           <!-- Dynamic product cards will load here -->
         </div>
@@ -321,6 +326,15 @@
       });
     }
 
+    // ── Search / Filter ─────────────────────────────────────────────────────────
+    function filterProducts(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll(".product-card").forEach((card) => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = !q || text.includes(q) ? "" : "none";
+      });
+    }
+
     // ── Render Cards ──────────────────────────────────────────────────────────
     function renderProducts() {
       const grid = document.getElementById("product-grid");
@@ -400,17 +414,43 @@
         labelBox.innerHTML += formatCardLabels(item.label);
         card.appendChild(labelBox);
 
-        // View Details button
+        // Action buttons
+        const actions = document.createElement("div");
+        actions.className = "product-card-actions";
+
         const detailBtn = document.createElement("button");
         detailBtn.type = "button";
         detailBtn.className = "use-product-btn";
         detailBtn.style.cssText = "background:var(--surface-secondary);color:var(--text-primary);border:1px solid var(--border);";
-        detailBtn.innerHTML = '<span class="material-symbols-outlined">open_in_new</span> ดูรายละเอียดสินค้า';
+        detailBtn.innerHTML = '<span class="material-symbols-outlined">open_in_new</span> ดูรายละเอียด';
         detailBtn.addEventListener("click", () => openDetailModal(id));
-        card.appendChild(detailBtn);
+        actions.appendChild(detailBtn);
+
+        const quickBtn = document.createElement("button");
+        quickBtn.type = "button";
+        quickBtn.className = "quick-select-btn";
+        quickBtn.innerHTML = '<span class="material-symbols-outlined">check</span> เลือกใช้';
+        quickBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          quickBtn.classList.add("selected");
+          quickBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> เลือกแล้ว';
+          localStorage.setItem("selectedProductId", id);
+          showToast(`เลือก "${item.name}" แล้ว กำลังไปยังหน้าสร้าง Prompt...`);
+          setTimeout(() => { window.location.href = "index.html"; }, 800);
+        });
+        actions.appendChild(quickBtn);
+
+        card.appendChild(actions);
 
         grid.appendChild(card);
       });
+    }
+
+    // ── Search input events ──
+    function initSearch() {
+      const input = document.getElementById("product-search-input");
+      if (!input) return;
+      input.addEventListener("input", () => filterProducts(input.value));
     }
 
     // ── Bootstrap ──────────────────────────────────────────────────────────────
@@ -418,6 +458,7 @@
       initTheme();
       renderProducts();
       initDetailModalEvents();
+      initSearch();
     });
   </script>
 </body>

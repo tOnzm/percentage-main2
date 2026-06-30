@@ -35,18 +35,43 @@ function renderProps() {
     section.style.display = index === 0 ? "block" : "none";
     section.innerHTML = `
       <div class="pm-label">${catName}</div>
-      <div class="pill-group" id="props-cat-${catId}">
-        ${items.map((p) => `<button type="button" class="pill" data-val="${p.val}">${p.icon ? p.icon + " " : ""}${p.label}</button>`).join("")}
+      <div class="props-card-grid" id="props-cat-${catId}">
       </div>
     `;
     modalMain.appendChild(section);
 
-    section.querySelectorAll(".pill").forEach((pill) => {
-      pill.addEventListener("click", () => {
-        pill.classList.toggle("active");
+    const grid = section.querySelector(`#props-cat-${catId}`);
+    items.forEach((p) => {
+      const card = document.createElement("div");
+      card.className = "props-card";
+      card.dataset.val = p.val;
+
+      const hasImage = !!p.image;
+      if (hasImage) {
+        const img = document.createElement("img");
+        img.src = p.image;
+        img.alt = p.label;
+        img.loading = "lazy";
+        card.appendChild(img);
+      } else {
+        const icon = document.createElement("span");
+        icon.className = "props-card-icon";
+        icon.textContent = p.icon || "🖼";
+        card.appendChild(icon);
+      }
+
+      const label = document.createElement("div");
+      label.className = "props-card-label";
+      label.textContent = p.label;
+      card.appendChild(label);
+
+      card.addEventListener("click", () => {
+        card.classList.toggle("active");
         updatePropsDisplay();
         tryRecompile();
       });
+
+      grid.appendChild(card);
     });
   });
 }
@@ -56,8 +81,19 @@ function updatePropsDisplay() {
   if (!container) return;
 
   const activePills = document.querySelectorAll(
-    "#props-modal-main .pill.active",
+    "#props-modal-main .props-card.active",
   );
+
+  // Update count badge
+  const badge = document.getElementById("props-count-badge");
+  if (badge) {
+    if (activePills.length > 0) {
+      badge.textContent = `${activePills.length}`;
+      badge.style.display = "inline-flex";
+    } else {
+      badge.style.display = "none";
+    }
+  }
 
   if (activePills.length === 0) {
     container.innerHTML = '<div class="snotes">ยังไม่เลือกพร็อพ</div>';
@@ -140,9 +176,9 @@ function initPropsModal() {
         if (searchInput && searchInput.value) {
           searchInput.value = "";
           navBtns.forEach((b) => (b.style.display = ""));
-          sections.forEach((sec) =>
-            sec.querySelectorAll(".pill").forEach((p) => (p.style.display = ""))
-          );
+      sections.forEach((sec) =>
+        sec.querySelectorAll(".props-card").forEach((c) => (c.style.display = ""))
+      );
         }
 
         const targetId = btn.dataset.target;
@@ -162,7 +198,7 @@ function initPropsModal() {
 
   clearBtn?.addEventListener("click", () => {
     document
-      .querySelectorAll("#props-modal-main .pill.active")
+      .querySelectorAll("#props-modal-main .props-card.active")
       .forEach((p) => p.classList.remove("active"));
     updatePropsDisplay();
 
@@ -200,19 +236,20 @@ function initPropsSearch() {
 
       sections.forEach((sec) => {
         sec.style.display = sec.id === targetId ? "block" : "none";
-        sec.querySelectorAll(".pill").forEach((p) => (p.style.display = ""));
+        sec.querySelectorAll(".props-card").forEach((c) => (c.style.display = ""));
       });
       return;
     }
 
     // กรณีมีการพิมพ์ค้นหา: กรองข้อมูลทุกหมวดหมู่ (Global Search)
     sections.forEach((section) => {
-      const pills = section.querySelectorAll(".pill");
+      const cards = section.querySelectorAll(".props-card");
       let hasMatch = false;
 
-      pills.forEach((pill) => {
-        const isMatch = pill.textContent.toLowerCase().includes(term);
-        pill.style.display = isMatch ? "" : "none";
+      cards.forEach((card) => {
+        const label = card.querySelector(".props-card-label");
+        const isMatch = label && label.textContent.toLowerCase().includes(term);
+        card.style.display = isMatch ? "" : "none";
         if (isMatch) hasMatch = true;
       });
 
@@ -239,7 +276,7 @@ function _renderPropsPreviewItem(data, container) {
 }
 
 function getSelectedPropsVal() {
-  return [...document.querySelectorAll("#props-modal-main .pill.active")]
+  return [...document.querySelectorAll("#props-modal-main .props-card.active")]
     .map((p) => p.dataset.val)
     .join(", ");
 }

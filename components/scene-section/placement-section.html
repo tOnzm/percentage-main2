@@ -1,11 +1,7 @@
 <section class="workspace-section">
-    <div class="section-title">
-        <span class="material-symbols-outlined">check_box_outline_blank</span> การจัดวาง
-    </div>
-
     <div class="section-content">
         <button type="button" class="action-btn" id="open-placement-modal" style="width: 100%;">
-            <i class="ti ti-plus"></i> เลือกการจัดวาง
+            <span class="material-symbols-outlined">add</span> เลือกการจัดวาง
         </button>
         <div class="product-detail" id="placement-detail" aria-live="polite">
             ยังไม่เลือกการจัดวาง
@@ -22,26 +18,38 @@
                 </div>
                 <button type="button" class="theme-toggle-btn" id="close-placement-modal"
                     style="border:none; background:none;">
-                    <i class="ti ti-x"></i>
+                    <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
 
-            <div class="pm-modal-body">
-                <div class="section-content">
-                    <div>
+            <div class="pm-modal-body--with-sidebar">
+                <aside class="pm-modal-sidebar" id="placement-sidebar-nav">
+                    <button type="button" class="modal-nav-btn active" data-target="placement-list-pane">
+                        <span class="material-symbols-outlined">grid_view</span> จากรายการ
+                    </button>
+                    <button type="button" class="modal-nav-btn" data-target="placement-custom-pane">
+                        <span class="material-symbols-outlined">edit</span> กำหนดเอง
+                    </button>
+                </aside>
+                <div class="pm-modal-main" id="placement-modal-main">
+                    <div class="modal-section" id="placement-list-pane">
                         <div class="pm-label">เลือกจากรายการ</div>
+                        <div class="product-search-wrapper" style="margin-bottom:var(--sp-3);">
+                            <span class="material-symbols-outlined">search</span>
+                            <input type="text" class="product-search-input" id="placement-search" placeholder="ค้นหาการจัดวาง..." autocomplete="off" />
+                        </div>
                         <div class="scene-grid" id="placement-group" role="group" aria-label="เลือกการจัดวาง"></div>
                     </div>
-                    <div class="mt-4">
-                        <div class="pm-label">หรือพิมพ์ระบุเอง</div>
-                        <input class="pm-input" id="placement-custom"
-                            placeholder="พิมพ์การจัดวางเอง เช่น placed on a mirror" autocomplete="off" />
+                    <div class="modal-section" id="placement-custom-pane" style="display:none;">
+                        <div class="pm-label">พิมพ์การจัดวางเอง</div>
+                        <textarea class="pm-textarea" id="placement-custom-textarea" placeholder="เช่น วางผลิตภัณฑ์ตรงกลางกรอบ โดยให้ขวดหันไปทางซ้าย มีพื้นที่ว่างด้านบน..." style="min-height:120px;"></textarea>
+                        <div class="snotes mt-3">ข้อความนี้จะถูกใช้แทนรายการที่เลือก</div>
                     </div>
                 </div>
             </div>
             <div class="pm-modal-footer" style="gap: 8px;">
                 <button type="button" class="clear-btn" id="clear-placement-selection">ล้างค่า</button>
-                <button type="button" class="main-btn" id="confirm-placement-selection">ตกลง</button>
+                <button type="button" class="main-btn" id="confirm-placement-selection">ปิด</button>
             </div>
         </div>
     </div>

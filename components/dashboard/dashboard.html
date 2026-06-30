@@ -1,0 +1,32 @@
+<div id="dashboard">
+  <!-- Dashboard Button List -->
+  <div class="dashboard-btn-list" id="dashboard-btn-list"></div>
+
+  <!-- Hidden Section Containers (for init + state preservation) -->
+  <div id="dashboard-hidden-sections" style="display:none">
+    <div id="dashboard-section-product"></div>
+    <div id="dashboard-section-theme"></div>
+    <div id="dashboard-section-lighting"></div>
+    <div id="dashboard-section-atmosphere"></div>
+    <div id="dashboard-section-colorLock"></div>
+    <div id="dashboard-section-background"></div>
+    <div id="dashboard-section-camera"></div>
+    <div id="dashboard-section-props"></div>
+    <div id="dashboard-section-placement"></div>
+  </div>
+
+  <!-- Section header template (cloned by JS) -->
+  <template id="dash-section-header-template">
+    <div class="dash-content-header">
+      <button type="button" class="dash-nav-btn" id="dash-prev-btn">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+      <span class="dash-content-title" id="dash-content-title"></span>
+      <div class="dash-content-header-actions">
+        <button type="button" class="dash-nav-btn" id="dash-next-btn">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </template>
+</div>

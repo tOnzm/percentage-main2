@@ -1,67 +1,30 @@
-// data/lightingData.js
+// data/lightingData.js — Sub-controls for Nano Banana lighting builder
 window.lightingData = {
-  "Soft & Commercial": [
-    { label: "Soft Elegant", val: "soft elegant shadows, barely visible" },
-    {
-      label: "Soft Commercial",
-      val: "soft directional studio lighting, high-end commercial beauty lighting",
-    },
-    {
-      label: "Frosted Diffusion",
-      val: "frosted glass shadow diffusion with smooth soft-edge lighting effect",
-    },
+  keyLight: [
+    { label: "Soft Top",     val: "soft overhead key light, large diffuser, even top-down illumination, gentle wrap-around shadows" },
+    { label: "Side Soft",    val: "soft side key light from the left at 45 degrees, diffused broad source, gentle sculpting" },
+    { label: "Side Hard",    val: "hard side key light, focused beam, sharp shadow edges, high contrast drama, Chiaroscuro effect" },
+    { label: "Back Light",   val: "backlight from behind and slightly above, rim exposure on subject edges, silhouette separation" },
+    { label: "Studio Light", val: "balanced studio key light with reflector umbrella, professional even coverage, soft falloff" },
+    { label: "Window Light", val: "soft natural window light from a large north-facing source, directional falloff, airy mood" },
   ],
-  "Shadow Effects": [
-    { label: "No Shadow", val: "no shadow, pure clean seamless" },
-    {
-      label: "Drop Shadow",
-      val: "soft diffused drop shadow directly beneath the bottle, grounding the product naturally",
-    },
-    {
-      label: "Glass Reflection",
-      val: "glass reflection shadow cast on surface, translucent and soft",
-    },
-    {
-      label: "Halo Glow",
-      val: "circular halo glow on surface beneath product, no hard shadow",
-    },
-    {
-      label: "Dual Light Shadow",
-      val: "soft double shadow from two light sources, three-dimensional and luxurious",
-    },
+  fillLight: [
+    { label: "Low",    val: "low fill light, deep shadows preserved, high contrast ratio, dramatic depth" },
+    { label: "Medium", val: "medium fill light, balanced shadow detail, moderate contrast, natural look" },
+    { label: "High",   val: "high fill light, minimal shadows, evenly lit scene, flat commercial finish" },
   ],
-  "Graphic & Pattern Shadows": [
-    { label: "Sharp Editorial", val: "sharp clean editorial shadows" },
-    { label: "Long Cinematic", val: "long cinematic projected shadows" },
-    {
-      label: "Leaf Shadow Pattern",
-      val: "botanical leaf shadow pattern cast across the bottle and surface from off-frame leaves",
-    },
-    {
-      label: "Blind Stripe",
-      val: "window blind stripe shadows falling across product, editorial fashion feel",
-    },
-    {
-      label: "Window Shadow",
-      val: "soft window light shadow creating clean editorial patterns on reflective surface",
-    },
-    {
-      label: "Linear Slit Shadow",
-      val: "sharp geometric slit light with long dramatic hard shadow contrast",
-    },
+  rimLight: [
+    { label: "Off", val: "no rim light, flat edge transition, soft boundary" },
+    { label: "On",  val: "rim light from behind at 45 degrees, edge definition haloing, strong subject-background separation" },
   ],
-  "Material & Refraction": [
-    {
-      label: "Acrylic Shadow",
-      val: "diffused acrylic shadow with subtle gradients and futuristic laboratory feel",
-    },
-    {
-      label: "Water Caustics",
-      val: "soft water ripple reflections casting organic light patterns across glossy surface",
-    },
-    {
-      label: "Chrome Reflection",
-      val: "chrome metallic reflections creating abstract futuristic shadow shapes",
-    },
+  shadowType: [
+    { label: "Soft",   val: "soft diffused shadows with gentle falloff, smooth transition from light to dark, low edge definition" },
+    { label: "Medium", val: "medium shadow density with balanced contrast, defined but not harsh edges" },
+    { label: "Hard",   val: "hard sharp shadows with crisp edges, high contrast drama, distinct dark pools" },
+  ],
+  reflection: [
+    { label: "Low",    val: "low reflection surface, matte finish, soft diffuse, minimal glare" },
+    { label: "Medium", val: "medium reflection surface, satin sheen, subtle highlights, controlled glare" },
+    { label: "High",   val: "high reflection surface, glossy mirror-like finish, bright specular highlights, crisp reflections" },
   ],
 };

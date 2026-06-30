@@ -36,7 +36,7 @@ window.placementData = [
   },
   {
     label: "Dark Stone Slab",
-    val: "placed on a dark stone slab with subtle natural texture",
+    val: "placed on a dark basalt stone slab with subtle natural veining and matte mineral finish",
     image:
       "https://thumbs.dreamstime.com/b/natural-black-stone-slab-rough-edges-dark-textured-background-ideal-display-presentation-natural-black-stone-slab-357372394.jpg",
   },
@@ -95,7 +95,7 @@ window.placementData = [
   },
   {
     label: "Soft Fabric",
-    val: "placed on luxurious soft fabric with elegant folds",
+    val: "placed on raw silk fabric with soft elegant folds and subtle sheen, premium textile texture",
     image:
       "https://i.pinimg.com/736x/4b/26/4a/4b264a29272764958964bfad1d35fa2d.jpg",
   },
